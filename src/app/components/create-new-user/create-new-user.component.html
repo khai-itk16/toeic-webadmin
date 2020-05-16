@@ -1,0 +1,65 @@
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Thêm bài hát</h2>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Form Elements -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name">User name</label>
+                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Password</label>
+                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Re-enter password</label>
+                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Email</label>
+                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Firt name</label>
+                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Last name</label>
+                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category">Vai trò</label>
+                                        <select id="category" name="category" class="form-control">
+	                                        <option value="1">admin</option>
+											<option value="2">mod</option>
+											<option value="3" selected>khách</option>
+                                        </select>
+                                    </div>
+                                   
+                                    <button class="btn btn-success btn-md" (click)="onCreateNewUser()">Thêm</button>
+                                    &nbsp;
+                                    <button class="btn btn-primary btn-md"(click)="onBack()">Trở về</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Form Elements -->
+            </div>
+        </div>
+        <!-- /. ROW  -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>

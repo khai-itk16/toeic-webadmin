@@ -10,26 +10,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  user = new User();
-
-  constructor(private authService: AuthService,
-    private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  loginUser () {
-
-    console.log(this.user)
-    localStorage.setItem("token", "abcd")
-    // this.authService.loginUser(this.user)
-    // .subscribe(
-    //   res => {
-    //     console.log(res)
-    //     localStorage.setItem("token", res.token)
-    //   },
-    //   err => console.log(err)
-    // ) 
   }
 
 }

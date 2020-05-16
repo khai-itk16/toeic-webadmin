@@ -1,1 +1,27 @@
-<p>home works!</p>
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+            <li class="text-center">
+                <img src="assets/img/find_user.png" class="user-image img-responsive" />
+            </li>
+            <li>
+                <a routerLink="/dashboard" routerLinkActive="active-menu"><i class="fa fa-dashboard fa-3x"></i> Trang chủ</a>
+            </li>
+            <li>
+                <a routerLink="#" routerLinkActive="active-menu"><i class="fa fa-list fa-3x"></i> Quản lý</a>
+            </li>
+            <li>
+                <a routerLink="#" routerLinkActive="active-menu"><i class="fa fa-music fa-3x"></i> Quản lý</a>
+            </li>
+            <li>
+                <a routerLink="/user-management" routerLinkActive="active-menu"><i class="fa fa-user fa-3x"></i> Quản lý người dùng</a>
+            </li>
+            <li>
+                <a routerLink="#" routerLinkActive="active-menu"><i class="fa fa-envelope fa-3x"></i> Quản lý</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <router-outlet></router-outlet>
+</div>
