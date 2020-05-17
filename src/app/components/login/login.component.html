@@ -7,12 +7,12 @@
       
       <div class="form-group">
         <label for="uname"><b>Username</b></label>
-        <input class="form-control" id="uname" type="text" placeholder="Enter Username" name="username" required>
+        <input class="form-control" id="uname" type="text" placeholder="Enter Username" name="username" [(ngModel)]="user.username" required>
       
         <label for="psw"><b>Password</b></label>
-        <input class="form-control" id="psw" type="password" placeholder="Enter Password" name="password" required>
+        <input class="form-control" id="psw" type="password" placeholder="Enter Password" name="password" [(ngModel)]="user.password" required>
       
-        <button class="btn btn-success">Login</button>
+        <button class="btn btn-success" (click)="loginUser()">Login</button>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>

@@ -14,8 +14,8 @@
   </nav>
   <!-- /. NAV TOP  -->
 
-  <!-- <app-login></app-login> -->
-  <app-home></app-home>       
+  <app-login *ngIf="!statusLogin"></app-login>
+  <app-left-main-menu  *ngIf="statusLogin"></app-left-main-menu>      
 
 </div>
 <!-- /.WRAPPER TOP  -->

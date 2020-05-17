@@ -8,21 +8,21 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { HomeComponent } from './components/home/home.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { CreateNewUserComponent } from './components/create-new-user/create-new-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LeftMainMenuComponent } from './components/left-main-menu/left-main-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     UserManagementComponent,
     CreateNewUserComponent,
     EditUserComponent,
-    DashboardComponent
+    DashboardComponent,
+    LeftMainMenuComponent
   ],
   imports: [
     BrowserModule,
