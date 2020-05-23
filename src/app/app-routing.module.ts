@@ -5,6 +5,10 @@ import { UserManagementComponent } from './components/user-management/user-manag
 import { CreateNewUserComponent } from './components/create-new-user/create-new-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthGuard } from './guard/auth.guard';
+import { AppComponent } from './app.component';
+import { TransferComponent } from './components/transfer/transfer.component';
 
 
 const routes: Routes = [
@@ -15,23 +19,27 @@ const routes: Routes = [
   },
   {
     path: "dashboard",
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "user-management",
+    component: TransferComponent,
+    children: [
+      { path: '', component: UserManagementComponent },
+      { path: 'create-new-user', component: CreateNewUserComponent },
+      { path: 'edit-user/:id', component: EditUserComponent },
+      { path: "**", component: PageNotFoundComponent }
+    ],
+    canActivate: [AuthGuard]
   },
   {
     path: "login",
     component: LoginComponent
   },
   {
-    path: "user-management",
-    component: UserManagementComponent
-  },
-  {
-    path: "user-management/create-new-user",
-    component: CreateNewUserComponent
-  },
-  {
-    path: "user-management/edit-user/:id",
-    component: EditUserComponent
+    path: "**",
+    component: PageNotFoundComponent
   }
 ];
 

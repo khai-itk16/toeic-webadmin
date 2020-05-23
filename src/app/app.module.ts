@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +16,10 @@ import { CreateNewUserComponent } from './components/create-new-user/create-new-
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LeftMainMenuComponent } from './components/left-main-menu/left-main-menu.component';
+import { AccountService } from './services/account.service';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthGuard } from './guard/auth.guard';
+import { TransferComponent } from './components/transfer/transfer.component';
 
 @NgModule({
   declarations: [
@@ -22,15 +29,21 @@ import { LeftMainMenuComponent } from './components/left-main-menu/left-main-men
     CreateNewUserComponent,
     EditUserComponent,
     DashboardComponent,
-    LeftMainMenuComponent
+    LeftMainMenuComponent,
+    PageNotFoundComponent,
+    TransferComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
+    NgxPaginationModule
   ],
-  providers: [AuthService,
+  providers: [AuthService, AccountService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
