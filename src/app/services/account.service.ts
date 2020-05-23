@@ -13,7 +13,7 @@ export class AccountService {
   private urlGetAccountById = this.configure.urlGetAccountById
   private urlDeleteAccountById = this.configure.urlDeleteAccountById
   private urlLockAccountById = this.configure.urlLockAccountById
-  private urlurlUnlockAccountById = this.configure.urlurlUnlockAccountById
+  private urlurlUnlockAccountById = this.configure.urlUnlockAccountById
 
   constructor(private http: HttpClient) { }
 
