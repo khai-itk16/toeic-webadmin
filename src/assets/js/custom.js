@@ -34,3 +34,22 @@
     });
 
 }(jQuery));
+
+$(document).ready(function () {
+    $(document).scroll(function() {
+        if ($(document).scrollTop() < 20){
+          $(".back-to-top").css("display", "none")
+          $(".back-to-top").removeClass("fadeIn")
+        } else {
+          $(".back-to-top").css("display", "inline")
+          $(".back-to-top").addClass("fadeIn")
+        } 
+    });
+
+    $(".back-to-top").click(function (e) { 
+        e.preventDefault();
+        $("html,body").animate({
+        scrollTop: 0
+    }, 700);
+    });
+})

@@ -17,5 +17,8 @@ export class AppComponent implements OnInit {
 
   logoutUser() {
     this.authService.logoutUser();
+    setTimeout(() => {
+      window.location.reload()
+    }, 100);
   }
 }

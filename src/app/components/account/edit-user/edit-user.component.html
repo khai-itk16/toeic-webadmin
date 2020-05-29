@@ -2,7 +2,7 @@
     <div id="page-inner">
         <div class="row">
             <div class="col-md-12">
-                <h2>Thêm bài hát</h2>
+                <h2>Chỉnh sửa Account</h2>
             </div>
         </div>
         <!-- /. ROW  -->
@@ -14,42 +14,131 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form>
+                                <form  [formGroup]= "editAccountForm">
                                     <div class="form-group">
-                                        <label for="name">User name</label>
-                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                        <label for="uname">Username</label>
+                                        <input id="uname" type="text" [(ngModel)]="account.username" formControlName="username"
+                                            name="username" class="form-control"/>
+                                        <div>
+                                            {{editAccountFormControl.username.errors | json}}
+                                        </div>
+                                        <div *ngIf="editAccountFormControl.username.errors 
+                                            && (editAccountFormControl.username.touched || editAccountFormControl.username.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="editAccountFormControl.username.errors.required"  class="text-danger">
+                                                Username is required.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.username.errors.minlength">
+                                                Username must be at least 4 characters long.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.username.errors.containAllBlankCharacter">
+                                                Username must not be blank character.
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="name">Password</label>
-                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                        <label for="fname">Full name</label>
+                                        <input id="fname" [(ngModel)]="account.full_name" type="text" formControlName="fullName"
+                                            name="fname" class="form-control"/>
+                                        <div>
+                                            {{editAccountFormControl.fullName.errors | json}}
+                                        </div>
+                                        <div *ngIf="editAccountFormControl.fullName.errors 
+                                            && (editAccountFormControl.fullName.touched || editAccountFormControl.fullName.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="editAccountFormControl.fullName.errors.required"  class="text-danger">
+                                                Full name  is required.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.fullName.errors.minlength">
+                                                Full name must be at least 4 characters long.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.fullName.errors.containAllBlankCharacter">
+                                                Full name  must not be blank character.
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="name">Re-enter password</label>
-                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                        <label for="email">Email</label>
+                                        <input id="email" [(ngModel)]="account.email" type="text" formControlName="email"
+                                            name="email" class="form-control"/>
+                                        <div>
+                                            {{editAccountFormControl.email.errors | json}}
+                                        </div>
+                                        <div *ngIf="editAccountFormControl.email.errors 
+                                            && (editAccountFormControl.email.touched || editAccountFormControl.email.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="editAccountFormControl.email.errors.required"  class="text-danger">
+                                                Email  is required.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.email.errors.email">
+                                                Email invalid format.
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="name">Email</label>
-                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                        <label for="password">Password</label>
+                                        <input id="password" type="text" formControlName="password"
+                                            name="password" class="form-control"/>
+                                        <div>
+                                            {{editAccountFormControl.password.errors | json}}
+                                        </div>
+                                        <div *ngIf="editAccountFormControl.password.errors 
+                                            && (editAccountFormControl.password.touched || editAccountFormControl.password.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="editAccountFormControl.password.errors.required"  class="text-danger">
+                                                Password is required.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.password.errors.minlength">
+                                                Password must be at least 6 characters long.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.password.errors.containAllBlankCharacter">
+                                                Password must not be blank character.
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="name">Firt name</label>
-                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                        <label for="confirmPassword">Confirm Password</label>
+                                        <input id="confirmPassword" type="text" formControlName="confirmPassword"
+                                            name="confirmPassword" class="form-control"/>
+                                        <div>
+                                            {{editAccountFormControl.confirmPassword.errors | json}}
+                                        </div>
+                                        <div *ngIf="editAccountFormControl.confirmPassword.errors 
+                                            && (editAccountFormControl.confirmPassword.touched || editAccountFormControl.confirmPassword.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="editAccountFormControl.confirmPassword.errors.required" class="text-danger">
+                                                Confirm Password is required.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.confirmPassword.errors.minlength">
+                                                Confirm Password must be at least 6 characters long.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.confirmPassword.errors.containAllBlankCharacter">
+                                                Confirm Password must not be blank character.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.confirmPassword.errors.mustMatch">
+                                                Confirm Password does not match.
+                                            </div>
+                                        </div>
+                                        
                                     </div>
+
                                     <div class="form-group">
                                         <label for="category">Role</label>
-                                        <select  
-                                            id="category" name="roleID" name="category" class="form-control">
+                                        <!-- <select formControlName="roleID" (change)="changeRole($event)" id="category" name="roleID" name="category" class="form-control"> -->
+                                        <select formControlName="roleID" [(ngModel)]="account.role_id" id="category" name="roleID" name="category" class="form-control">
                                             <option *ngFor="let rl of roles" [value]="rl.roleId">{{rl.role}}</option>
                                         </select>
-                                       
+                                        <!-- <div *ngIf="editAccountFormControl.roleID.errors.unselectOption">
+                                            select
+                                        </div> -->
                                     </div>
-                                    <div class="form-group">
-                                        <label for="category">Vai trò</label>
-                                        <select id="category" name="category" class="form-control">
-	                                        <option value="1">admin</option>
-											<option value="2">mod</option>
-											<option value="3" selected>khách</option>
-                                        </select>
+                                    <div>
+                                        {{editAccountFormControl.roleID.value | json}}
+                                        {{editAccountFormControl.roleID.errors | json}}
                                     </div>
                                     <button [disabled]="editAccountForm.invalid" class="btn btn-success btn-md" 
                                         (click)="onEditUser()">Chỉnh sửa</button>

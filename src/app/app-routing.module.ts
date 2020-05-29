@@ -8,6 +8,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DocumentManagementComponent } from './components/document/document-management/document-management.component';
 import { TestListComponent } from './components/document/test-list/test-list.component';
 import { GroupQuestionComponent } from './components/document/group-question/group-question.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthGuard } from './guard/auth.guard';
+import { AppComponent } from './app.component';
+import { TransferComponent } from './components/transfer/transfer.component';
 
 
 const routes: Routes = [
@@ -18,23 +22,27 @@ const routes: Routes = [
   },
   {
     path: "dashboard",
-    component: DashboardComponent
-  },
-  {
-    path: "login",
-    component: LoginComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "user-management",
-    component: UserManagementComponent
+    component: TransferComponent,
+    children: [
+      { path: '', component: UserManagementComponent },
+      { path: 'create-new-user', component: CreateNewUserComponent },
+      { path: 'edit-user/:id', component: EditUserComponent },
+      { path: "**", component: PageNotFoundComponent }
+    ],
+    canActivate: [AuthGuard]
   },
   {
     path: "login",
     component: LoginComponent
   },
   {
-    path: "user-management/edit-user/:id",
-    component: EditUserComponent
+    path: "**",
+    component: PageNotFoundComponent
   }
 ];
 

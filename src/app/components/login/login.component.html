@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color: #ffc;">
+<div class="container-fluid" style="background-color: aliceblue;">
   <div class="row">
     <div class="col-md-6" style="margin-left: 25%; padding-bottom: 10em;">
       <div class="imgcontainer">
@@ -7,12 +7,12 @@
       
       <div class="form-group">
         <label for="uname"><b>Username</b></label>
-        <input class="form-control" id="uname" type="text" placeholder="Enter Username" name="username" required>
+        <input class="form-control" id="uname" type="text" placeholder="Enter Username" name="username" [(ngModel)]="user.username" required>
       
         <label for="psw"><b>Password</b></label>
-        <input class="form-control" id="psw" type="password" placeholder="Enter Password" name="password" required>
+        <input class="form-control" id="psw" type="password" placeholder="Enter Password" name="password" [(ngModel)]="user.password" required>
       
-        <button class="btn btn-success">Login</button>
+        <button class="btn btn-success" (click)="loginUser()">Login</button>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
