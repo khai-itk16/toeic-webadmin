@@ -36,8 +36,15 @@
                                         <input type="text" id="name" value="" name="name" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Last name</label>
-                                        <input type="text" id="name" value="" name="name" class="form-control" />
+                                        <label for="category">Role</label>
+                                        <select formControlName="roleID" [(ngModel)]="account.role_id" 
+                                            id="category" name="roleID" name="category" class="form-control">
+                                            <option *ngFor="let rl of roles" [value]="rl.roleId">{{rl.role}}</option>
+                                        </select>
+                                        <div *ngIf="editAccountFormControl.roleID.errors 
+                                            && editAccountFormControl.roleId.touched" class="text-danger">
+                                            Please select role
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="category">Vai trò</label>
@@ -47,8 +54,8 @@
 											<option value="3" selected>khách</option>
                                         </select>
                                     </div>
-                                   
-                                    <button class="btn btn-success btn-md" (click)="onCreateNewUser()">Thêm</button>
+                                    <button [disabled]="editAccountForm.invalid" class="btn btn-success btn-md" 
+                                        (click)="onEditUser()">Chỉnh sửa</button>
                                     &nbsp;
                                     <button class="btn btn-primary btn-md"(click)="onBack()">Trở về</button>
                                 </form>

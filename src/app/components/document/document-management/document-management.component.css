@@ -1,0 +1,37 @@
+a {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+.box {
+    margin: 40px auto;
+}
+
+.box-item {
+    box-shadow: 0 8px 20px 0 rgba(150, 205, 215, 0.6);
+    border-radius: 15px;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 26px;
+    font-weight: 400;
+    background: #8eceff;
+}
+
+.box-item :hover > .img {
+    transform: scale(1);
+}
+
+.img {
+    width: 15em;
+    height: 10em;
+    margin: 10px auto;
+    transform: scale(0.9);
+    transition: 0.4s;
+    overflow: hidden;
+}
+
+.item-content {
+    text-transform: uppercase;
+}
