@@ -12,7 +12,16 @@ import { Account } from 'src/app/models/account';
 })
 export class EditUserComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private accountService: AccountService, 
+    private router: Router, 
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder) { }
+
+  editAccountForm: FormGroup
+  editAccount: Account
+  account = null;
+
+  roles = [{ roleId: 1, role: 'admin' }, { roleId: 2, role: 'mod' }, { roleId: 3, role: 'guest' }]
 
   ngOnInit(): void {
     this.editAccountForm = this.formBuilder.group({
@@ -37,6 +46,8 @@ export class EditUserComponent implements OnInit {
       }
     );
   }
+
+  get editAccountFormControl() { return this.editAccountForm.controls; }
 
   onEditUser() {
     this.editAccount = this.editAccountForm.value
