@@ -37,6 +37,17 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: "document-management",
+    component: TransferComponent,
+    children: [
+      { path: '', component: DocumentManagementComponent },
+      { path: 'test-list', component: TestListComponent },
+      { path: 'test-list/:id', component: GroupQuestionComponent },
+      { path: "**", component: PageNotFoundComponent }
+    ],
+    canActivate: [AuthGuard]
+  },
+  {
     path: "login",
     component: LoginComponent
   },

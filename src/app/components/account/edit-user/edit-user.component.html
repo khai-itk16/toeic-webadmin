@@ -128,13 +128,12 @@
 
                                     <div class="form-group">
                                         <label for="category">Role</label>
-                                        <!-- <select formControlName="roleID" (change)="changeRole($event)" id="category" name="roleID" name="category" class="form-control"> -->
                                         <select formControlName="roleID" [(ngModel)]="account.role_id" id="category" name="roleID" name="category" class="form-control">
                                             <option *ngFor="let rl of roles" [value]="rl.roleId">{{rl.role}}</option>
                                         </select>
-                                        <!-- <div *ngIf="editAccountFormControl.roleID.errors.unselectOption">
-                                            select
-                                        </div> -->
+                                        <div *ngIf="editAccountFormControl.roleID.errors && editAccountFormControl.roleID.touched" class="text-danger">
+                                            Please select role
+                                        </div>
                                     </div>
                                     <div>
                                         {{editAccountFormControl.roleID.value | json}}

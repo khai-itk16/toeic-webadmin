@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { containAllBlankCharacter, MustMatch } from 'src/app/common/custom-validator-account';
+import { containAllBlankCharacter, MustMatch, unselectOption } from 'src/app/common/custom-validator-account';
 
 @Component({
   selector: 'app-create-new-user',
@@ -28,7 +28,7 @@ export class CreateNewUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), containAllBlankCharacter]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6), containAllBlankCharacter]],
-      roleId: ['']
+      roleId: ['', [unselectOption]]
   },{
     validators: MustMatch('password', 'confirmPassword')
   });
