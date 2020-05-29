@@ -6,7 +6,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import {  MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +28,7 @@ import { DocumentManagementComponent } from './components/document/document-mana
 import { TestListComponent } from './components/document/test-list/test-list.component';
 import { GroupQuestionComponent } from './components/document/group-question/group-question.component';
 import { LeftMainMenuComponent } from './components/left-main-menu/left-main-menu.component';
+import { PopupGroupComponent } from './components/document/popup-group/popup-group.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import { LeftMainMenuComponent } from './components/left-main-menu/left-main-men
     GroupQuestionComponent,
     LeftMainMenuComponent,
     PageNotFoundComponent,
-    TransferComponent
+    TransferComponent,
+    PopupGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,10 @@ import { LeftMainMenuComponent } from './components/left-main-menu/left-main-men
     Ng2OrderModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule
   ],
   providers: [AuthService, AccountService, AuthGuard,
     {
