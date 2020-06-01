@@ -49,24 +49,9 @@ export class UserManagementComponent implements OnInit {
     }
   }
 
-  lockAccount(id) {
+  changeLockAccount(id) {
     if(confirm("Are you sure to lock account")) {
-      this.accountService.lockAccount(id).subscribe (
-        res => {
-          setTimeout(() => {
-            window.location.reload()
-            console.log(res)
-          }, 100);
-          
-      }, error => {
-        console.log(error)
-      })
-    }
-  }
-
-  unlockAccount(id) {
-    if(confirm("Are you sure to unlock account")) {
-      this.accountService.unlockAccount(id).subscribe (
+      this.accountService.changeLockAccount(id).subscribe (
         res => {
           setTimeout(() => {
             window.location.reload()

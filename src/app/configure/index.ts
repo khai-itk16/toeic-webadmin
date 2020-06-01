@@ -5,6 +5,5 @@ export class Configure {
   urlUpdateAccount = "http://localhost:4000/admin/account/update/"
   urlGetAccountById = "http://localhost:4000/admin/account/"
   urlDeleteAccountById = "http://localhost:4000/admin/account/delete/"
-  urlUnlockAccountById = "http://localhost:4000/admin/account/delete/"
-  urlLockAccountById = "http://localhost:4000/admin/account/delete/"
+  urlChangeLockAccountById = "http://localhost:4000/admin/account/changeLock/"
 }

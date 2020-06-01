@@ -12,8 +12,7 @@ export class AccountService {
   private urlUpdateAccount = this.configure.urlUpdateAccount
   private urlGetAccountById = this.configure.urlGetAccountById
   private urlDeleteAccountById = this.configure.urlDeleteAccountById
-  private urlLockAccountById = this.configure.urlLockAccountById
-  private urlurlUnlockAccountById = this.configure.urlUnlockAccountById
+  private urlChangeLockAccountById = this.configure.urlChangeLockAccountById
 
   constructor(private http: HttpClient) { }
 
@@ -41,13 +40,8 @@ export class AccountService {
     return this.http.delete<any>(urlDelete)
   }
 
-  lockAccount(id) {
-    let urlLock = this.urlLockAccountById + id
-    return this.http.put<any>(urlLock, id)
-  }
-
-  unlockAccount(id) {
-    let urlUnlock = this.urlurlUnlockAccountById + id
-    return this.http.put<any>(urlUnlock, id)
+  changeLockAccount(id) {
+    let urlChangeLock = this.urlChangeLockAccountById + id
+    return this.http.put<any>(urlChangeLock, id)
   }
 }

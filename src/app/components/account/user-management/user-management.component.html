@@ -62,9 +62,9 @@
                                             <a [routerLink]="['/user-management/edit-user', item.account_id]" title="Sửa" class="btn btn-primary">
                                                 <i class="fa fa-edit "></i></a> 
                                                 &nbsp;
-                                            <a *ngIf="item.status == 'active'" href="" title="Khóa" class="btn btn-danger">
+                                            <a *ngIf="item.status == 'active'" (click)="changeLockAccount(item.account_id)" title="Khóa" class="btn btn-danger">
                                                 <i class="fa fa-lock"></i></a>
-                                            <a *ngIf="item.status == 'lock'" href="" title="Khóa" class="btn btn-danger">
+                                            <a *ngIf="item.status == 'lock'" (click)="changeLockAccount(item.account_id)" title="Khóa" class="btn btn-danger">
                                                 <i class="fa fa-unlock"></i></a> 
                                                 &nbsp;
                                             <a (click)="deleteAccount(item.account_id)" title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
