@@ -1,2 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.icon-cancel-question {
+    top: 15px;
+    position: relative;
+    left: -12px;
+    z-index: 10;
+    color: orangered;
+    cursor: pointer;
+}

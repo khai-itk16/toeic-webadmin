@@ -67,6 +67,7 @@ import { PopupGroupComponent } from './components/document/popup-group/popup-gro
       useClass: TokenInterceptorService,
       multi: true
     }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ PopupGroupComponent ]
 })
 export class AppModule { }

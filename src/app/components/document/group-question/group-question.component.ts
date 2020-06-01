@@ -31,9 +31,8 @@ export class GroupQuestionComponent implements OnInit, AfterViewInit {
       data: {name: this.name, animal: this.animal}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.animal = result;
-      console.log(result);
+    dialogRef.afterClosed().subscribe(groupQuestion => {
+      console.log(groupQuestion);
     });
   }
 }
