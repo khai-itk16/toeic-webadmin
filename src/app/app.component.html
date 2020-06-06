@@ -14,8 +14,8 @@
   </nav>
   <!-- /. NAV TOP  -->
 
-  <app-login *ngIf="!statusLogin"></app-login>
-  <app-left-main-menu *ngIf="statusLogin"></app-left-main-menu>   
+  <app-login *ngIf="!statusLogin"></app-login>  
+  <router-outlet *ngIf="statusLogin"></router-outlet>
 
   <!-- BACK TO TOP  -->
    <div>

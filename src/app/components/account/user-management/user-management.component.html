@@ -50,7 +50,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of Accounts | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 1, currentPage: p }; let i = index">
+                                    <tr *ngFor="let item of Accounts | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
                                         <td>{{ i + 1 }}</td>
                                         <td class="center">{{item.username}}</td>
                                         <td class="center">{{item.full_name}}</td>
@@ -62,9 +62,9 @@
                                             <a [routerLink]="['/user-management/edit-user', item.account_id]" title="Sửa" class="btn btn-primary">
                                                 <i class="fa fa-edit "></i></a> 
                                                 &nbsp;
-                                            <a *ngIf="item.status == 'active'" (click)="changeLockAccount(item.account_id)" title="Khóa" class="btn btn-danger">
+                                            <a *ngIf="item.status == 'lock'" (click)="changeLockAccount(item.account_id)" title="Đang bị khóa" class="btn btn-danger">
                                                 <i class="fa fa-lock"></i></a>
-                                            <a *ngIf="item.status == 'lock'" (click)="changeLockAccount(item.account_id)" title="Khóa" class="btn btn-danger">
+                                            <a *ngIf="item.status == 'active'" (click)="changeLockAccount(item.account_id)" title="Không bị khóa" class="btn btn-primary">
                                                 <i class="fa fa-unlock"></i></a> 
                                                 &nbsp;
                                             <a (click)="deleteAccount(item.account_id)" title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>

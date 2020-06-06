@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupGroupComponent } from '../popup-group/popup-group.component';
+import { GroupQuestionService } from 'src/app/services/group-question.service';
+import { GroupQuestion } from 'src/app/models/group-question';
 
 declare var $: any;
 
@@ -11,10 +13,9 @@ declare var $: any;
 })
 export class GroupQuestionComponent implements OnInit, AfterViewInit {
 
-  animal: string;
-  name: string;
+  groupQuestion: GroupQuestion
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private groupQuestionService: GroupQuestionService) { }
 
   ngOnInit(): void {
     
@@ -27,12 +28,36 @@ export class GroupQuestionComponent implements OnInit, AfterViewInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(PopupGroupComponent, {
-      width: '80vw', height: '80vh',
-      data: {name: this.name, animal: this.animal}
+      width: '100vw', height: '100vh',
     });
 
     dialogRef.afterClosed().subscribe(groupQuestion => {
+      this.groupQuestion = groupQuestion
       console.log(groupQuestion);
     });
+  }
+
+  createGroupQuestion() {
+    this.openDialog()
+    // this.groupQuestionService.createGroupQuestion(this.groupQuestion).subscribe(
+    //   res => {
+    //     console.log(res)
+    //   },
+    //   error => {
+    //     console.log(error)
+    //   }
+    // )
+  }
+
+  updateGroupQuestion() {
+    this.openDialog()
+    // this.groupQuestionService.updateGroupQuestion(this.groupQuestion).subscribe(
+    //   res => {
+    //     console.log(res)
+    //   },
+    //   error => {
+    //     console.log(error)
+    //   }
+    // )
   }
 }

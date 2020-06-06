@@ -4,6 +4,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { containAllBlankCharacter, MustMatch, unselectOption } from 'src/app/common/custom-validator-account';
 import { Account } from 'src/app/models/account';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-edit-user',
@@ -19,22 +20,12 @@ export class EditUserComponent implements OnInit {
 
   editAccountForm: FormGroup
   editAccount: Account
-  account = null;
+  account = { account_id: 0 , username: '', full_name: '', email:'', role_id: 0 };
+  changPass = false
 
-  roles = [{ roleId: 1, role: 'admin' }, { roleId: 2, role: 'mod' }, { roleId: 3, role: 'guest' }]
+  roles = [{ roleId: 1, role: 'admin' }, { roleId: 2, role: 'editor' }, { roleId: 3, role: 'user' }]
 
   ngOnInit(): void {
-    this.editAccountForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(4), containAllBlankCharacter]],
-      fullName: ['', [Validators.required, Validators.minLength(4), containAllBlankCharacter]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), containAllBlankCharacter]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6), containAllBlankCharacter]],
-      roleID: ['',[unselectOption]]
-    },{
-      validators: MustMatch('password', 'confirmPassword')
-    });
-
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.accountService.getAccountById(id).subscribe(
       res => {
@@ -45,6 +36,13 @@ export class EditUserComponent implements OnInit {
         console.log(error);      
       }
     );
+
+    this.editAccountForm = this.formBuilder.group({
+      username: [this.account.username, [Validators.required,  Validators.maxLength(100), containAllBlankCharacter]],
+      fullName: [this.account.full_name, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
+      email: [this.account.email, [Validators.required, Validators.maxLength(100), Validators.email]],
+      roleID: [this.account.role_id,[unselectOption]]
+    });
   }
 
   get editAccountFormControl() { return this.editAccountForm.controls; }
@@ -56,25 +54,47 @@ export class EditUserComponent implements OnInit {
     console.log(this.editAccount.id)
     if ( this.editAccount != null) {
       console.log(this.editAccount)
-      this.accountService.updateAccount(this.editAccount).subscribe (
-        res => {
-          this.router.navigate(["/user-management"])
-          setTimeout(()=>{
-            window.location.reload();
-            alert("update success")
-            console.log(res)
-          }, 100);
-        },
+      Swal.fire({
+        title: 'Are you sure to update account',
+        // text: 'You will not be able to recover this imaginary file!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, update it!',
+        cancelButtonText: 'No, don\'t update it'
+      }).then((result) => {
+        if (result.value) { 
+          this.accountService.updateAccount(this.editAccount).subscribe( 
+            res => {
+              console.log(res)
+              this.router.navigate(["/user-management"])
+                Swal.fire(
+                  'Update!',
+                  'Account has been updated.',
+                  'success'
+                )
+            },
         error => {
-          alert("update error")
           console.log(error)
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'Cancelled',
+            'Account isn\'t updated',
+            'error'
+          )
         }
-      )
+      })
     }
   }
 
-  onBack() {
-    this.router.navigate(["/user-management"])
+  onChangePass() {
+    this.changPass = !this.changPass
+    if (this.changPass == true) {
+      this.editAccountForm.addControl('password', 
+        this.formBuilder.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(50), containAllBlankCharacter]));
+    }
+    if (this.changPass == false) {
+      this.editAccountForm.removeControl('password');
+    } 
   }
-
 }

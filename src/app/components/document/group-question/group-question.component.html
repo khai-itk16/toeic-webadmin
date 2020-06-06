@@ -10,7 +10,14 @@
         <!-- /. ROW  -->
         <hr />
         <div class="row">
-            
+            <div class="col-sm-6">
+                <button (click)="createGroupQuestion()" class="btn btn-success btn-md">Thêm Group Question</button>
+                &nbsp;
+                <button class="btn btn-primary btn-md" [routerLink]="['../']">Trở lại</button>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="question-group-wrap col-md-12">
                 <div class="question-item">
                     <div class="question-content">

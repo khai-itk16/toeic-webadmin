@@ -1,0 +1,28 @@
+<form style="margin: 0 25px;">
+    <div class="row">
+        <div class="popup-test">
+            <div class="popup-header">
+                <h1 mat-dialog-title>{{ data.title }}</h1>
+            </div>
+            
+            <div class="popup-body">
+                <div class="form-group">
+                    <div class="test">
+                        <div class="input-group">
+                            <span class="input-group-addon">Test</span>
+                            <input name="test" type="text" class="form-control" [value]="data.testName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-footer" style="text-align: right;">
+                <button class="btn btn-primary" (click)="onNoClick()">No Thanks</button>
+                &nbsp;
+                <button class=" btn btn-success">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</form>
+

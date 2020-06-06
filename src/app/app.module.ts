@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import {  MatInputModule } from '@angular/material/input';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +21,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AccountService } from './services/account.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guard/auth.guard';
-import { TransferComponent } from './components/transfer/transfer.component';
 import { UserManagementComponent } from './components/account/user-management/user-management.component';
 import { CreateNewUserComponent } from './components/account/create-new-user/create-new-user.component';
 import { EditUserComponent } from './components/account/edit-user/edit-user.component';
@@ -29,6 +29,8 @@ import { TestListComponent } from './components/document/test-list/test-list.com
 import { GroupQuestionComponent } from './components/document/group-question/group-question.component';
 import { LeftMainMenuComponent } from './components/left-main-menu/left-main-menu.component';
 import { PopupGroupComponent } from './components/document/popup-group/popup-group.component';
+import { PopupTestComponent } from './components/document/popup-test/popup-test.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +45,9 @@ import { PopupGroupComponent } from './components/document/popup-group/popup-gro
     GroupQuestionComponent,
     LeftMainMenuComponent,
     PageNotFoundComponent,
-    TransferComponent,
-    PopupGroupComponent
+    PopupGroupComponent,
+    PopupTestComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,9 @@ import { PopupGroupComponent } from './components/document/popup-group/popup-gro
     MatDialogModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot() 
   ],
   providers: [AuthService, AccountService, AuthGuard,
     {

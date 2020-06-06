@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupTestComponent } from '../popup-test/popup-test.component';
 
 @Component({
   selector: 'app-test-list',
@@ -7,13 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestListComponent implements OnInit {
 
-  filter
-
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
-
+  // filter
+  filter
   key: string = 'testName'; //set default
   reverse: boolean = false;
   sort(key){
@@ -21,5 +22,26 @@ export class TestListComponent implements OnInit {
     this.reverse = !this.reverse;
   }
   p: number = 1;
+  // end filter
 
+  openDialog(test): void {
+    const dialogRef = this.dialog.open(PopupTestComponent, {
+      width: '650px', height: '200px',
+      data: test
+    });
+
+    dialogRef.afterClosed().subscribe(testQuestion => {
+      
+      console.log(testQuestion);
+    });
+  }
+
+  createTestQuestion() {
+    this.openDialog({title: "Thêm test", testName: ''})
+  }
+
+  updateTestQuestion(id) {
+    let test
+    this.openDialog({title: "Update test", testName: 'asdfadf'})
+  }
 }

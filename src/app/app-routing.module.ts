@@ -10,8 +10,8 @@ import { TestListComponent } from './components/document/test-list/test-list.com
 import { GroupQuestionComponent } from './components/document/group-question/group-question.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guard/auth.guard';
-import { AppComponent } from './app.component';
-import { TransferComponent } from './components/transfer/transfer.component';
+import { LeftMainMenuComponent } from './components/left-main-menu/left-main-menu.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 const routes: Routes = [
@@ -22,12 +22,19 @@ const routes: Routes = [
   },
   {
     path: "dashboard",
-    component: DashboardComponent,
+    component: LeftMainMenuComponent,
+    children: [{ path: '', component: DashboardComponent }],
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "profile",
+    component: LeftMainMenuComponent,
+    children: [{ path: '', component: ProfileComponent }],
     canActivate: [AuthGuard]
   },
   {
     path: "user-management",
-    component: TransferComponent,
+    component: LeftMainMenuComponent,
     children: [
       { path: '', component: UserManagementComponent },
       { path: 'create-new-user', component: CreateNewUserComponent },
@@ -38,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: "document-management",
-    component: TransferComponent,
+    component: LeftMainMenuComponent,
     children: [
       { path: '', component: DocumentManagementComponent },
       { path: 'test-list', component: TestListComponent },
@@ -53,12 +60,13 @@ const routes: Routes = [
   },
   {
     path: "**",
-    component: PageNotFoundComponent
+    component: LeftMainMenuComponent,
+    children: [{ path: '', component: PageNotFoundComponent }]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

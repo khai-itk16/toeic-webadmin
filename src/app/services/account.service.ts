@@ -21,27 +21,31 @@ export class AccountService {
   }
 
   getAccounts() {
+    console.log(this.urlListAccount)
     return this.http.get<any>(this.urlListAccount);
   }
 
   getAccountById(id) {
     let urlGetAcc = this.urlGetAccountById + id
+    console.log(urlGetAcc)
     return this.http.get<any>(urlGetAcc);
   }
 
   updateAccount(account) {
-    console.log(account)
     let urlUpdate = this.urlUpdateAccount + account.id
+    console.log(urlUpdate)
     return this.http.put<any>(urlUpdate, account);
   }
 
   deleteAccount(id) {
     let urlDelete = this.urlDeleteAccountById + id
+    console.log(urlDelete)
     return this.http.delete<any>(urlDelete)
   }
 
   changeLockAccount(id) {
     let urlChangeLock = this.urlChangeLockAccountById + id
-    return this.http.put<any>(urlChangeLock, id)
+    console.log(urlChangeLock)
+    return this.http.put<any>(urlChangeLock, {})
   }
 }

@@ -31,6 +31,10 @@
                     <label for="transcript">Transcript:</label>
                     <textarea id="transcript" name="transcript" class="form-control" rows="5"></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="text">Text:</label>
+                    <textarea id="text" name="text" class="form-control" rows="5"></textarea>
+                </div>
         
                 <div id="question_1" class="popup-question-content">
                     <span class="icon-cancel-question">
@@ -47,33 +51,36 @@
                         <div class="answer">
                             <div class="input-group">
                                 <div class="input-group-btn btn btn-primary">
-                                    <input type="radio" name="correctAnswer_1" checked value="A" style="transform: scale(1.5);">
+                                    <input id="isRight_1_1" type="radio" name="correctAnswer_1" value="A" style="transform: scale(1.5);">
                                 </div>
                                 <span class="input-group-addon" style="width: 40px;">A</span>
-                                <input name="answerA" type="text" class="form-control">
+                                <input name="answer_1" type="text" class="form-control">
                             </div>
                             <div class="input-group">
                                 <div class="input-group-btn btn btn-primary">
-                                    <input type="radio" name="correctAnswer_1" value="B" style="transform: scale(1.5);">
+                                    <input  id="isRight_1_2" type="radio" name="correctAnswer_1" value="B" style="transform: scale(1.5);">
                                 </div>
                                 <span class="input-group-addon" style="width: 40px;">B</span>
-                                <input name="answerB" type="text" class="form-control">
+                                <input name="answer_2" type="text" class="form-control">
                             </div>
                             <div class="input-group">
                                 <div class="input-group-btn btn btn-primary">
-                                    <input type="radio" name="correctAnswer_1" value="C" style="transform: scale(1.5);">
+                                    <input  id="isRight_1_3" type="radio" name="correctAnswer_1" value="C" style="transform: scale(1.5);">
                                 </div>
                                 <span class="input-group-addon" style="width: 40px;">C</span>
-                                <input name="answerC" type="text" class="form-control">
+                                <input name="answer_3" type="text" class="form-control">
                             </div>
                             <div class="input-group">
                                 <div class="input-group-btn btn btn-primary">
-                                    <input type="radio" name="correctAnswer_1" value="D" style="transform: scale(1.5);">
+                                    <input  id="isRight_1_4" type="radio" name="correctAnswer_1" value="D" style="transform: scale(1.5);">
                                 </div>
                                 <span class="input-group-addon" style="width: 40px;">D</span>
-                                <input name="answerD" type="text" class="form-control">
+                                <input name="answer_4" type="text" class="form-control">
                             </div>
-                            <br>
+                            <div class="form-group">
+                                <label for="explain">Explain:</label>
+                                <textarea id="explain_1" name="explain_1" class="form-control" rows="2"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,7 @@
+import { Answer } from './answer'
+
 export class Question {
-    question: string
-    answerA: string
-    answerB: string
-    answerC: string
-    answerD: string
-    correctAnswer: string
+    txtQuestion: string
+    txtExplain: string
+    answers = new Array<Answer>()
 }

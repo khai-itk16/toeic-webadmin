@@ -19,20 +19,17 @@
                                         <label for="uname">Username</label>
                                         <input id="uname" type="text" formControlName="username"
                                             name="uname" class="form-control"/>
-                                        <div>
-                                            {{createAccountFormControl.username.errors | json}}
-                                        </div>
                                         <div *ngIf="createAccountFormControl.username.errors 
                                             && (createAccountFormControl.username.touched || createAccountFormControl.username.dirty)" 
                                             class="text-danger">
                                             <div *ngIf="createAccountFormControl.username.errors.required"  class="text-danger">
                                                 Username is required.
                                             </div>
-                                            <div *ngIf="createAccountFormControl.username.errors.minlength">
-                                                Username must be at least 4 characters long.
-                                            </div>
                                             <div *ngIf="createAccountFormControl.username.errors.containAllBlankCharacter">
                                                 Username must not be blank character.
+                                            </div>
+                                            <div *ngIf="createAccountFormControl.username.errors.maxlength">
+                                                Username must be at less than 100 characters long.
                                             </div>
                                         </div>
                                     </div>
@@ -41,20 +38,17 @@
                                         <label for="fname">Full name</label>
                                         <input id="fname" type="text" formControlName="fullName"
                                             name="fname" class="form-control"/>
-                                        <div>
-                                            {{createAccountFormControl.fullName.errors | json}}
-                                        </div>
                                         <div *ngIf="createAccountFormControl.fullName.errors 
                                             && (createAccountFormControl.fullName.touched || createAccountFormControl.fullName.dirty)" 
                                             class="text-danger">
                                             <div *ngIf="createAccountFormControl.fullName.errors.required"  class="text-danger">
                                                 Full name  is required.
                                             </div>
-                                            <div *ngIf="createAccountFormControl.fullName.errors.minlength">
-                                                Full name must be at least 4 characters long.
-                                            </div>
                                             <div *ngIf="createAccountFormControl.fullName.errors.containAllBlankCharacter">
                                                 Full name  must not be blank character.
+                                            </div>
+                                            <div *ngIf="createAccountFormControl.fullName.errors.maxlength">
+                                                Full name must be at less than 100 characters long.
                                             </div>
                                         </div>
                                     </div>
@@ -63,9 +57,6 @@
                                         <label for="email">Email</label>
                                         <input id="email" type="text" formControlName="email"
                                             name="email" class="form-control"/>
-                                        <div>
-                                            {{createAccountFormControl.email.errors | json}}
-                                        </div>
                                         <div *ngIf="createAccountFormControl.email.errors 
                                             && (createAccountFormControl.email.touched || createAccountFormControl.email.dirty)" 
                                             class="text-danger">
@@ -75,6 +66,9 @@
                                             <div *ngIf="createAccountFormControl.email.errors.email">
                                                 Email invalid format.
                                             </div>
+                                            <div *ngIf="createAccountFormControl.email.errors.maxlength">
+                                                Email must be at less than 100 characters long.
+                                            </div>
                                         </div>
                                     </div>
 
@@ -82,9 +76,6 @@
                                         <label for="password">Password</label>
                                         <input id="password" type="text" formControlName="password"
                                             name="password" class="form-control"/>
-                                        <div>
-                                            {{createAccountFormControl.password.errors | json}}
-                                        </div>
                                         <div *ngIf="createAccountFormControl.password.errors 
                                             && (createAccountFormControl.password.touched || createAccountFormControl.password.dirty)" 
                                             class="text-danger">
@@ -97,6 +88,9 @@
                                             <div *ngIf="createAccountFormControl.password.errors.containAllBlankCharacter">
                                                 Password must not be blank character.
                                             </div>
+                                            <div *ngIf="createAccountFormControl.password.errors.maxlength">
+                                                Password must be at less than 50 characters long.
+                                            </div>
                                         </div>
                                     </div>
 
@@ -104,9 +98,6 @@
                                         <label for="confirmPassword">Confirm Password</label>
                                         <input id="confirmPassword" type="text" formControlName="confirmPassword"
                                             name="confirmPassword" class="form-control"/>
-                                        <div>
-                                            {{createAccountFormControl.confirmPassword.errors | json}}
-                                        </div>
                                         <div *ngIf="createAccountFormControl.confirmPassword.errors 
                                             && (createAccountFormControl.confirmPassword.touched || createAccountFormControl.confirmPassword.dirty)" 
                                             class="text-danger">
@@ -119,11 +110,13 @@
                                             <div *ngIf="createAccountFormControl.confirmPassword.errors.containAllBlankCharacter">
                                                 Confirm Password must not be blank character.
                                             </div>
+                                            <div *ngIf="createAccountFormControl.confirmPassword.errors.maxlength">
+                                                Confirm Password must be at less than 50 characters long.
+                                            </div>
                                             <div *ngIf="createAccountFormControl.confirmPassword.errors.mustMatch">
                                                 Confirm Password does not match.
                                             </div>
                                         </div>
-                                        
                                     </div>
 
                                     <div class="form-group">
@@ -136,13 +129,9 @@
                                             Please select role
                                         </div>
                                     </div>
-                                    <div>
-                                        {{createAccountFormControl.roleId.value | json}}
-                                        {{createAccountFormControl.roleId.errors | json}}
-                                    </div>
                                     <button [disabled]="createAccountForm.invalid" class="btn btn-success btn-md" (click)="onCreateNewUser()">Thêm</button>
                                     &nbsp;
-                                    <button class="btn btn-primary btn-md"(click)="onBack()">Trở về</button>
+                                    <button class="btn btn-primary btn-md" [routerLink]="['../']">Trở về</button>
                                 </form>
                             </div>
                         </div>

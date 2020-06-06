@@ -15,8 +15,9 @@
                         <div class="table-responsive">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <a  [routerLink]="['']" 
-                                        class="btn btn-success btn-md">Thêm test</a>
+                                    <button class="btn btn-success btn-md" (click)="createTestQuestion()">Thêm test</button>
+                                    &nbsp;
+                                    <button class="btn btn-primary btn-md" [routerLink]="['../']">Trở lại</button>
                                 </div>
                                 <div class="col-sm-6" style="text-align: right;">
                                     <form>
@@ -55,7 +56,7 @@
                                             <a [routerLink]="['/document-management/test-list/1']" title="Xem chi tiết" class="btn btn-primary">
                                                 <i class="fa fa-info-circle "></i></a> 
                                                 &nbsp;
-                                            <a title="Sửa" class="btn btn-primary">
+                                            <a title="Sửa" class="btn btn-primary" (click)="updateTestQuestion(1)">
                                                 <i class="fa fa-edit "></i></a> 
                                                 &nbsp;
                                             <a title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>

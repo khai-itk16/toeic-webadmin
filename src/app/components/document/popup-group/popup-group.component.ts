@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GroupQuestion } from 'src/app/models/group-question';
 import { Question } from 'src/app/models/question';
+import { Answer } from 'src/app/models/answer';
 declare var $: any;
 
 @Component({
@@ -13,7 +14,6 @@ export class PopupGroupComponent implements OnInit {
 
   imageName: string
   audioName: string
-  isCorrectAnswer: boolean
 
   constructor(
     public dialogRef: MatDialogRef<PopupGroupComponent>,
@@ -29,24 +29,48 @@ export class PopupGroupComponent implements OnInit {
 
   submitGroupQuestion() {
     let groupQuestion = new GroupQuestion();
-    let total_question = $('.popup-question-content').length;
+    let totalQuestion = $('.popup-question-content').length;
 
     groupQuestion.image = $('input[name="image"]').prop('files')[0];
     groupQuestion.audio = $('input[name="audio"]').prop('files')[0];
-    groupQuestion.transcript = $('#transcript').val();
+    groupQuestion.txtTranscript = $('#transcript').val();
+    groupQuestion.txtText = $('#text').val();
 
-    for(let i = 1; i <= total_question; i++) {
+    for(let i = 1; i <= totalQuestion; i++) {
       let question = new Question();
+      let isExistRight = false 
 
-      question.correctAnswer = $(`#question_` +i+ ` input[name="correctAnswer_` +i+ `"]:checked`).val();
-      question.answerA = $(`#question_` +i+ ` input[name="answerA"]`).val();
-      question.answerB = $(`#question_` +i+ ` input[name="answerB"]`).val();
-      question.answerC = $(`#question_` +i+ ` input[name="answerC"]`).val();
-      question.answerD = $(`#question_` +i+ ` input[name="answerD"]`).val();
+      question.txtQuestion = $(`#question_` +i+ ` input[name="question"]`).val();
 
-      groupQuestion.listQuestion.push(question);
+      for(let j = 1; j <= 4; j++) {
+        let answer = new Answer();
+
+        answer.txtAnswer = $(`#question_` +i+ ` input[name="answer_` +j+ `"]`).val();
+        answer.isRight = $(`#isRight_` +i+ `_` +j).is(":checked")
+        if(answer.isRight) {
+          if(answer.txtAnswer == '') {
+            alert('Correct answer is required')
+            return
+          }
+          isExistRight = true;
+        }
+       
+        if(answer.isRight == false && answer.txtAnswer == '') {
+          continue;
+        }
+
+        question.answers.push(answer);
+      }
+
+      if(!isExistRight) {
+        alert('please choose correct answer')
+        return
+      }
+
+      question.txtExplain = $(`#explain_`+i).val();
+
+      groupQuestion.questions.push(question)
     }
-    // console.log(groupQuestion);
     this.dialogRef.close(groupQuestion);
   }
 
@@ -60,19 +84,19 @@ export class PopupGroupComponent implements OnInit {
 
   addQuestion() {
     $(document).ready(function(){
-      let total_element = $('.popup-question-content').length;
-      let lastid = $('.popup-question-content:last').attr("id");
-      let split_id = lastid.split("_");
-      let nextindex = Number(split_id[1]) + 1;
+      let totalElement = $('.popup-question-content').length;
+      let lastId = $('.popup-question-content:last').attr("id");
+      let splitId = lastId.split("_");
+      let nextIndex = Number(splitId[1]) + 1;
       let max = 5;
 
-      if (total_element == max) {
+      if (totalElement == max) {
         alert('Tối đa có ' + max + ' câu hỏi');
       }
 
-      if(total_element < max){
-        $(".popup-question-content:last").after(`<div id="question_`+ nextindex +`" class="popup-question-content"></div>`);
-        $("#question_" + nextindex).append(`
+      if(totalElement < max){
+        $(".popup-question-content:last").after(`<div id="question_`+ nextIndex +`" class="popup-question-content"></div>`);
+        $("#question_" + nextIndex).append(`
           <span class="icon-cancel-question">
               <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
           </span>
@@ -87,33 +111,36 @@ export class PopupGroupComponent implements OnInit {
               <div class="answer">
                   <div class="input-group">
                       <div class="input-group-btn btn btn-primary">
-                          <input type="radio" name="correctAnswer_`+ nextindex +`" checked value="A" style="transform: scale(1.5);">
+                          <input id="isRight_`+ nextIndex +`_1" type="radio" name="correctAnswer_`+ nextIndex +`" value="A" style="transform: scale(1.5);">
                       </div>
                       <span class="input-group-addon" style="width: 40px;">A</span>
-                      <input name="answerA" type="text" class="form-control">
+                      <input name="answer_1" type="text" class="form-control">
                   </div>
                   <div class="input-group">
                       <div class="input-group-btn btn btn-primary">
-                          <input type="radio" name="correctAnswer_`+ nextindex +`" value="B" style="transform: scale(1.5);">
+                          <input id="isRight_`+ nextIndex +`_2" type="radio" name="correctAnswer_`+ nextIndex +`" value="B" style="transform: scale(1.5);">
                       </div>
                       <span class="input-group-addon" style="width: 40px;">B</span>
-                      <input name="answerB" type="text" class="form-control">
+                      <input name="answer_2" type="text" class="form-control">
                   </div>
                   <div class="input-group">
                       <div class="input-group-btn btn btn-primary">
-                          <input type="radio" name="correctAnswer_`+ nextindex +`" value="C" style="transform: scale(1.5);">
+                          <input id="isRight_`+ nextIndex +`_3" type="radio" name="correctAnswer_`+ nextIndex +`" value="C" style="transform: scale(1.5);">
                       </div>
                       <span class="input-group-addon" style="width: 40px;">C</span>
-                      <input name="answerC" type="text" class="form-control">
+                      <input name="answer_3" type="text" class="form-control">
                   </div>
                   <div class="input-group">
                       <div class="input-group-btn btn btn-primary">
-                          <input type="radio" name="correctAnswer_`+ nextindex +`" value="D" style="transform: scale(1.5);">
+                          <input id="isRight_`+ nextIndex +`_4" type="radio" name="correctAnswer_`+ nextIndex +`" value="D" style="transform: scale(1.5);">
                       </div>
                       <span class="input-group-addon" style="width: 40px;">D</span>
-                      <input name="answerD" type="text" class="form-control">
+                      <input name="answer_4" type="text" class="form-control">
                   </div>
-                  <br>
+                  <div class="form-group">
+                    <label for="explain">Explain:</label>
+                    <textarea id="explain_`+ nextIndex +`" name="explain_`+ nextIndex +`" class="form-control" rows="2"></textarea>
+                </div>
               </div>
           </div>
         `)
@@ -123,17 +150,17 @@ export class PopupGroupComponent implements OnInit {
 
   removeQuestion() {
     $(document).on('click', '.icon-cancel-question', function() {
-      let total_element = $('.popup-question-content').length;
+      let totalElement = $('.popup-question-content').length;
       let id = $(this).parent().attr('id');
-      let split_id = id.split("_");
-      let deleteindex = split_id[1];
+      let splitId = id.split("_");
+      let delIndex = splitId[1];
 
-      if (total_element == 1) {
+      if (totalElement == 1) {
         alert('Tối thiểu có 1 câu hỏi')
       }
 
-      if (total_element > 1) {
-        $("#question_" + deleteindex).remove();
+      if (totalElement > 1) {
+        $("#question_" + delIndex).remove();
       }
     });
   }

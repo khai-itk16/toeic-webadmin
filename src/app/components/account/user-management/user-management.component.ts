@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-user-management',
@@ -10,11 +11,12 @@ import { Router } from '@angular/router';
 export class UserManagementComponent implements OnInit {
 
   filter
-  Accounts:[]
+  Accounts: Array<any>
 
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
+
     this.accountService.getAccounts().subscribe(
       res => {
         this.Accounts = res.data.list
@@ -35,32 +37,64 @@ export class UserManagementComponent implements OnInit {
   p: number = 1;
 
   deleteAccount(id) {
-    if(confirm("Are you sure to delete account")) {
-      this.accountService.deleteAccount(id).subscribe (
-        res => {
-          setTimeout(() => {
-            window.location.reload()
-            console.log(res)
-          }, 100);
-          
-      }, error => {
-        console.log(error)
-      })
-    }
+    Swal.fire({
+      title: 'Are you sure delete account',
+      // text: 'You will not be able to recover this imaginary file!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.accountService.deleteAccount(id).subscribe (
+          res => {
+            this.ngOnInit()
+            Swal.fire(
+              'Deleted!',
+              'Account has been deleted.',
+              'success'
+            )
+        }, error => {
+          console.log(error)
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Account is safe',
+          'error'
+        )
+      }
+    })
   }
 
   changeLockAccount(id) {
-    if(confirm("Are you sure to lock account")) {
-      this.accountService.changeLockAccount(id).subscribe (
-        res => {
-          setTimeout(() => {
-            window.location.reload()
-            console.log(res)
-          }, 100);
-          
-      }, error => {
-        console.log(error)
-      })
-    }
+    Swal.fire({
+      title: 'Are you sure to change state lock account',
+      // text: 'You will not be able to recover this imaginary file!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, change state it!',
+      cancelButtonText: 'No, don\'t change it'
+    }).then((result) => {
+      if (result.value) {
+        this.accountService.changeLockAccount(id).subscribe (
+          res => {
+            this.ngOnInit()
+            Swal.fire(
+              'Changed!',
+              'Account has been changed status.',
+              'success'
+            )
+        }, error => {
+          console.log(error)
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Account isn\'t change',
+          'error'
+        )
+      }
+    })
   }
 }
