@@ -27,6 +27,12 @@ export class GroupQuestionComponent implements OnInit, AfterViewInit {
   }
 
   openDialog(): void {
+    
+
+    
+  }
+
+  createGroupQuestion() {
     const dialogRef = this.dialog.open(PopupGroupComponent, {
       width: '100vw', height: '100vh',
     });
@@ -34,19 +40,14 @@ export class GroupQuestionComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(groupQuestion => {
       this.groupQuestion = groupQuestion
       console.log(groupQuestion);
+      this.groupQuestionService.createGroupQuestion(this.groupQuestion).subscribe(
+        res => {
+          console.log(res)
+        },
+        error => {
+          console.log(error)
+        })
     });
-  }
-
-  createGroupQuestion() {
-    this.openDialog()
-    // this.groupQuestionService.createGroupQuestion(this.groupQuestion).subscribe(
-    //   res => {
-    //     console.log(res)
-    //   },
-    //   error => {
-    //     console.log(error)
-    //   }
-    // )
   }
 
   updateGroupQuestion() {

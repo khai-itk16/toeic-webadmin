@@ -1,9 +1,9 @@
 import { Question } from './question'
 
 export class GroupQuestion {
-    audio: any
-    image: any
-    txtTranscript: string
-    txtText: string
+    imagePath: any
+    audioPath: any
+    testId: number
+    text: string
     questions = new Array<Question>()
 }

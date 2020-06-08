@@ -1,4 +1,4 @@
 export class Answer {
-    txtAnswer: string
+    text: string
     isRight: boolean
 }

@@ -48,7 +48,7 @@ export class CreateNewUserComponent implements OnInit {
         showCancelButton: true,
         confirmButtonText: 'Yes, create it!',
         cancelButtonText: 'No, don\'t create it'
-      }).then((result) => {
+      }).then(result => {
         if (result.value) { 
           this.accountService.createAccount(this.newAccount).subscribe( 
             res => {
@@ -64,13 +64,13 @@ export class CreateNewUserComponent implements OnInit {
           console.log(error)
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Account isn\'t created',
-          'error'
-        )
-      }
-    })
+          Swal.fire(
+            'Cancelled',
+            'Account isn\'t created',
+            'error'
+          )
+        }
+      })
     }
   }
 }

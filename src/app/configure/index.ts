@@ -6,4 +6,5 @@ export class Configure {
   urlGetAccountById = "http://localhost:4000/admin/account/"
   urlDeleteAccountById = "http://localhost:4000/admin/account/delete/"
   urlChangeLockAccountById = "http://localhost:4000/admin/account/changeLock/"
+  urlCreateGroupQuestion = "http://localhost:4000/group-question/create"
 }

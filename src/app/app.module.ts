@@ -30,7 +30,11 @@ import { GroupQuestionComponent } from './components/document/group-question/gro
 import { LeftMainMenuComponent } from './components/left-main-menu/left-main-menu.component';
 import { PopupGroupComponent } from './components/document/popup-group/popup-group.component';
 import { PopupTestComponent } from './components/document/popup-test/popup-test.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
+import { ProfileManagementComponent } from './components/profile/profile-management/profile-management.component';
+import { ChangePassComponent } from './components/profile/change-pass/change-pass.component';
+import { DataTransferService } from './services/data-transfer.service';
+import { GroupQuestionService } from './services/group-question.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     PageNotFoundComponent,
     PopupGroupComponent,
     PopupTestComponent,
-    ProfileComponent
+    ProfileManagementComponent,
+    EditProfileComponent,
+    ChangePassComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +72,12 @@ import { ProfileComponent } from './components/profile/profile.component';
     BrowserAnimationsModule, 
     ToastrModule.forRoot() 
   ],
-  providers: [AuthService, AccountService, AuthGuard,
+  providers: [
+    AuthService, 
+    AccountService, 
+    AuthGuard, 
+    DataTransferService,
+    GroupQuestionService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

@@ -11,7 +11,9 @@ import { GroupQuestionComponent } from './components/document/group-question/gro
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LeftMainMenuComponent } from './components/left-main-menu/left-main-menu.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileManagementComponent } from './components/profile/profile-management/profile-management.component';
+import { ChangePassComponent } from './components/profile/change-pass/change-pass.component';
+import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
 
 
 const routes: Routes = [
@@ -29,7 +31,11 @@ const routes: Routes = [
   {
     path: "profile",
     component: LeftMainMenuComponent,
-    children: [{ path: '', component: ProfileComponent }],
+    children: [
+      { path: '', component: ProfileManagementComponent },
+      { path: 'edit-profile', component: EditProfileComponent },
+      { path: 'change-pass', component: ChangePassComponent },
+    ],
     canActivate: [AuthGuard]
   },
   {

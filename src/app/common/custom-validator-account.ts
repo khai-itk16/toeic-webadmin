@@ -31,7 +31,6 @@ export function containAllBlankCharacter(control: FormControl) {
 
 export function unselectOption(control: FormControl) {
     let controlValue = control.value
-    console.log(controlValue)
     if(controlValue == '')
     {
         return  { unselectOption: true }

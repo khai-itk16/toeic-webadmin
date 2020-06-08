@@ -1,0 +1,53 @@
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Quản lý profile</h2>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Form Elements -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6 text-primary" style="margin: 10px 25%; border: 2px solid aliceblue;">
+                                <table class="table">
+                                    <tr>
+                                        <td><h4>Username:</h4></td>
+                                        <td><p>{{ profileAPI.username }}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4>Full Name:</h4></td>
+                                        <td><p>{{ profileAPI.full_name }}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4>Email:</h4></td>
+                                        <td><p>{{ profileAPI.email }}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4>Role:</h4></td>
+                                        <td><p>{{ profileAPI.role_id }}</p></td>
+                                    </tr>
+                                </table>
+                                <div class="profile-action">
+                                    <button class="btn btn-success btn-md" 
+                                    routerLinkActive="router-link-active"
+                                    [routerLink]="['/profile/edit-profile']">Chỉnh sửa</button>
+                                &nbsp;
+                                <button class="btn btn-success btn-md" 
+                                    [routerLink]="['/profile/change-pass']">Đổi mật khẩu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Form Elements -->
+            </div>
+        </div>
+        <!-- /. ROW  -->
+
+    </div>
+</div>

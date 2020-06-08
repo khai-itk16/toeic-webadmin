@@ -13,61 +13,26 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="form-content">
                                 <form  [formGroup]= "profileForm">
                                     <div class="form-group">
-                                        <label for="uname">Username</label>
-                                        <input id="uname" type="text" formControlName="username"
-                                            name="uname" class="form-control"/>
-                                        <div *ngIf="profileFormControl.username.errors 
-                                            && (profileFormControl.username.touched || profileFormControl.username.dirty)" 
+                                        <label for="old_password">Old password</label>
+                                        <input id="old_password" type="text" formControlName="oldPassword"
+                                            name="password" class="form-control"/>
+                                        <div *ngIf="profileFormControl.oldPassword?.errors 
+                                            && (profileFormControl.oldPassword.touched || profileFormControl.password.dirty)" 
                                             class="text-danger">
-                                            <div *ngIf="profileFormControl.username.errors.required"  class="text-danger">
-                                                Username is required.
+                                            <div *ngIf="profileFormControl.oldPassword.errors.required"  class="text-danger">
+                                                Old password is required.
                                             </div>
-                                            <div *ngIf="profileFormControl.username.errors.containAllBlankCharacter">
-                                                Username must not be blank character.
+                                            <div *ngIf="profileFormControl.oldPassword.errors.minlength">
+                                                Old password must be at least 6 characters long.
                                             </div>
-                                            <div *ngIf="profileFormControl.username.errors.maxlength">
-                                                Username must be at less than 100 characters long.
+                                            <div *ngIf="profileFormControl.oldPassword.errors.containAllBlankCharacter">
+                                                Old password must not be blank character.
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="fname">Full name</label>
-                                        <input id="fname" type="text" formControlName="fullName"
-                                            name="fname" class="form-control"/>
-                                        <div *ngIf="profileFormControl.fullName.errors 
-                                            && (profileFormControl.fullName.touched || profileFormControl.fullName.dirty)" 
-                                            class="text-danger">
-                                            <div *ngIf="profileFormControl.fullName.errors.required"  class="text-danger">
-                                                Full name  is required.
-                                            </div>
-                                            <div *ngIf="profileFormControl.fullName.errors.containAllBlankCharacter">
-                                                Full name  must not be blank character.
-                                            </div>
-                                            <div *ngIf="profileFormControl.fullName.errors.maxlength">
-                                                Full name must be at less than 100 characters long.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input id="email" type="text" formControlName="email"
-                                            name="email" class="form-control"/>
-                                        <div *ngIf="profileFormControl.email.errors 
-                                            && (profileFormControl.email.touched || profileFormControl.email.dirty)" 
-                                            class="text-danger">
-                                            <div *ngIf="profileFormControl.email.errors.required"  class="text-danger">
-                                                Email  is required.
-                                            </div>
-                                            <div *ngIf="profileFormControl.email.errors.email">
-                                                Email invalid format.
-                                            </div>
-                                            <div *ngIf="profileFormControl.email.errors.maxlength">
-                                                Email must be at less than 100 characters long.
+                                            <div *ngIf="profileFormControl.oldPassword.errors.maxlength">
+                                                Old password must be at less than 50 characters long.
                                             </div>
                                         </div>
                                     </div>
@@ -76,7 +41,7 @@
                                         <label for="password">Password</label>
                                         <input id="password" type="text" formControlName="password"
                                             name="password" class="form-control"/>
-                                        <div *ngIf="profileFormControl.password.errors 
+                                        <div *ngIf="profileFormControl.password?.errors 
                                             && (profileFormControl.password.touched || profileFormControl.password.dirty)" 
                                             class="text-danger">
                                             <div *ngIf="profileFormControl.password.errors.required"  class="text-danger">
@@ -118,6 +83,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <button [disabled]="profileForm.invalid" class="btn btn-success btn-md" 
+                                        (click)="onChangePassProfile()">Chỉnh sửa</button>
+                                    &nbsp;
+                                    
+                                    <button class="btn btn-primary btn-md" [routerLink]="['../']">Trở về</button>
                                 </form>
                             </div>
                         </div>

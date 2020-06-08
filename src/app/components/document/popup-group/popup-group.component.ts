@@ -31,31 +31,30 @@ export class PopupGroupComponent implements OnInit {
     let groupQuestion = new GroupQuestion();
     let totalQuestion = $('.popup-question-content').length;
 
-    groupQuestion.image = $('input[name="image"]').prop('files')[0];
-    groupQuestion.audio = $('input[name="audio"]').prop('files')[0];
-    groupQuestion.txtTranscript = $('#transcript').val();
-    groupQuestion.txtText = $('#text').val();
+    groupQuestion.imagePath = $('input[name="image"]').prop('files')[0];
+    groupQuestion.audioPath = $('input[name="audio"]').prop('files')[0];
+    groupQuestion.text = $('#text').val();
 
     for(let i = 1; i <= totalQuestion; i++) {
       let question = new Question();
       let isExistRight = false 
 
-      question.txtQuestion = $(`#question_` +i+ ` input[name="question"]`).val();
+      question.text = $(`#question_` +i+ ` input[name="question"]`).val();
 
       for(let j = 1; j <= 4; j++) {
         let answer = new Answer();
 
-        answer.txtAnswer = $(`#question_` +i+ ` input[name="answer_` +j+ `"]`).val();
+        answer.text = $(`#question_` +i+ ` input[name="answer_` +j+ `"]`).val();
         answer.isRight = $(`#isRight_` +i+ `_` +j).is(":checked")
         if(answer.isRight) {
-          if(answer.txtAnswer == '') {
+          if(answer.text == '') {
             alert('Correct answer is required')
             return
           }
           isExistRight = true;
         }
        
-        if(answer.isRight == false && answer.txtAnswer == '') {
+        if(answer.isRight == false && answer.text == '') {
           continue;
         }
 
@@ -67,7 +66,7 @@ export class PopupGroupComponent implements OnInit {
         return
       }
 
-      question.txtExplain = $(`#explain_`+i).val();
+      question.explanation = $(`#explain_`+i).val();
 
       groupQuestion.questions.push(question)
     }

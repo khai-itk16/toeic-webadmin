@@ -17,41 +17,45 @@ export class EditUserComponent implements OnInit {
     private router: Router, 
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder) { }
-
+ 
   editAccountForm: FormGroup
   editAccount: Account
-  account = { account_id: 0 , username: '', full_name: '', email:'', role_id: 0 };
+  accountAPI = { account_id: 0, username: '', full_name: '', email: '', role_id: 0 }
   changPass = false
 
   roles = [{ roleId: 1, role: 'admin' }, { roleId: 2, role: 'editor' }, { roleId: 3, role: 'user' }]
 
   ngOnInit(): void {
+    this.editAccountForm = this.formBuilder.group({
+      username: [this.accountAPI.username],
+      fullName: [this.accountAPI.full_name],
+      email: [this.accountAPI.email],
+      roleID: [this.accountAPI.role_id]
+    });
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.accountService.getAccountById(id).subscribe(
       res => {
-        this.account = res.data
-        console.log(this.account);
+        this.accountAPI = res.data
+        console.log(this.accountAPI);
+        this.editAccountForm = this.formBuilder.group({
+          username: [this.accountAPI.username, [Validators.required,  Validators.maxLength(100), containAllBlankCharacter]],
+          fullName: [this.accountAPI.full_name, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
+          email: [this.accountAPI.email, [Validators.required, Validators.maxLength(100), Validators.email]],
+          roleID: [this.accountAPI.role_id, [unselectOption]]
+        });
       },
       error => {
         console.log(error);      
       }
     );
-
-    this.editAccountForm = this.formBuilder.group({
-      username: [this.account.username, [Validators.required,  Validators.maxLength(100), containAllBlankCharacter]],
-      fullName: [this.account.full_name, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
-      email: [this.account.email, [Validators.required, Validators.maxLength(100), Validators.email]],
-      roleID: [this.account.role_id,[unselectOption]]
-    });
   }
+
 
   get editAccountFormControl() { return this.editAccountForm.controls; }
 
   onEditUser() {
     this.editAccount = this.editAccountForm.value
-    this.editAccount.id = this.account.account_id
-    this.editAccount.roleID = this.account.role_id
-    console.log(this.editAccount.id)
+    this.editAccount.id = this.accountAPI.account_id
     if ( this.editAccount != null) {
       console.log(this.editAccount)
       Swal.fire({

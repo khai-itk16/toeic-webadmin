@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Configure } from '../configure';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupQuestionService {
 
+  private configure = new Configure()
+
   urlGetListGroupQuestion = ""
-  urlCreateGroupQuestion = ""
+  urlCreateGroupQuestion = this.configure.urlCreateGroupQuestion
   urlUpdateGroupQuestion = ""
   urlDeleteGroupQuestion = ""
   urlGroupQuestion = ""
@@ -15,7 +18,17 @@ export class GroupQuestionService {
   constructor(private http: HttpClient) { }
 
   createGroupQuestion(groupQuestion) {
-    return this.http.post<any>(this.urlCreateGroupQuestion, groupQuestion);
+    const formData = new FormData()
+    formData.append('imagePath', groupQuestion.imagePath)
+    formData.append('audioPath', groupQuestion.audioPath)
+
+    const body = { formData, groupQuestion }
+
+    return this.http.post<any>(this.urlCreateGroupQuestion, formData, {
+      headers: {
+        enctype: 'multipart/form-data'
+      }
+    });
   }
 
   updateGroupQuestion(groupQuestion) {

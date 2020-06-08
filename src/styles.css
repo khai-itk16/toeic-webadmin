@@ -20,3 +20,9 @@
 .input-group {
     margin: 10px 0;
 }
+
+.form-content {
+    width: 80%;
+    height: 100%;
+    margin: 20px auto;
+}

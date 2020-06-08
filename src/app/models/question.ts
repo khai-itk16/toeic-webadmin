@@ -1,7 +1,9 @@
 import { Answer } from './answer'
 
 export class Question {
-    txtQuestion: string
-    txtExplain: string
+    text: string
+    imagePath: any
+    audioPath: any
+    explanation: string
     answers = new Array<Answer>()
 }

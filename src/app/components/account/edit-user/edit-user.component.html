@@ -13,14 +13,13 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="form-content">
                                 <form  [formGroup]= "editAccountForm">
                                     <div class="form-group">
                                         <label for="uname">Username</label>
                                         <input id="uname" type="text" formControlName="username"
                                             name="username" class="form-control"/>
-                                        <div *ngIf="editAccountFormControl.username.errors 
-                                            && (editAccountFormControl.username.touched || editAccountFormControl.username.dirty)" 
+                                        <div *ngIf="editAccountFormControl.username.errors" 
                                             class="text-danger">
                                             <div *ngIf="editAccountFormControl.username.errors.required"  class="text-danger">
                                                 Username is required.
@@ -29,7 +28,7 @@
                                                 Username must not be blank character.
                                             </div>
                                             <div *ngIf="editAccountFormControl.username.errors.maxlength">
-                                                Full name must be at less than 100 characters long.
+                                                Username must be at less than 100 characters long.
                                             </div>
                                         </div>
                                     </div>
@@ -37,9 +36,8 @@
                                     <div class="form-group">
                                         <label for="fname">Full name</label>
                                         <input id="fname" type="text" formControlName="fullName"
-                                            name="fname" class="form-control"/>
-                                        <div *ngIf="editAccountFormControl.fullName.errors 
-                                            && (editAccountFormControl.fullName.touched || editAccountFormControl.fullName.dirty)" 
+                                            name="fname" class="form-control" />
+                                        <div *ngIf="editAccountFormControl.fullName.errors" 
                                             class="text-danger">
                                             <div *ngIf="editAccountFormControl.fullName.errors.required"  class="text-danger">
                                                 Full name  is required.
@@ -57,16 +55,15 @@
                                         <label for="email">Email</label>
                                         <input id="email" type="text" formControlName="email"
                                             name="email" class="form-control"/>
-                                        <div *ngIf="editAccountFormControl.email.errors 
-                                            && (editAccountFormControl.email.touched || editAccountFormControl.email.dirty)" 
+                                        <div *ngIf="editAccountFormControl.email?.errors " 
                                             class="text-danger">
-                                            <div *ngIf="editAccountFormControl.email.errors.required"  class="text-danger">
+                                            <div *ngIf="editAccountFormControl.email.errors?.required"  class="text-danger">
                                                 Email  is required.
                                             </div>
-                                            <div *ngIf="editAccountFormControl.email.errors.email">
+                                            <div *ngIf="editAccountFormControl.email.errors?.email">
                                                 Email invalid format.
                                             </div>
-                                            <div *ngIf="editAccountFormControl.email.errors.maxlength">
+                                            <div *ngIf="editAccountFormControl.email.errors?.maxlength">
                                                 Email must be at less than 100 characters long.
                                             </div>
                                         </div>
@@ -76,19 +73,19 @@
                                             <label for="password">Password</label>
                                             <input id="password" type="text" formControlName="password"
                                                 name="password" class="form-control"/>
-                                            <div *ngIf="editAccountFormControl?.password?.errors
-                                                && (editAccountFormControl?.password.touched || editAccountFormControl?.password.dirty)" 
+                                            <div *ngIf="editAccountFormControl?.password?.errors 
+                                                && (editAccountFormControl.username.touched || editAccountFormControl.username.dirty)" 
                                                 class="text-danger">
-                                                <div *ngIf="editAccountFormControl?.password?.errors.required"  class="text-danger">
+                                                <div *ngIf="editAccountFormControl.password.errors?.required"  class="text-danger">
                                                     Password is required.
                                                 </div>
-                                                <div *ngIf="editAccountFormControl?.password?.errors.minlength">
+                                                <div *ngIf="editAccountFormControl.password.errors?.minlength">
                                                     Password must be at least 6 characters long.
                                                 </div>
-                                                <div *ngIf="editAccountFormControl?.password?.errors.maxlength">
+                                                <div *ngIf="editAccountFormControl.password.errors?.maxlength">
                                                     Password must be at less than 50 characters long.
                                                 </div>
-                                                <div *ngIf="editAccountFormControl?.password?.errors.containAllBlankCharacter">
+                                                <div *ngIf="editAccountFormControl.password.errors?.containAllBlankCharacter">
                                                     Password must not be blank character.
                                                 </div>
                                             </div>
