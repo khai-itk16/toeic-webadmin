@@ -15,9 +15,9 @@
                         <div class="table-responsive">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <button class="btn btn-success btn-md" (click)="createTestQuestion()">Thêm test</button>
+                                    <button class="btn btn-success btn-md" (click)="createTestQuestion(partId)">Thêm test</button>
                                     &nbsp;
-                                    <button class="btn btn-primary btn-md" [routerLink]="['../']">Trở lại</button>
+                                    <button class="btn btn-primary btn-md" [routerLink]="['../../']">Trở lại</button>
                                 </div>
                                 <div class="col-sm-6" style="text-align: right;">
                                     <form>
@@ -49,21 +49,21 @@
                                             <a (click)="deleteAccount(item.account_id)" title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr> -->
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td>test 1</td>
+                                    <tr *ngFor="let test of testsAPI; let i = index">
+                                        <td class="text-center">{{ i + 1 }}</td>
+                                        <td>{{ test.name }}</td>
                                         <td class="center">
-                                            <a [routerLink]="['/document-management/test-list/1']" title="Xem chi tiết" class="btn btn-primary">
+                                            <a [routerLink]="['/document-management/'+ test.partId +'/test', test.testId]" title="Xem chi tiết" class="btn btn-primary">
                                                 <i class="fa fa-info-circle "></i></a> 
                                                 &nbsp;
-                                            <a title="Sửa" class="btn btn-primary" (click)="updateTestQuestion(1)">
+                                            <a title="Sửa" class="btn btn-primary" (click)="updateTestQuestion(test.testId)">
                                                 <i class="fa fa-edit "></i></a> 
                                                 &nbsp;
                                             <a title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
 
-                                    <tr>
+                                    <!-- <tr>
                                         <td class="text-center">1</td>
                                         <td>test 1</td>
                                         <td class="center">
@@ -75,7 +75,7 @@
                                                 &nbsp;
                                             <a title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                                 
                             </table>

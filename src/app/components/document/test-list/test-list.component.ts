@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupTestComponent } from '../popup-test/popup-test.component';
+import { TestQuestionService } from 'src/app/services/test-question.service';
+import { TestQuestion } from 'src/app/models/test-question';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-test-list',
@@ -9,9 +12,21 @@ import { PopupTestComponent } from '../popup-test/popup-test.component';
 })
 export class TestListComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  testsAPI: Array<TestQuestion>
+  partId: number
+
+  constructor(public dialog: MatDialog,
+    private testQuestionService: TestQuestionService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.partId = Number(this.activatedRoute.snapshot.paramMap.get('partId'))
+    this.testQuestionService.getAllTest(this.partId).subscribe(
+      res => {
+        console.log(res)
+        this.testsAPI = res.list
+      }
+    )
   }
   // filter
   filter
@@ -29,19 +44,19 @@ export class TestListComponent implements OnInit {
       width: '650px', height: '200px',
       data: test
     });
-
-    dialogRef.afterClosed().subscribe(testQuestion => {
-      
-      console.log(testQuestion);
+    dialogRef.afterClosed().subscribe(data => {
+      if (data != null) {
+        this.ngOnInit()
+      }
     });
   }
 
-  createTestQuestion() {
-    this.openDialog({title: "Thêm test", testName: ''})
+  createTestQuestion(partId) {
+    this.openDialog({title: { name: "Thêm test", titleId: 1 }, test: { name: '', partId: this.partId }})
   }
 
-  updateTestQuestion(id) {
-    let test
-    this.openDialog({title: "Update test", testName: 'asdfadf'})
+  updateTestQuestion(testId) {
+    let test = this.testsAPI.find(i => i.testId === testId);
+    this.openDialog({ title: { name: "Chỉnh sửa test", titleId: 2 }, test })
   }
 }

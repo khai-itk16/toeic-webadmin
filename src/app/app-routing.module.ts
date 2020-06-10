@@ -54,8 +54,8 @@ const routes: Routes = [
     component: LeftMainMenuComponent,
     children: [
       { path: '', component: DocumentManagementComponent },
-      { path: 'test-list', component: TestListComponent },
-      { path: 'test-list/:id', component: GroupQuestionComponent },
+      { path: ':partId/test-list', component: TestListComponent },
+      { path: ':partId/test/:testId', component: GroupQuestionComponent },
       { path: "**", component: PageNotFoundComponent }
     ],
     canActivate: [AuthGuard]

@@ -1,4 +1,5 @@
 export class TestQuestion {
-    id: number
-    testName: string
+    testId: number
+    name: string
+    partId: number
 }

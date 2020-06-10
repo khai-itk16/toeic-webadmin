@@ -21,9 +21,10 @@ export class GroupQuestionService {
     const formData = new FormData()
     formData.append('imagePath', groupQuestion.imagePath)
     formData.append('audioPath', groupQuestion.audioPath)
-
-    const body = { formData, groupQuestion }
-
+    formData.append('text', groupQuestion.text)
+    formData.append('testId', groupQuestion.testId)
+    formData.append('questions', JSON.stringify(groupQuestion.questions))
+    
     return this.http.post<any>(this.urlCreateGroupQuestion, formData, {
       headers: {
         enctype: 'multipart/form-data'

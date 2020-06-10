@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GroupQuestion } from 'src/app/models/group-question';
 import { Question } from 'src/app/models/question';
 import { Answer } from 'src/app/models/answer';
+import { GroupQuestionService } from 'src/app/services/group-question.service';
+import Swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -15,7 +17,7 @@ export class PopupGroupComponent implements OnInit {
   imageName: string
   audioName: string
 
-  constructor(
+  constructor(private groupQuestionService: GroupQuestionService,
     public dialogRef: MatDialogRef<PopupGroupComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {}
   
@@ -69,8 +71,29 @@ export class PopupGroupComponent implements OnInit {
       question.explanation = $(`#explain_`+i).val();
 
       groupQuestion.questions.push(question)
+      console.log('test id: ' + this.data)
+      groupQuestion.testId = this.data;
     }
-    this.dialogRef.close(groupQuestion);
+
+    this.groupQuestionService.createGroupQuestion(groupQuestion).subscribe(
+      res => {
+        console.log(res)
+        Swal.fire({
+          icon: 'success',
+          title: 'Group question has been created',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.dialogRef.close();
+      },
+      error => {
+        console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Error create group question',
+          text: 'Something wrong!'
+        })
+      })
   }
 
   selectNameImg (event) {
