@@ -13,11 +13,17 @@
     width: 90%;
 }
 
+.question-item {
+    width: 85%;
+    height: 100%;
+    margin: auto;
+}
+
 .img-item {
-    max-width: 90%;
+    max-width: 80%;
     vertical-align: middle;
     border: 0;
-    margin: auto;
+    margin: 20px auto;
 }
 
 .audio-item {
@@ -38,14 +44,14 @@
     padding: 5px;
 }
 
-.transcript-item {
+.text-item {
     width: 95%;
     margin: auto;
 }
 
-.function-item a {
-    margin-top: 30px;
-    margin-right: 20px;
-    font-size: 24px;
+.function-item {
+   text-align: center;
+   margin-top: 30px;
+   margin-bottom: -25px;
 }
 

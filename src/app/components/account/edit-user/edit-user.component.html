@@ -68,46 +68,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngIf="changPass" class="change-pass">
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <input id="password" type="text" formControlName="password"
-                                                name="password" class="form-control"/>
-                                            <div *ngIf="editAccountFormControl?.password?.errors 
-                                                && (editAccountFormControl.username.touched || editAccountFormControl.username.dirty)" 
-                                                class="text-danger">
-                                                <div *ngIf="editAccountFormControl.password.errors?.required"  class="text-danger">
-                                                    Password is required.
-                                                </div>
-                                                <div *ngIf="editAccountFormControl.password.errors?.minlength">
-                                                    Password must be at least 6 characters long.
-                                                </div>
-                                                <div *ngIf="editAccountFormControl.password.errors?.maxlength">
-                                                    Password must be at less than 50 characters long.
-                                                </div>
-                                                <div *ngIf="editAccountFormControl.password.errors?.containAllBlankCharacter">
-                                                    Password must not be blank character.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     
                                     <div class="form-group">
                                         <label for="category">Role</label>
-                                        <select formControlName="roleID" id="category" name="roleID" name="category" class="form-control">
+                                        <select formControlName="roleId" id="category" name="roleId" name="category" class="form-control">
                                             <option *ngFor="let rl of roles" [value]="rl.roleId">{{rl.role}}</option>
                                         </select>
-                                        <div *ngIf="editAccountFormControl.roleID?.errors && editAccountFormControl.roleID.touched" class="text-danger">
+                                        <div *ngIf="editAccountFormControl.roleId?.errors && editAccountFormControl.roleId.touched" class="text-danger">
                                             Please select role
                                         </div>
                                     </div>
                                     <button [disabled]="editAccountForm.invalid" class="btn btn-success btn-md" 
                                         (click)="onEditUser()">Chỉnh sửa</button>
-                                    &nbsp;
-                                    <button *ngIf="changPass" class="btn btn-success btn-md" 
-                                        (click)="onChangePass()">Hủy cấp mật khẩu</button>
-                                    <button *ngIf="!changPass" class="btn btn-success btn-md" 
-                                        (click)="onChangePass()">Cấp mật khẩu</button>
                                     &nbsp;
                                     <button class="btn btn-primary btn-md" [routerLink]="['../../']">Trở về</button>
                                 </form>

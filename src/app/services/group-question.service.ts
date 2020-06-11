@@ -9,11 +9,10 @@ export class GroupQuestionService {
 
   private configure = new Configure()
 
-  urlGetListGroupQuestion = ""
+  urlGetListGroupQuestion = this.configure.urlGetListGroupQuestion
   urlCreateGroupQuestion = this.configure.urlCreateGroupQuestion
-  urlUpdateGroupQuestion = ""
-  urlDeleteGroupQuestion = ""
-  urlGroupQuestion = ""
+  urlUpdateGroupQuestionById =  this.configure.urlUpdateGroupQuestionById
+  urlDeleteGroupQuestionById =  this.configure.urlDeleteGroupQuestionById
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +32,14 @@ export class GroupQuestionService {
   }
 
   updateGroupQuestion(groupQuestion) {
-    return this.http.put<any>(this.urlUpdateGroupQuestion, groupQuestion);
+    return this.http.put<any>(this.urlUpdateGroupQuestionById, groupQuestion);
+  }
+
+  deleteGroupQuestion(groupQuestionId) {
+    return this.http.delete<any>(this.urlDeleteGroupQuestionById + groupQuestionId);
+  }
+
+  getAllGroupQuestion(testId) {
+    return this.http.get<any>(this.urlGetListGroupQuestion, { params: { testId }});
   }
 }

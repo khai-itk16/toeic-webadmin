@@ -2,7 +2,7 @@
     <div class="row">
         <div class="popup-group">
             <div class="popup-header">
-                <h1 mat-dialog-title>Chỉnh sửa câu hỏi</h1>
+                <h1 mat-dialog-title>{{ data.title }}</h1>
             </div>
             <div class="popup-content">
                 <div class="form-group">
@@ -12,7 +12,7 @@
                                 Chọn ảnh <input name="image" type="file" accept=".jpg, .png, .JPG, .PNG" (change)="selectNameImg($event)" style="display: none;">
                             </span>
                         </label>
-                        <input type="text" class="form-control" [value]="(imageName != null) ? imageName : ''" readonly>
+                        <input id='image_name' type="text" class="form-control" [value]="(imageName != null) ? imageName : ''" readonly>
                     </div>
                 </div>
         
@@ -23,7 +23,7 @@
                                 Chọn audio <input name="audio" type="file" accept=".mp3, .MP3" (change)="selectNameAudio($event)" style="display: none;">
                             </span>
                         </label>
-                        <input type="text" class="form-control" [value]="(audioName != null) ? audioName : ''" readonly>
+                        <input id='audio_name' type="text" class="form-control" [value]="(audioName != null) ? audioName : ''" readonly>
                     </div>
                 </div>
             
@@ -82,7 +82,7 @@
                 </div>
                 
                 <div class="popup-add-question" style="text-align: center;">
-                    <button class="btn btn-primary" style="padding-top: 10px;" (click)="addQuestion()" title="Add another question" >
+                    <button id="addElementQuestion" class="btn btn-primary" style="padding-top: 10px;" (click)="addElementQuestion()" title="Add another question" >
                         <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
                     </button>
                 </div>

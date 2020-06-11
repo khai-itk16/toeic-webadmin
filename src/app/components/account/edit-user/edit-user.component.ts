@@ -30,7 +30,7 @@ export class EditUserComponent implements OnInit {
       username: [this.accountAPI.username],
       fullName: [this.accountAPI.full_name],
       email: [this.accountAPI.email],
-      roleID: [this.accountAPI.role_id]
+      roleId: [this.accountAPI.role_id]
     });
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.accountService.getAccountById(id).subscribe(
@@ -41,7 +41,7 @@ export class EditUserComponent implements OnInit {
           username: [this.accountAPI.username, [Validators.required,  Validators.maxLength(100), containAllBlankCharacter]],
           fullName: [this.accountAPI.full_name, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
           email: [this.accountAPI.email, [Validators.required, Validators.maxLength(100), Validators.email]],
-          roleID: [this.accountAPI.role_id, [unselectOption]]
+          roleId: [this.accountAPI.role_id, [unselectOption]]
         });
       },
       error => {
@@ -56,6 +56,9 @@ export class EditUserComponent implements OnInit {
   onEditUser() {
     this.editAccount = this.editAccountForm.value
     this.editAccount.id = this.accountAPI.account_id
+
+    console.log(this.editAccount)
+
     if ( this.editAccount != null) {
       console.log(this.editAccount)
       Swal.fire({
@@ -89,16 +92,5 @@ export class EditUserComponent implements OnInit {
         }
       })
     }
-  }
-
-  onChangePass() {
-    this.changPass = !this.changPass
-    if (this.changPass == true) {
-      this.editAccountForm.addControl('password', 
-        this.formBuilder.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(50), containAllBlankCharacter]));
-    }
-    if (this.changPass == false) {
-      this.editAccountForm.removeControl('password');
-    } 
   }
 }

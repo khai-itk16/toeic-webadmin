@@ -10,278 +10,76 @@
         <!-- /. ROW  -->
         <hr />
         <div class="row">
-            <div class="col-sm-6">
-                <button (click)="createGroupQuestion()" class="btn btn-success btn-md">Thêm Group Question</button>
+            <div class="col-md-12 text-center">
+                <button (click)="createGroupQuestion()" class="btn btn-success btn-md" style="width: 200px;">Thêm Group Question</button>
                 &nbsp;
-                <button class="btn btn-primary btn-md" [routerLink]="['../../test-list']">Trở lại</button>
+                <button class="btn btn-primary btn-md" style="width: 200px;" [routerLink]="['../../test-list']">Trở lại</button>
             </div>
         </div>
 
         <div class="row">
-            <div class="question-group-wrap col-md-12">
+
+            <div *ngFor="let groupQuestion of groupQuestionsAPI; let i = index;" class="question-group-wrap col-md-12">
                 <div class="question-item">
                     <div class="question-content">
-                        <div class="col-md-12">
+                        <div class="col-md-12" *ngIf="groupQuestion.audio_path != '' && groupQuestion.image_path != 'undefined'">
                             <div class="audio-item">
                                 <audio preload="auto" controls>
-                                    <source src="../../../../assets/audio/test.mp3"  type="audio/mp3">
+                                    <source [src]="host +'/asset/upload/audios/'+ groupQuestion.audio_path"  type="audio/mp3">
                                 </audio>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="transcript-item">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione impedit assumenda unde, laborum, accusamus ad quos nisi distinctio quasi excepturi iure eos ex nulla aliquam possimus? Eaque possimus nisi iure.
-                                </p>
+                            <div class="text-item">
+                                <h4 style="font-weight: bold;">Text: </h4>
+                                <p>{{ groupQuestion.text }}</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" *ngIf="groupQuestion.image_path != '' && groupQuestion.image_path != 'undefined' ">
                             <div class="img-item">
-                                <img src="../../../../assets/img/anh1.png" style="width: 100%">
+                                <img [src]="host +'/asset/upload/images/'+ groupQuestion.image_path" style="width: 100%">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" *ngFor="let question of groupQuestion.questions; let i = index;">
                             <div class="answer-item">
                                 <ul class="answer-list">
                                     <li>
-                                        <input type="radio" name="radio-1" id="radio-1" disabled="disabled">
-                                        <label for="radio-1">
-                                            <i class="icon icon_radio"></i>
-                                            A. He is on the phone
-                                        </label>
+                                        <h4 style="font-weight: bold;">Question {{i+1}}:</h4>
+                                        <p>{{ question.text }}</p>
                                     </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-2" disabled="disabled">
-                                        <label for="radio-2">
+                                    <li *ngFor="let answer of question.answers; let j = index">
+                                        <input type="radio" [name]="'radio_'+i" [checked]="answer.isRight" disabled="disabled">
+                                        <label
+                                            [ngStyle]="{ 'color': answer.isRight == true ? 'orangered' : '',
+                                            'font-weight': answer.isRight == true ? 'bold' : 'normal' }">
                                             <i class="icon icon_radio"></i>
-                                            B. She is driving the car
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-3" disabled="disabled">
-                                        <label for="radio-3">
-                                            <i class="icon icon_radio"></i>
-                                            C. She is typing on the computer
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-4" checked disabled="disabled">
-                                        <label for="radio-4" style="color: orangered;">
-                                            <i class="icon icon_radio"></i>
-                                            D. He is sitting next to her
+                                            {{ representAns[j] + answer.text }}
                                         </label>
                                     </li>
                                 </ul>
                             </div>
-                        </div> 
-                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="explain-item">
+                                    <h4 style="font-weight: bold;">Explaination:</h4>
+                                    <p>{{ groupQuestion.explaination }} sssssssssss</p>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="col-md-12">
                             <div class="function-item">
-                                <a title="Sửa" class="btn btn-primary">
-                                    <i class="fa fa-edit "></i></a> 
+                                <button (click)="updateGroupQuestion(i)" title="Sửa" class="btn btn-primary">
+                                    <i class="fa fa-edit" style="margin-top: 5px;"></i></button> 
                                     &nbsp;
-                                <a title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                <button (click)="deleteGroupQuestion(groupQuestion.group_question_id)" title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="question-group-wrap col-md-12">
-                <div class="question-item">
-                    <div class="question-content">
-                        <div class="col-md-12">
-                            <div class="audio-item">
-                                <audio preload="auto" controls>
-                                    <source src="../../../../assets/audio/test.mp3"  type="audio/mp3">
-                                </audio>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="transcript-item">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione impedit assumenda unde, laborum, accusamus ad quos nisi distinctio quasi excepturi iure eos ex nulla aliquam possimus? Eaque possimus nisi iure.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="answer-item" style="margin-left: 20%;">
-                                <ul class="answer-list">
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-1" disabled="disabled">
-                                        <label for="radio-1">
-                                            <i class="icon icon_radio"></i>
-                                            A. He is on the phone
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-2" disabled="disabled">
-                                        <label for="radio-2">
-                                            <i class="icon icon_radio"></i>
-                                            B. She is driving the car
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-3" disabled="disabled">
-                                        <label for="radio-3">
-                                            <i class="icon icon_radio"></i>
-                                            C. She is typing on the computer
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-4" checked disabled="disabled">
-                                        <label for="radio-4" style="color: orangered;">
-                                            <i class="icon icon_radio"></i>
-                                            D. He is sitting next to her
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> 
-                        <div class="col-md-4">
-                            <div class="function-item">
-                                <a title="Sửa" class="btn btn-primary">
-                                    <i class="fa fa-edit "></i></a> 
-                                    &nbsp;
-                                <a title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="question-group-wrap col-md-12">
-                <div class="question-item">
-                    <div class="question-content">
-                        <div class="col-md-12">
-                            <div class="audio-item">
-                                <audio preload="auto" controls>
-                                    <source src="../../../../assets/audio/test.mp3"  type="audio/mp3">
-                                </audio>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="transcript-item">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione impedit assumenda unde, laborum, accusamus ad quos nisi distinctio quasi excepturi iure eos ex nulla aliquam possimus? Eaque possimus nisi iure.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="answer-item" style="margin-left: 20%;">
-                                <ul class="answer-list">
-                                    <li>
-                                        <p>question</p>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-1" disabled="disabled">
-                                        <label for="radio-1">
-                                            <i class="icon icon_radio"></i>
-                                            A. He is on the phone
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-2" disabled="disabled">
-                                        <label for="radio-2">
-                                            <i class="icon icon_radio"></i>
-                                            B. She is driving the car
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-3" disabled="disabled">
-                                        <label for="radio-3">
-                                            <i class="icon icon_radio"></i>
-                                            C. She is typing on the computer
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-4" checked disabled="disabled">
-                                        <label for="radio-4" style="color: orangered;">
-                                            <i class="icon icon_radio"></i>
-                                            D. He is sitting next to her
-                                        </label>
-                                    </li>
-                                </ul>
-
-                                <ul class="answer-list">
-                                    <li>
-                                        <p>question</p>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-1" disabled="disabled">
-                                        <label for="radio-1">
-                                            <i class="icon icon_radio"></i>
-                                            A. He is on the phone
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-2" disabled="disabled">
-                                        <label for="radio-2">
-                                            <i class="icon icon_radio"></i>
-                                            B. She is driving the car
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-3" disabled="disabled">
-                                        <label for="radio-3">
-                                            <i class="icon icon_radio"></i>
-                                            C. She is typing on the computer
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-4" checked disabled="disabled">
-                                        <label for="radio-4" style="color: orangered;">
-                                            <i class="icon icon_radio"></i>
-                                            D. He is sitting next to her
-                                        </label>
-                                    </li>
-                                </ul>
-
-                                <ul class="answer-list">
-                                    <li>
-                                        <p>question</p>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-1" disabled="disabled">
-                                        <label for="radio-1">
-                                            <i class="icon icon_radio"></i>
-                                            A. He is on the phone
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-2" disabled="disabled">
-                                        <label for="radio-2">
-                                            <i class="icon icon_radio"></i>
-                                            B. She is driving the car
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-3" disabled="disabled">
-                                        <label for="radio-3">
-                                            <i class="icon icon_radio"></i>
-                                            C. She is typing on the computer
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="radio-1" id="radio-4" checked disabled="disabled">
-                                        <label for="radio-4" style="color: orangered;">
-                                            <i class="icon icon_radio"></i>
-                                            D. He is sitting next to her
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> 
-                        <div class="col-md-4">
-                            <div class="function-item">
-                                <a title="Sửa" class="btn btn-primary">
-                                    <i class="fa fa-edit "></i></a> 
-                                    &nbsp;
-                                <a title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
+
     </div>
 </div>
 

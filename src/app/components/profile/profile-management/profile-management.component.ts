@@ -11,7 +11,7 @@ import { DataTransferService } from 'src/app/services/data-transfer.service';
 })
 export class ProfileManagementComponent implements OnInit {
 
-  profileAPI = { account_id: 0, username: '', full_name: '', email: '', role_id: 0 }
+  profileAPI = { account_id: 0, username: '', full_name: '', email: '', role_name: '' }
 
   constructor(private accountService: AccountService, 
     private dataTransferService: DataTransferService) { }

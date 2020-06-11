@@ -22,7 +22,11 @@ export class PopupGroupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) {}
   
   ngOnInit(): void {
-    this.removeQuestion()
+    this.removeElementQuestion()
+    if(this.data.action == 'edit') {
+      console.log(this.data)
+      this.initialDataPopUp()
+    }
   }
   
   onNoClick(): void {
@@ -71,10 +75,23 @@ export class PopupGroupComponent implements OnInit {
       question.explanation = $(`#explain_`+i).val();
 
       groupQuestion.questions.push(question)
-      console.log('test id: ' + this.data)
-      groupQuestion.testId = this.data;
     }
 
+    if(this.data.action == 'add'){
+      groupQuestion.testId = this.data.testId;
+      this.createGroupQuestion(groupQuestion)
+      console.log(groupQuestion)
+    }
+
+    if(this.data.action == 'edit'){
+      groupQuestion.testId = this.data.questionUpdate.testId;
+      this.updateGroupQuestion(groupQuestion)
+      console.log(groupQuestion)
+    }
+    
+  }
+
+  createGroupQuestion(groupQuestion) {
     this.groupQuestionService.createGroupQuestion(groupQuestion).subscribe(
       res => {
         console.log(res)
@@ -84,7 +101,7 @@ export class PopupGroupComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         })
-        this.dialogRef.close();
+        this.dialogRef.close(1);
       },
       error => {
         console.log(error)
@@ -93,7 +110,62 @@ export class PopupGroupComponent implements OnInit {
           title: 'Error create group question',
           text: 'Something wrong!'
         })
-      })
+      }
+    )
+  }
+
+  updateGroupQuestion(groupQuestion) {
+    this.groupQuestionService.updateGroupQuestion(groupQuestion).subscribe(
+      res => {
+        console.log(res)
+        Swal.fire({
+          icon: 'success',
+          title: 'Group question has been updated',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.dialogRef.close(1);
+      },
+      error => {
+        console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Error update group question',
+          text: 'Something wrong!'
+        })
+      }
+    )
+  }
+
+  initialDataPopUp() {
+    this.imageName = this.data.questionUpdate.image_path
+    this.audioName = this.data.questionUpdate.audio_path
+    $('#text').val(this.data.questionUpdate.text);
+
+    let totalQuestion = this.data.questionUpdate.questions.length
+
+    for (let i = 1; i < totalQuestion; i++) {
+      this.addElementQuestion()
+    }
+
+    for(let i = 1; i <= totalQuestion; i++) {
+      let question = this.data.questionUpdate.questions[i-1];
+      let totalAnswer = question.answers.length;
+      
+      $(`#explain_`+i).val('ssdfsa');
+
+      $(`#question_` +i+ ` input[name="question"]`).val(question.text);
+
+      for(let j = 1; j <= totalAnswer; j++) {
+        let answer = question.answers[j-1];
+
+        $(`#question_` +i+ ` input[name="answer_` +j+ `"]`).val(answer.text);
+
+        if(answer.isRight) {
+          $(`#isRight_` +i+ `_` +j).prop('checked', true);
+        }
+      }
+    }
   }
 
   selectNameImg (event) {
@@ -104,73 +176,71 @@ export class PopupGroupComponent implements OnInit {
     this.audioName = event.target.files[0].name;
   }
 
-  addQuestion() {
-    $(document).ready(function(){
-      let totalElement = $('.popup-question-content').length;
-      let lastId = $('.popup-question-content:last').attr("id");
-      let splitId = lastId.split("_");
-      let nextIndex = Number(splitId[1]) + 1;
-      let max = 5;
+  addElementQuestion() {
+    let totalElement = $('.popup-question-content').length;
+    let lastId = $('.popup-question-content:last').attr("id");
+    let splitId = lastId.split("_");
+    let nextIndex = Number(splitId[1]) + 1;
+    let max = 5;
 
-      if (totalElement == max) {
-        alert('Tối đa có ' + max + ' câu hỏi');
-      }
+    if (totalElement == max) {
+      alert('Tối đa có ' + max + ' câu hỏi');
+    }
 
-      if(totalElement < max){
-        $(".popup-question-content:last").after(`<div id="question_`+ nextIndex +`" class="popup-question-content"></div>`);
-        $("#question_" + nextIndex).append(`
-          <span class="icon-cancel-question">
-              <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
-          </span>
+    if(totalElement < max){
+      $(".popup-question-content:last").after(`<div id="question_`+ nextIndex +`" class="popup-question-content"></div>`);
+      $("#question_" + nextIndex).append(`
+        <span class="icon-cancel-question">
+            <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+        </span>
 
-          <div class="form-group">
-              <div class="question">
-                  <div class="input-group">
-                      <span class="input-group-addon">Question</span>
-                      <input name="question" type="text" class="form-control">
-                  </div>
-              </div>
-              <div class="answer">
-                  <div class="input-group">
-                      <div class="input-group-btn btn btn-primary">
-                          <input id="isRight_`+ nextIndex +`_1" type="radio" name="correctAnswer_`+ nextIndex +`" value="A" style="transform: scale(1.5);">
-                      </div>
-                      <span class="input-group-addon" style="width: 40px;">A</span>
-                      <input name="answer_1" type="text" class="form-control">
-                  </div>
-                  <div class="input-group">
-                      <div class="input-group-btn btn btn-primary">
-                          <input id="isRight_`+ nextIndex +`_2" type="radio" name="correctAnswer_`+ nextIndex +`" value="B" style="transform: scale(1.5);">
-                      </div>
-                      <span class="input-group-addon" style="width: 40px;">B</span>
-                      <input name="answer_2" type="text" class="form-control">
-                  </div>
-                  <div class="input-group">
-                      <div class="input-group-btn btn btn-primary">
-                          <input id="isRight_`+ nextIndex +`_3" type="radio" name="correctAnswer_`+ nextIndex +`" value="C" style="transform: scale(1.5);">
-                      </div>
-                      <span class="input-group-addon" style="width: 40px;">C</span>
-                      <input name="answer_3" type="text" class="form-control">
-                  </div>
-                  <div class="input-group">
-                      <div class="input-group-btn btn btn-primary">
-                          <input id="isRight_`+ nextIndex +`_4" type="radio" name="correctAnswer_`+ nextIndex +`" value="D" style="transform: scale(1.5);">
-                      </div>
-                      <span class="input-group-addon" style="width: 40px;">D</span>
-                      <input name="answer_4" type="text" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="explain">Explain:</label>
-                    <textarea id="explain_`+ nextIndex +`" name="explain_`+ nextIndex +`" class="form-control" rows="2"></textarea>
+        <div class="form-group">
+            <div class="question">
+                <div class="input-group">
+                    <span class="input-group-addon">Question</span>
+                    <input name="question" type="text" class="form-control">
                 </div>
+            </div>
+            <div class="answer">
+                <div class="input-group">
+                    <div class="input-group-btn btn btn-primary">
+                        <input id="isRight_`+ nextIndex +`_1" type="radio" name="correctAnswer_`+ nextIndex +`" value="A" style="transform: scale(1.5);">
+                    </div>
+                    <span class="input-group-addon" style="width: 40px;">A</span>
+                    <input name="answer_1" type="text" class="form-control">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-btn btn btn-primary">
+                        <input id="isRight_`+ nextIndex +`_2" type="radio" name="correctAnswer_`+ nextIndex +`" value="B" style="transform: scale(1.5);">
+                    </div>
+                    <span class="input-group-addon" style="width: 40px;">B</span>
+                    <input name="answer_2" type="text" class="form-control">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-btn btn btn-primary">
+                        <input id="isRight_`+ nextIndex +`_3" type="radio" name="correctAnswer_`+ nextIndex +`" value="C" style="transform: scale(1.5);">
+                    </div>
+                    <span class="input-group-addon" style="width: 40px;">C</span>
+                    <input name="answer_3" type="text" class="form-control">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-btn btn btn-primary">
+                        <input id="isRight_`+ nextIndex +`_4" type="radio" name="correctAnswer_`+ nextIndex +`" value="D" style="transform: scale(1.5);">
+                    </div>
+                    <span class="input-group-addon" style="width: 40px;">D</span>
+                    <input name="answer_4" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="explain">Explain:</label>
+                  <textarea id="explain_`+ nextIndex +`" name="explain_`+ nextIndex +`" class="form-control" rows="2"></textarea>
               </div>
-          </div>
-        `)
-      }
-    });
+            </div>
+        </div>
+      `)
+    }
   }
 
-  removeQuestion() {
+  removeElementQuestion() {
     $(document).on('click', '.icon-cancel-question', function() {
       let totalElement = $('.popup-question-content').length;
       let id = $(this).parent().attr('id');
