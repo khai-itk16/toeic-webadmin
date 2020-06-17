@@ -21,6 +21,7 @@ export class PopupTestComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) {}
     
   ngOnInit(): void {
+    console.log(this.data)
     this.testForm = this.formBuilder.group({
       name: [this.data.test.name, [Validators.required,  Validators.maxLength(100), containAllBlankCharacter]],
     });
@@ -40,48 +41,54 @@ export class PopupTestComponent implements OnInit {
 
     console.log(testQuestion)
 
-    // titleId == 1 Create test
-    if(this.data.title.titleId == 1)
-    this.testQuestionService.createTest(testQuestion).subscribe(
-      res => {
-        console.log(res)
-        Swal.fire({
-          icon: 'success',
-          title: 'Test has been created',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        this.dialogRef.close(1);
-      },
-      error => {
-        console.log(error)
-        Swal.fire({
-          icon: 'error',
-          title: 'Error create test',
-          text: 'Something wrong!'
-        })
-    })
+    // Create test
+    if(this.data.action == 'add') {
+      this.testQuestionService.createTest(testQuestion).subscribe(
+        res => {
+          console.log(res)
+          Swal.fire({
+            icon: 'success',
+            title: 'Test has been created',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.dialogRef.close(1);
+        },
+        error => {
+          console.log(error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Error create test',
+            text: 'Something wrong!'
+          })
+      })
+    }
+    
 
-    // titleId == 2 Update test
-    if(this.data.title.titleId == 2)
-    this.testQuestionService.updateTest(testQuestion).subscribe(
-      res => {
-        console.log(res)
-        Swal.fire({
-          icon: 'success',
-          title: 'Test has been updated',
-          showConfirmButton: false,
-          timer: 1500
+    // Update test
+    if(this.data.action == 'edit') {
+      testQuestion.testId = this.data.test.testId
+      console.log(testQuestion)
+      this.testQuestionService.updateTest(testQuestion).subscribe(
+        res => {
+          console.log(res)
+          Swal.fire({
+            icon: 'success',
+            title: 'Test has been updated',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.dialogRef.close(1);
+        },
+        error => {
+          console.log(error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Error update test',
+            text: 'Something wrong!'
         })
-        this.dialogRef.close(1);
-      },
-      error => {
-        console.log(error)
-        Swal.fire({
-          icon: 'error',
-          title: 'Error update test',
-          text: 'Something wrong!'
-        })
-    })
+      })
+    }
+    
   }
 }

@@ -76,15 +76,25 @@ export class PopupGroupComponent implements OnInit {
 
       groupQuestion.questions.push(question)
     }
-
+    // Create group question
     if(this.data.action == 'add'){
       groupQuestion.testId = this.data.testId;
       this.createGroupQuestion(groupQuestion)
       console.log(groupQuestion)
     }
-
+    
+    // Edit group question
     if(this.data.action == 'edit'){
       groupQuestion.testId = this.data.questionUpdate.testId;
+
+      if(this.imageName != this.data.questionUpdate.image_path) {
+        groupQuestion.oldImagePath = this.data.questionUpdate.image_path;
+      }
+
+      if(this.audioName != this.data.questionUpdate.audio_path) {
+        groupQuestion.oldAudioPath = this.data.questionUpdate.audio_path;
+      }
+
       this.updateGroupQuestion(groupQuestion)
       console.log(groupQuestion)
     }

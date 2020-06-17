@@ -23,6 +23,7 @@ export class TestQuestionService {
   }
 
   updateTest(test) {
+    console.log(this.urlUpdateTestById + test.testId)
     return this.http.put<any>(this.urlUpdateTestById + test.testId, test)
   }
   

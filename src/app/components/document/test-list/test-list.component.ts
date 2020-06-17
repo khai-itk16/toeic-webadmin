@@ -52,11 +52,11 @@ export class TestListComponent implements OnInit {
   }
 
   createTestQuestion(partId) {
-    this.openDialog({title: { name: "Thêm test", titleId: 1 }, test: { name: '', partId: this.partId }})
+    this.openDialog({action:"add", title:"Thêm test", test: { name: '', partId: this.partId }})
   }
 
   updateTestQuestion(testId) {
-    let test = this.testsAPI.find(i => i.testId === testId);
-    this.openDialog({ title: { name: "Chỉnh sửa test", titleId: 2 }, test })
+    let test = this.testsAPI.find(i => i.testId == testId);
+    this.openDialog({action:"edit", title:"Chỉnh sửa test" , test })
   }
 }
