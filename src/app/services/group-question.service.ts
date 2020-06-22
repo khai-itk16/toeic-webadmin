@@ -32,7 +32,7 @@ export class GroupQuestionService {
   }
 
   updateGroupQuestion(groupQuestion) {
-    return this.http.put<any>(this.urlUpdateGroupQuestionById, groupQuestion);
+    return this.http.put<any>(this.urlUpdateGroupQuestionById + groupQuestion.groupQuestionId, groupQuestion);
   }
 
   deleteGroupQuestion(groupQuestionId) {

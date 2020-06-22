@@ -86,6 +86,7 @@ export class PopupGroupComponent implements OnInit {
     // Edit group question
     if(this.data.action == 'edit'){
       groupQuestion.testId = this.data.questionUpdate.testId;
+      groupQuestion.groupQuestionId = this.data.questionUpdate.group_question_id;
 
       if(this.imageName != this.data.questionUpdate.image_path) {
         groupQuestion.oldImagePath = this.data.questionUpdate.image_path;

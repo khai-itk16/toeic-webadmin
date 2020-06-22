@@ -1,6 +1,7 @@
 export class Configure {
-  // host = "https://toeic-quizz-api.azurewebsites.net"
-  host = "http://192.168.1.167:4000"
+  host = "https://toeic-quizz-api.azurewebsites.net"
+  // host = "http://192.168.1.167:4000"
+  // host = "http://localhost:4000"
   urlLogin = this.host + "/auth/login"
   urlCreateAccount = this.host + "/admin/account/create"
   urlListAccount = this.host + "/admin/account/get-list"
@@ -11,8 +12,8 @@ export class Configure {
 
   urlCreateGroupQuestion = this.host + "/group-question/create"
   urlGetListGroupQuestion = this.host + "/group-question/get-list"
-  urlUpdateGroupQuestionById = this.host + '/'
-  urlDeleteGroupQuestionById = this.host + '/'
+  urlUpdateGroupQuestionById = this.host + '/group-question/update/'
+  urlDeleteGroupQuestionById = this.host + '/group-question/delete/'
 
   urlListPart = this.host + "/part/get-list"
 

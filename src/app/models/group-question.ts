@@ -8,4 +8,5 @@ export class GroupQuestion {
     testId: number
     text: string
     questions = new Array<Question>()
+  groupQuestionId: any
 }
