@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
             closeButton: true,
             progressBar: true,
             progressAnimation: 'increasing',
-            tapToDismiss: false
+            tapToDismiss: false,
+            positionClass: "toast-top-right"
           });
         } else if(error.status == 403) {
           this.toastrService.warning('Account is locked', 'WARMING', {

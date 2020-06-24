@@ -41,7 +41,7 @@ export class TestListComponent implements OnInit {
 
   openDialog(test): void {
     const dialogRef = this.dialog.open(PopupTestComponent, {
-      width: '650px', height: '200px',
+      width: '650px', height: '250px',
       data: test
     });
     dialogRef.afterClosed().subscribe(data => {

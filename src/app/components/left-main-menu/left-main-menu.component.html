@@ -1,24 +1,29 @@
+<!--/. NAV TOP  -->
 <nav class="navbar-default navbar-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
-            <li class="text-center">
-                <img src="../../../assets/img/find_user.png" class="user-image img-responsive" />
+
+            <li>
+                <a routerLink="/dashboard" routerLinkActive="active-menu" class="waves-effect waves-dark"><i class="fa fa-dashboard"></i>
+                    Dashboard</a>
             </li>
             <li>
-                <a routerLink="/dashboard" routerLinkActive="active-menu"><i class="fa fa-dashboard fa-2x"></i> Trang chủ</a>
+                <a routerLink="/profile" routerLinkActive="active-menu" class="waves-effect waves-dark"><i class="fa fa-user"></i>
+                    Quản lý profile</a>
             </li>
             <li>
-                <a routerLink="/profile" routerLinkActive="active-menu"><i class="fa fa-user fa-2x"></i> Quản lý profile</a>
+                <a routerLink="/document-management" routerLinkActive="active-menu" class="waves-effect waves-dark"><i class="fa fa-file-text-o"></i>
+                    Quản lý tài liệu</a>
             </li>
             <li>
-                <a routerLink="/document-management" routerLinkActive="active-menu"><i class="fa fa-file-text-o fa-2x"></i> Quản lý tài liệu</a>
-            </li>
-            <li>
-                <a routerLink="/user-management" routerLinkActive="active-menu"><i class="fa fa-users fa-2x"></i> Quản lý tài khoản</a>
+                <a routerLink="/user-management" routerLinkActive="active-menu" class="waves-effect waves-dark"><i class="fa fa-users"></i>
+                    Quản lý tài khoản</a>
             </li>
         </ul>
+
     </div>
+
 </nav>
-<div class="container-fluid">
-    <router-outlet></router-outlet>
-</div>
+<!-- /. NAV SIDE  -->
+
+<router-outlet></router-outlet>

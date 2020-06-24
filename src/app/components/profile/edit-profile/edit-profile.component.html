@@ -1,12 +1,16 @@
 <div id="page-wrapper">
+    <div class="header">
+        <h1 class="page-header">
+            Chỉnh sửa profile
+        </h1>
+        <ol class="breadcrumb">
+            <li><a [routerLink]="['/profile']">Quản lý profile</a></li>
+            <li><a class="active">Chỉnh sửa profile</a></li>
+        </ol>
+
+    </div>
     <div id="page-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Quản lý profile</h2>
-            </div>
-        </div>
         <!-- /. ROW  -->
-        <hr />
         <div class="row">
             <div class="col-md-12">
                 <!-- Form Elements -->
@@ -15,10 +19,10 @@
                         <div class="row">
                             <div class="form-content">
                                 <form  [formGroup]= "profileForm">
-                                    <div class="form-group">
+                                    <div class="col s12">
                                         <label for="uname">Username</label>
                                         <input id="uname" type="text" formControlName="username"
-                                            name="uname" class="form-control"/>
+                                            name="uname" class="validate"/>
                                         <div *ngIf="profileFormControl.username.errors 
                                             && (profileFormControl.username.touched || profileFormControl.username.dirty)" 
                                             class="text-danger">
@@ -34,10 +38,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="col s12">
                                         <label for="fname">Full name</label>
                                         <input id="fname" type="text" formControlName="fullName"
-                                            name="fname" class="form-control"/>
+                                            name="fname" class="validate"/>
                                         <div *ngIf="profileFormControl.fullName.errors 
                                             && (profileFormControl.fullName.touched || profileFormControl.fullName.dirty)" 
                                             class="text-danger">
@@ -53,10 +57,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="col s12">
                                         <label for="email">Email</label>
                                         <input id="email" type="text" formControlName="email"
-                                            name="email" class="form-control"/>
+                                            name="email" class="validate"/>
                                         <div *ngIf="profileFormControl.email.errors 
                                             && (profileFormControl.email.touched || profileFormControl.email.dirty)" 
                                             class="text-danger">

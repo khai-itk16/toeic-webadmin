@@ -1,85 +1,88 @@
 
 <div id="page-wrapper">
+    <div class="header">
+        <h1 class="page-header">
+            Group question
+        </h1>
+        <ol class="breadcrumb">
+            <li><a [routerLink]="['/document-management']">Quản lý tài liệu</a></li>
+            <li><a [routerLink]="['../../test-list']">Test Group question</a></li>
+            <li><a class="active">Group question</a></li>
+        </ol>
+
+    </div>
     <div id="page-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Group Question</h2>
-            </div>
-        </div>
-       
         <!-- /. ROW  -->
-        <hr />
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <button (click)="createGroupQuestion()" class="btn btn-success btn-md" style="width: 200px;">Thêm Group Question</button>
-                &nbsp;
-                <button class="btn btn-primary btn-md" style="width: 200px;" [routerLink]="['../../test-list']">Trở lại</button>
+        <div class="row" style="background: #fff;">
+            <div class="row">
+                <div class="col-md-12 text-center" style="margin-top: 35px;">
+                    <button (click)="createGroupQuestion()" class="btn btn-success btn-md" style="width: 200px;">Thêm Group Question</button>
+                    &nbsp;
+                    <button class="btn btn-primary btn-md" style="width: 200px;" [routerLink]="['../../test-list']">Trở lại</button>
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-
-            <div *ngFor="let groupQuestion of groupQuestionsAPI; let i = index;" class="question-group-wrap col-md-12">
-                <div class="question-item">
-                    <div class="question-content">
-                        <div class="col-md-12" *ngIf="groupQuestion.audio_path != '' && groupQuestion.image_path != 'undefined'">
-                            <div class="audio-item">
-                                <audio preload="auto" controls>
-                                    <source [src]="host +'/asset/upload/audios/'+ groupQuestion.audio_path"  type="audio/mp3">
-                                </audio>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="text-item">
-                                <h4 style="font-weight: bold;">Text: </h4>
-                                <p>{{ groupQuestion.text }}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6" *ngIf="groupQuestion.image_path != '' && groupQuestion.image_path != 'undefined' ">
-                            <div class="img-item">
-                                <img [src]="host +'/asset/upload/images/'+ groupQuestion.image_path" style="width: 100%">
-                            </div>
-                        </div>
-                        <div class="col-md-6" *ngFor="let question of groupQuestion.questions; let i = index;">
-                            <div class="answer-item">
-                                <ul class="answer-list">
-                                    <li>
-                                        <h4 style="font-weight: bold;">Question {{i+1}}:</h4>
-                                        <p>{{ question.text }}</p>
-                                    </li>
-                                    <li *ngFor="let answer of question.answers; let j = index">
-                                        <input type="radio" [name]="'radio_'+i" [checked]="answer.isRight" disabled="disabled">
-                                        <label
-                                            [ngStyle]="{ 'color': answer.isRight == true ? 'orangered' : '',
-                                            'font-weight': answer.isRight == true ? 'bold' : 'normal' }">
-                                            <i class="icon icon_radio"></i>
-                                            {{ representAns[j] + answer.text }}
-                                        </label>
-                                    </li>
-                                </ul>
+    
+            <div class="row">
+                <div *ngFor="let groupQuestion of groupQuestionsAPI; let i = index;" class="question-group-wrap col-md-12">
+                    <div class="question-item">
+                        <div class="question-content">
+                            <div class="col-md-12" *ngIf="groupQuestion.audio_path != '' && groupQuestion.image_path != 'undefined'">
+                                <div class="audio-item">
+                                    <audio preload="auto" controls>
+                                        <source [src]="host +'/asset/upload/audios/'+ groupQuestion.audio_path"  type="audio/mp3">
+                                    </audio>
+                                </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="explain-item">
-                                    <h4 style="font-weight: bold;">Explaination:</h4>
-                                    <p>{{ groupQuestion.explaination }} sssssssssss</p>
+                                <div class="text-item">
+                                    <h4 style="font-weight: bold;">Text: </h4>
+                                    <p>{{ groupQuestion.text }}</p>
                                 </div>
-                            </div> 
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="function-item">
-                                <button (click)="updateGroupQuestion(i)" title="Sửa" class="btn btn-primary">
-                                    <i class="fa fa-edit" style="margin-top: 5px;"></i></button> 
-                                    &nbsp;
-                                <button (click)="deleteGroupQuestion(groupQuestion.group_question_id)" title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                            </div>
+                            <div class="col-md-6" *ngIf="groupQuestion.image_path != '' && groupQuestion.image_path != 'undefined' ">
+                                <div class="img-item">
+                                    <img [src]="host +'/asset/upload/images/'+ groupQuestion.image_path" style="width: 100%">
+                                </div>
+                            </div>
+                            <div class="col-md-6" *ngFor="let question of groupQuestion.questions; let i = index;">
+                                <div class="answer-item">
+                                    <ul class="answer-list">
+                                        <li>
+                                            <h4 style="font-weight: bold;">Question {{i+1}}:</h4>
+                                            <p>{{ question.text }}</p>
+                                        </li>
+                                        <li *ngFor="let answer of question.answers; let j = index">
+                                            <input type="radio" [name]="'radio_'+i" [checked]="answer.isRight" disabled="disabled">
+                                            <p
+                                                [ngStyle]="{ 'color': answer.isRight == true ? 'orangered' : '',
+                                                'font-weight': answer.isRight == true ? 'bold' : 'normal' }">
+                                                {{ representAns[j] + answer.text }}
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="explain-item">
+                                        <h4 style="font-weight: bold;">Explaination:</h4>
+                                        <p>{{ groupQuestion.explaination }} sssssssssss</p>
+                                    </div>
+                                </div> 
+                            </div>
+    
+                            <div class="col-md-12">
+                                <div class="function-item">
+                                    <button (click)="updateGroupQuestion(i)" title="Sửa" class="btn btn-primary">
+                                        <i class="fa fa-edit" style="margin-top: 5px;"></i></button> 
+                                        &nbsp;
+                                    <button (click)="deleteGroupQuestion(groupQuestion.group_question_id)" title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
-            
         </div>
-
     </div>
 </div>
 

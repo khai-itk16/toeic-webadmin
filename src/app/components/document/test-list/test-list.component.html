@@ -1,12 +1,16 @@
 <div id="page-wrapper">
+    <div class="header">
+        <h1 class="page-header">
+            Test group question
+        </h1>
+        <ol class="breadcrumb">
+            <li><a [routerLink]="['/document-management']">Quản lý tài liệu</a></li>
+            <li><a class="active">Test group question</a></li>
+        </ol>
+
+    </div>
     <div id="page-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Danh sách các test</h2>
-            </div>
-        </div>
         <!-- /. ROW  -->
-        <hr />
         <div class="row">
             <div class="col-md-12">
                 <!-- Advanced Tables -->
@@ -31,7 +35,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">STT</th>
-                                        <th class="text-center" (click)="sort('testName')">Tên Test
+                                        <th class="text-center" style="cursor: pointer;" (click)="sort('testName')">Tên Test
                                             <span class="glyphicon sort-icon" *ngIf="key =='testName'"
                                             [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                         </th>

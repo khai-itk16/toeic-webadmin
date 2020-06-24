@@ -1,12 +1,15 @@
 <div id="page-wrapper">
+    <div class="header">
+        <h1 class="page-header">
+            Quản lý tài khoản
+        </h1>
+        <ol class="breadcrumb">
+            <li><a class="active">Quản lý tài khoản</a></li>
+        </ol>
+
+    </div>
     <div id="page-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Quản lý tài khoản</h2>
-            </div>
-        </div>
         <!-- /. ROW  -->
-        <hr />
         <div class="row">
             <div class="col-md-12">
                 <!-- Advanced Tables -->
@@ -30,19 +33,19 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">STT</th>
-                                        <th class="text-center" (click)="sort('username')">Username
+                                        <th class="text-center" style="cursor: pointer;" (click)="sort('username')">Username
                                             <span class="glyphicon sort-icon" *ngIf="key =='username'"
                                              [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                         </th>
-                                        <th class="text-center" (click)="sort('fullName')">Full name
+                                        <th class="text-center" style="cursor: pointer;" (click)="sort('fullName')">Full name
                                             <span class="glyphicon sort-icon" *ngIf="key =='fullName'"
                                              [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                         </th>
-                                        <th class="text-center" (click)="sort('email')">Email
+                                        <th class="text-center" style="cursor: pointer;" (click)="sort('email')">Email
                                             <span class="glyphicon sort-icon" *ngIf="key =='email'"
                                              [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                         </th>
-                                        <th class="text-center" (click)="sort('role')">Role
+                                        <th class="text-center" style="cursor: pointer;" (click)="sort('role')">Role
                                             <span class="glyphicon sort-icon" *ngIf="key =='role'"
                                              [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                         </th>
@@ -51,7 +54,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let item of Accounts | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
-                                        <td>{{ i + 1 }}</td>
+                                        <td class="center">{{ i + 1 }}</td>
                                         <td class="center">{{item.username}}</td>
                                         <td class="center">{{item.full_name}}</td>
                                         <td class="center">{{item.email}}</td>

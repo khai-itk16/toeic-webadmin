@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+declare var $:any;
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,25 @@ export class AppComponent implements OnInit {
         tapToDismiss: false
       });
     }
+
+    $(document).ready(function () {
+      $(document).scroll(function() {
+          if ($(document).scrollTop() < 20){
+            $(".back-to-top").css("display", "none")
+            $(".back-to-top").removeClass("fadeIn")
+          } else {
+            $(".back-to-top").css("display", "inline")
+            $(".back-to-top").addClass("fadeIn")
+          } 
+      });
+  
+      $(".back-to-top").click(function (e) { 
+          e.preventDefault();
+          $("html,body").animate({
+          scrollTop: 0
+      }, 700);
+      });
+  });
   }
 
   logoutUser() {

@@ -208,37 +208,41 @@ export class PopupGroupComponent implements OnInit {
         <div class="form-group">
             <div class="question">
                 <div class="input-group">
-                    <span class="input-group-addon">Question</span>
+                    <label class="input-group-addon">Question</label>
                     <input name="question" type="text" class="form-control">
                 </div>
             </div>
             <div class="answer">
                 <div class="input-group">
-                    <div class="input-group-btn btn btn-primary">
+                    <div class="inline">
                         <input id="isRight_`+ nextIndex +`_1" type="radio" name="correctAnswer_`+ nextIndex +`" value="A" style="transform: scale(1.5);">
+                        <label for="isRight_`+ nextIndex +`_1"></label>
                     </div>
-                    <span class="input-group-addon" style="width: 40px;">A</span>
+                    <label for="isRight_`+ nextIndex +`_1" class="input-group-addon" style="width: 40px; cursor: pointer;">A</label>
                     <input name="answer_1" type="text" class="form-control">
                 </div>
                 <div class="input-group">
-                    <div class="input-group-btn btn btn-primary">
+                    <div class="inline">
                         <input id="isRight_`+ nextIndex +`_2" type="radio" name="correctAnswer_`+ nextIndex +`" value="B" style="transform: scale(1.5);">
+                        <label for="isRight_`+ nextIndex +`_2"></label>
                     </div>
-                    <span class="input-group-addon" style="width: 40px;">B</span>
+                    <label for="isRight_`+ nextIndex +`_2"  class="input-group-addon" style="width: 40px; cursor: pointer;">B</label>
                     <input name="answer_2" type="text" class="form-control">
                 </div>
                 <div class="input-group">
-                    <div class="input-group-btn btn btn-primary">
+                    <div class="inline">
                         <input id="isRight_`+ nextIndex +`_3" type="radio" name="correctAnswer_`+ nextIndex +`" value="C" style="transform: scale(1.5);">
+                        <label for="isRight_`+ nextIndex +`_3"></label>
                     </div>
-                    <span class="input-group-addon" style="width: 40px;">C</span>
+                    <label for="isRight_`+ nextIndex +`_3" class="input-group-addon" style="width: 40px; cursor: pointer;">C</label>
                     <input name="answer_3" type="text" class="form-control">
                 </div>
                 <div class="input-group">
-                    <div class="input-group-btn btn btn-primary">
+                    <div class="inline">
                         <input id="isRight_`+ nextIndex +`_4" type="radio" name="correctAnswer_`+ nextIndex +`" value="D" style="transform: scale(1.5);">
+                        <label for="isRight_`+ nextIndex +`_4"></label>
                     </div>
-                    <span class="input-group-addon" style="width: 40px;">D</span>
+                    <label for="isRight_`+ nextIndex +`_4" class="input-group-addon" style="width: 40px; cursor: pointer;">D</label>
                     <input name="answer_4" type="text" class="form-control">
                 </div>
                 <div class="form-group">

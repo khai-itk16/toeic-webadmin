@@ -1,21 +1,24 @@
 <div id="page-wrapper">
+    <div class="header">
+        <h1 class="page-header">
+            Quản lý tài liệu
+        </h1>
+        <ol class="breadcrumb">
+            <li><a class="active">Quản lý tài liệu</a></li>
+        </ol>
+
+    </div>
     <div id="page-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Quản lý tài liệu</h2>
-            </div>
-        </div>
         <!-- /. ROW  -->
-        <hr />
-        <div class="row">
+        <div class="row" style="background-color: #fff;">
             <div class="col-md-12">
                 <div class="row">
                     <div class="box">
                         <div *ngFor="let part of parts" class="col-sm-3">
                             <div class="box-item">
                                 <a [routerLink]="['/document-management/'+ part.partID +'/test-list']" >
-                                    <div class="img" style="background-image: url('../../../assets/img/listening.png');">
-                                        
+                                    <div class="img-wrapper">
+                                        <img src="../../../../assets/img/images.jpg" alt="image">
                                     </div>
                                     <div class="item-content">
                                         <h3 class="text-center" style="text-transform: uppercase;">{{ part.partName }}</h3>

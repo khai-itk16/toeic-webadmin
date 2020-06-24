@@ -1,7 +1,7 @@
 export class Configure {
-  host = "https://toeic-quizz-api.azurewebsites.net"
+  // host = "https://toeic-quizz-api.azurewebsites.net"
   // host = "http://192.168.1.167:4000"
-  // host = "http://localhost:4000"
+  host = "http://localhost:4000"
   urlLogin = this.host + "/auth/login"
   urlCreateAccount = this.host + "/admin/account/create"
   urlListAccount = this.host + "/admin/account/get-list"

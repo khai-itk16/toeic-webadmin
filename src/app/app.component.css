@@ -1,0 +1,9 @@
+.back-to-top {
+    position: fixed;
+    z-index: 1000;
+    bottom: 35px;
+    right: 45px;
+    color: #62e271;
+    transform: scale(3);
+    cursor: pointer;
+}

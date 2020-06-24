@@ -1,41 +1,98 @@
-/* Full-width inputs */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 0;
+  color: #ffffff;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  padding: 50px 0;
+}
+
+.background-login {
+  background-image: url("../../../assets/img/cover4.jpg");
+  background-size: cover;
+  font-family: 'Raleway', sans-serif;
+}
+
+.tilte-login {
+  margin: 0;
+    color: #fc3955;
+    font-size: 25px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+    padding-bottom: 30px;
+}
+
+.login-form {
+  background: rgba(0, 0, 0, 0.4117647058823529);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 3em;
+  border-radius: 10px;
   box-sizing: border-box;
 }
 
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
+.group {
+  display: flex;
+  padding: 15px 5px;
+  background-color: #ffffff;
 }
 
-/* Add a hover effect for buttons */
-button:hover {
-  opacity: 0.8;
+.group i {
+  color: #fc3955;
+  font-size: 20px;
+  padding: 0 10px;
 }
 
-
-/* Center the avatar image inside this container */
-.imgcontainer {
-    text-align: center;
-    margin: auto;
-    margin-top: 2em;
-    height: 10em;
-    width: 25em;
+.login-form-group {
+  margin: 20px 0;
 }
 
-/* Avatar image */
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
+.login-form-group label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #d2d2d2;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+#uname,
+#pass {
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    background: transparent;
+    color: #000;
+    border-bottom: 0;
+}
+
+#uname:focus,
+#pass:focus {
+    outline: none;
+}
+
+.btn-login {
+    background: #fc3955;
+    color: #ffffff;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    padding: 12px 60px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.btn-login:hover {
+    background-color: #00BCD4;
+    transition-duration: 5s;
 }

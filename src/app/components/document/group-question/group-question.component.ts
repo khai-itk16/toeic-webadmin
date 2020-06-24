@@ -17,7 +17,7 @@ export class GroupQuestionComponent implements OnInit {
   host: string
   groupQuestionsAPI: Array<any>
   testId: number
-  representAns = ['A) ', 'D) ', 'C) ', 'D) ']
+  representAns = ['A) ', 'B) ', 'C) ', 'D) ']
 
   constructor(public dialog: MatDialog,
     private groupQuestionService: GroupQuestionService,
@@ -32,7 +32,6 @@ export class GroupQuestionComponent implements OnInit {
       res => {
         console.log(res)
         this.groupQuestionsAPI = res.data
-
         $(document).ready(function () {
           $('audio').audioPlayer();
         })
