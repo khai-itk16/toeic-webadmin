@@ -4,6 +4,7 @@ import { PopupGroupComponent } from '../popup-group/popup-group.component';
 import { GroupQuestionService } from 'src/app/services/group-question.service';
 import { ActivatedRoute } from '@angular/router';
 import { Configure } from 'src/app/configure';
+import Swal from 'sweetalert2'
 
 declare var $: any;
 
@@ -17,7 +18,6 @@ export class GroupQuestionComponent implements OnInit {
   host: string
   groupQuestionsAPI: Array<any>
   testId: number
-  representAns = ['A) ', 'B) ', 'C) ', 'D) ']
 
   constructor(public dialog: MatDialog,
     private groupQuestionService: GroupQuestionService,
@@ -38,6 +38,9 @@ export class GroupQuestionComponent implements OnInit {
       },
       error => {
         console.log(error)
+        if(error.error.name == "GroupQuestionNotFound") {
+          this.groupQuestionsAPI = null
+        }
       }
     )
   }
@@ -64,14 +67,33 @@ export class GroupQuestionComponent implements OnInit {
   }
 
   deleteGroupQuestion(groupQuestionId) {
-    this.groupQuestionService.deleteGroupQuestion(groupQuestionId).subscribe(
-      res => {
-        console.log(res)
-        this.ngOnInit()
-      },
-      error => {
-        console.log(error)
+    Swal.fire({
+      title: 'Are you sure delete group question',
+      // text: 'You will not be able to recover this imaginary file!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.groupQuestionService.deleteGroupQuestion(groupQuestionId).subscribe(
+          res => {
+            this.ngOnInit()
+            Swal.fire(
+              'Deleted!',
+              'Group question has been deleted.',
+              'success'
+            )
+        }, error => {
+          console.log(error)
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Group question is safe',
+          'error'
+        )
       }
-    )
+    })
   }
 }

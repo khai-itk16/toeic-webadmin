@@ -7,6 +7,6 @@ export class GroupQuestion {
     audioPath: any
     testId: number
     text: string
+    groupQuestionId: any
     questions = new Array<Question>()
-  groupQuestionId: any
 }

@@ -28,6 +28,7 @@ export class TestQuestionService {
   }
   
   deleteTestById(testId) {
+    console.log(this.urlDeleteTestById + testId)
     return this.http.delete<any>(this.urlDeleteTestById + testId)
   }
  

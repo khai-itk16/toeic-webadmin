@@ -4,6 +4,7 @@ import { PopupTestComponent } from '../popup-test/popup-test.component';
 import { TestQuestionService } from 'src/app/services/test-question.service';
 import { TestQuestion } from 'src/app/models/test-question';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-test-list',
@@ -58,5 +59,36 @@ export class TestListComponent implements OnInit {
   updateTestQuestion(testId) {
     let test = this.testsAPI.find(i => i.testId == testId);
     this.openDialog({action:"edit", title:"Chỉnh sửa test" , test })
+  }
+
+  delteTestQuestion(testId) {
+    Swal.fire({
+      title: 'Are you sure delete test',
+      // text: 'You will not be able to recover this imaginary file!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.testQuestionService.deleteTestById(testId).subscribe(
+          res => {
+            this.ngOnInit()
+            Swal.fire(
+              'Deleted!',
+              'Test has been deleted.',
+              'success'
+            )
+        }, error => {
+          console.log(error)
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Test is safe',
+          'error'
+        )
+      }
+    })
   }
 }

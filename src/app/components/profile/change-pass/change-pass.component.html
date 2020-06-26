@@ -24,7 +24,7 @@
                                         <input id="old_password" type="text" formControlName="oldPassword"
                                             name="password" class="form-control"/>
                                         <div *ngIf="profileFormControl.oldPassword?.errors 
-                                            && (profileFormControl.oldPassword.touched || profileFormControl.password.dirty)" 
+                                            && (profileFormControl.oldPassword.touched || profileFormControl.oldPassword.dirty)" 
                                             class="text-danger">
                                             <div *ngIf="profileFormControl.oldPassword.errors.required"  class="text-danger">
                                                 Old password is required.
@@ -43,21 +43,21 @@
 
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <input id="password" type="text" formControlName="password"
+                                        <input id="password" type="text" formControlName="newPassword"
                                             name="password" class="form-control"/>
-                                        <div *ngIf="profileFormControl.password?.errors 
-                                            && (profileFormControl.password.touched || profileFormControl.password.dirty)" 
+                                        <div *ngIf="profileFormControl.newPassword?.errors 
+                                            && (profileFormControl.newPassword.touched || profileFormControl.newPassword.dirty)" 
                                             class="text-danger">
-                                            <div *ngIf="profileFormControl.password.errors.required"  class="text-danger">
+                                            <div *ngIf="profileFormControl.newPassword.errors.required"  class="text-danger">
                                                 Password is required.
                                             </div>
-                                            <div *ngIf="profileFormControl.password.errors.minlength">
+                                            <div *ngIf="profileFormControl.newPassword.errors.minlength">
                                                 Password must be at least 6 characters long.
                                             </div>
-                                            <div *ngIf="profileFormControl.password.errors.containAllBlankCharacter">
+                                            <div *ngIf="profileFormControl.newPassword.errors.containAllBlankCharacter">
                                                 Password must not be blank character.
                                             </div>
-                                            <div *ngIf="profileFormControl.password.errors.maxlength">
+                                            <div *ngIf="profileFormControl.newPassword.errors.maxlength">
                                                 Password must be at less than 50 characters long.
                                             </div>
                                         </div>

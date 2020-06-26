@@ -12,6 +12,7 @@ export class UserManagementComponent implements OnInit {
 
   filter
   Accounts: Array<any>
+  statusCode: number
 
   constructor(private accountService: AccountService, private router: Router) { }
 
@@ -20,10 +21,12 @@ export class UserManagementComponent implements OnInit {
     this.accountService.getAccounts().subscribe(
       res => {
         this.Accounts = res.data.list
-        console.log(this.Accounts)
+        console.log(res)
+        this.statusCode = 200
       },
       error => {
-        console.log(error);      
+        console.log(error);     
+        this.statusCode = error.status 
       }
     );
   }

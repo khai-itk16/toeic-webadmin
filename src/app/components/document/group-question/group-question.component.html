@@ -22,11 +22,11 @@
                 </div>
             </div>
     
-            <div class="row">
+            <div *ngIf="groupQuestionsAPI != null" class="row">
                 <div *ngFor="let groupQuestion of groupQuestionsAPI; let i = index;" class="question-group-wrap col-md-12">
                     <div class="question-item">
                         <div class="question-content">
-                            <div class="col-md-12" *ngIf="groupQuestion.audio_path != '' && groupQuestion.image_path != 'undefined'">
+                            <div class="col-md-12" *ngIf="groupQuestion.audio_path != '' && groupQuestion.audio_path != 'undefined'">
                                 <div class="audio-item">
                                     <audio preload="auto" controls>
                                         <source [src]="host +'/asset/upload/audios/'+ groupQuestion.audio_path"  type="audio/mp3">
@@ -35,20 +35,22 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="text-item">
-                                    <h4 style="font-weight: bold;">Text: </h4>
-                                    <p>{{ groupQuestion.text }}</p>
+                                    <h5 style="font-weight: bold;">Text: </h5>
+                                    <pre>{{ groupQuestion.text }}</pre>
                                 </div>
                             </div>
+                            
                             <div class="col-md-6" *ngIf="groupQuestion.image_path != '' && groupQuestion.image_path != 'undefined' ">
                                 <div class="img-item">
                                     <img [src]="host +'/asset/upload/images/'+ groupQuestion.image_path" style="width: 100%">
                                 </div>
                             </div>
-                            <div class="col-md-6" *ngFor="let question of groupQuestion.questions; let i = index;">
+
+                            <div class="col-md-6" style="float: left;" *ngFor="let question of groupQuestion.questions; let i = index;">
                                 <div class="answer-item">
                                     <ul class="answer-list">
                                         <li>
-                                            <h4 style="font-weight: bold;">Question {{i+1}}:</h4>
+                                            <h5 style="font-weight: bold;">Question {{i+1}}:</h5>
                                             <p>{{ question.text }}</p>
                                         </li>
                                         <li *ngFor="let answer of question.answers; let j = index">
@@ -56,15 +58,15 @@
                                             <p
                                                 [ngStyle]="{ 'color': answer.isRight == true ? 'orangered' : '',
                                                 'font-weight': answer.isRight == true ? 'bold' : 'normal' }">
-                                                {{ representAns[j] + answer.text }}
+                                                {{ answer.text }}
                                             </p>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="explain-item">
-                                        <h4 style="font-weight: bold;">Explaination:</h4>
-                                        <p>{{ groupQuestion.explaination }} sssssssssss</p>
+                                        <h5 style="font-weight: bold;">Explanation {{i+1}}:</h5>
+                                        <pre>{{ question.explanation }}</pre>
                                     </div>
                                 </div> 
                             </div>

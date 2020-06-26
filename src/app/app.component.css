@@ -6,4 +6,5 @@
     color: #62e271;
     transform: scale(3);
     cursor: pointer;
+    display: none;
 }

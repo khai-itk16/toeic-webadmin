@@ -6,6 +6,7 @@ import { containAllBlankCharacter } from 'src/app/common/custom-validator-accoun
 import { Account } from 'src/app/models/account';
 import Swal from 'sweetalert2'
 import { DataTransferService } from 'src/app/services/data-transfer.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -18,7 +19,7 @@ export class EditProfileComponent implements OnInit {
   editProfile: Account
   profileAPI: any
   
-  constructor(private accountService: AccountService,
+  constructor(private profile: ProfileService,
     private dataTransferService: DataTransferService,
     private router: Router,
     private formBuilder: FormBuilder) { }
@@ -36,7 +37,6 @@ export class EditProfileComponent implements OnInit {
 
   onEditProfile() {
     this.editProfile = this.profileForm.value
-    this.editProfile.id = this.profileAPI.account_id
     if ( this.editProfile != null) {
       console.log(this.editProfile)
       Swal.fire({
@@ -48,7 +48,7 @@ export class EditProfileComponent implements OnInit {
         cancelButtonText: 'No, don\'t update it'
       }).then((result) => {
         if (result.value) { 
-          this.accountService.updateAccount(this.editProfile).subscribe( 
+          this.profile.updateProfile(this.editProfile).subscribe( 
             res => {
               console.log(res)
               this.router.navigate(["/profile"])

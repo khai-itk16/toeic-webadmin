@@ -16,6 +16,7 @@ export class PopupGroupComponent implements OnInit {
 
   imageName: string
   audioName: string
+  representAns = ['A) ', 'B) ', 'C) ', 'D) ']
 
   constructor(private groupQuestionService: GroupQuestionService,
     public dialogRef: MatDialogRef<PopupGroupComponent>,
@@ -23,8 +24,8 @@ export class PopupGroupComponent implements OnInit {
   
   ngOnInit(): void {
     this.removeElementQuestion()
+    console.log(this.data)
     if(this.data.action == 'edit') {
-      console.log(this.data)
       this.initialDataPopUp()
     }
   }
@@ -34,9 +35,24 @@ export class PopupGroupComponent implements OnInit {
   }
 
   submitGroupQuestion() {
+    // Create group question
+    if(this.data.action == 'add'){
+      this.createGroupQuestion()
+    }
+    
+    // Edit group question
+    if(this.data.action == 'edit'){
+      this.updateGroupQuestion()
+    }
+    
+  }
+
+  createGroupQuestion() {
+
     let groupQuestion = new GroupQuestion();
     let totalQuestion = $('.popup-question-content').length;
 
+    groupQuestion.testId = this.data.testId;
     groupQuestion.imagePath = $('input[name="image"]').prop('files')[0];
     groupQuestion.audioPath = $('input[name="audio"]').prop('files')[0];
     groupQuestion.text = $('#text').val();
@@ -46,6 +62,7 @@ export class PopupGroupComponent implements OnInit {
       let isExistRight = false 
 
       question.text = $(`#question_` +i+ ` input[name="question"]`).val();
+      question.explanation = $(`#explain_`+i).val();
 
       for(let j = 1; j <= 4; j++) {
         let answer = new Answer();
@@ -63,7 +80,7 @@ export class PopupGroupComponent implements OnInit {
         if(answer.isRight == false && answer.text == '') {
           continue;
         }
-
+        
         question.answers.push(answer);
       }
 
@@ -72,37 +89,10 @@ export class PopupGroupComponent implements OnInit {
         return
       }
 
-      question.explanation = $(`#explain_`+i).val();
-
       groupQuestion.questions.push(question)
     }
-    // Create group question
-    if(this.data.action == 'add'){
-      groupQuestion.testId = this.data.testId;
-      this.createGroupQuestion(groupQuestion)
-      console.log(groupQuestion)
-    }
-    
-    // Edit group question
-    if(this.data.action == 'edit'){
-      groupQuestion.testId = this.data.questionUpdate.testId;
-      groupQuestion.groupQuestionId = this.data.questionUpdate.group_question_id;
+    console.log(groupQuestion)
 
-      if(this.imageName != this.data.questionUpdate.image_path) {
-        groupQuestion.oldImagePath = this.data.questionUpdate.image_path;
-      }
-
-      if(this.audioName != this.data.questionUpdate.audio_path) {
-        groupQuestion.oldAudioPath = this.data.questionUpdate.audio_path;
-      }
-
-      this.updateGroupQuestion(groupQuestion)
-      console.log(groupQuestion)
-    }
-    
-  }
-
-  createGroupQuestion(groupQuestion) {
     this.groupQuestionService.createGroupQuestion(groupQuestion).subscribe(
       res => {
         console.log(res)
@@ -125,7 +115,67 @@ export class PopupGroupComponent implements OnInit {
     )
   }
 
-  updateGroupQuestion(groupQuestion) {
+  updateGroupQuestion() {
+    let groupQuestion = new GroupQuestion();
+    let totalQuestion = $('.popup-question-content').length;
+
+    groupQuestion.groupQuestionId = this.data.questionUpdate.group_question_id;
+    groupQuestion.testId = this.data.questionUpdate.test_id;
+    groupQuestion.imagePath = $('input[name="image"]').prop('files')[0];
+    groupQuestion.audioPath = $('input[name="audio"]').prop('files')[0];
+    groupQuestion.text = $('#text').val();
+    
+
+    for(let i = 1; i <= totalQuestion; i++) {
+      let question = new Question();
+      let isExistRight = false 
+
+      question.questionId = this.data.questionUpdate.questions[i-1].questionId
+      question.groupQuestionId = this.data.questionUpdate.group_question_id
+      
+      question.text = $(`#question_` +i+ ` input[name="question"]`).val();
+      question.explanation = $(`#explain_`+i).val();
+
+      for(let j = 1; j <= 4; j++) {
+        let answer = new Answer();
+
+        answer.text = $(`#question_` +i+ ` input[name="answer_` +j+ `"]`).val();
+        answer.isRight = $(`#isRight_` +i+ `_` +j).is(":checked")
+        answer.questionId = this.data.questionUpdate.questions[i-1].questionId
+        answer.answerId = this.data.questionUpdate.questions[i-1].answers[j-1].answerId
+        if(answer.isRight) {
+          if(answer.text == '') {
+            alert('Correct answer is required')
+            return
+          }
+          isExistRight = true;
+        }
+       
+        if(answer.isRight == false && answer.text == '') {
+          continue;
+        }
+        
+        question.answers.push(answer);
+      }
+
+      if(!isExistRight) {
+        alert('please choose correct answer')
+        return
+      }
+
+      groupQuestion.questions.push(question)
+    }
+
+    if(this.imageName != this.data.questionUpdate.image_path) {
+      groupQuestion.oldImagePath = this.data.questionUpdate.image_path;
+    }
+
+    if(this.audioName != this.data.questionUpdate.audio_path) {
+      groupQuestion.oldAudioPath = this.data.questionUpdate.audio_path;
+    }
+
+    console.log(groupQuestion)
+
     this.groupQuestionService.updateGroupQuestion(groupQuestion).subscribe(
       res => {
         console.log(res)
@@ -163,7 +213,7 @@ export class PopupGroupComponent implements OnInit {
       let question = this.data.questionUpdate.questions[i-1];
       let totalAnswer = question.answers.length;
       
-      $(`#explain_`+i).val('ssdfsa');
+      $(`#explain_`+i).val(question.explanation);
 
       $(`#question_` +i+ ` input[name="question"]`).val(question.text);
 
@@ -247,7 +297,7 @@ export class PopupGroupComponent implements OnInit {
                 </div>
                 <div class="form-group">
                   <label for="explain">Explain:</label>
-                  <textarea id="explain_`+ nextIndex +`" name="explain_`+ nextIndex +`" class="form-control" rows="2"></textarea>
+                  <textarea id="explain_`+ nextIndex +`" name="explain_`+ nextIndex +`" class="form-control" rows="4"></textarea>
               </div>
             </div>
         </div>

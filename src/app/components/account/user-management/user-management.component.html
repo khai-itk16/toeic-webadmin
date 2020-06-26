@@ -9,8 +9,13 @@
 
     </div>
     <div id="page-inner">
+        <div *ngIf="statusCode == 401" class="row">
+            <div class="col-md-12">
+                <h2 style="color: red; text-align: center;">BẠN KHÔNG ĐƯỢC CẤP PHÉP DÙNG CHỨC NĂNG NÀY</h2>
+            </div>
+        </div>
         <!-- /. ROW  -->
-        <div class="row">
+        <div *ngIf="statusCode == 200" class="row">
             <div class="col-md-12">
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">

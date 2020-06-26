@@ -32,7 +32,21 @@ export class GroupQuestionService {
   }
 
   updateGroupQuestion(groupQuestion) {
-    return this.http.put<any>(this.urlUpdateGroupQuestionById + groupQuestion.groupQuestionId, groupQuestion);
+    const formData = new FormData()
+    formData.append('imagePath', groupQuestion.imagePath)
+    formData.append('audioPath', groupQuestion.audioPath)
+    formData.append('oldImagePath', groupQuestion.oldImagePath)
+    formData.append('oldAudioPath', groupQuestion.oldAudioPath)
+    formData.append('text', groupQuestion.text)
+    formData.append('testId', groupQuestion.testId)
+    formData.append('groupQuestionId', groupQuestion.groupQuestionId)
+    formData.append('questions', JSON.stringify(groupQuestion.questions))
+    
+    return this.http.put<any>(this.urlUpdateGroupQuestionById + groupQuestion.groupQuestionId, formData, {
+      headers: {
+        enctype: 'multipart/form-data'
+      }
+    });
   }
 
   deleteGroupQuestion(groupQuestionId) {

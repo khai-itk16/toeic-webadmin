@@ -3,6 +3,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,18 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(this.user).subscribe(
       res => {
         console.log(res);
+        var decoded = jwt_decode(res.data.accessToken);
+        console.log(decoded);
+        if(decoded.role == 3) {
+          this.toastrService.warning('Account user access deny', 'WARMING', {
+            timeOut: 3000,
+            closeButton: true,
+            progressBar: true,
+            progressAnimation: 'increasing',
+            tapToDismiss: false
+          });
+          return
+        }
         localStorage.setItem("token", res.data.accessToken);
         this.router.navigate(["/dashboard"])
         setTimeout(()=>{
@@ -32,7 +45,7 @@ export class LoginComponent implements OnInit {
         }, 100);
       }, 
       error => {
-        if(error.status == 401) {
+        if(error.status == 401 || error.status == 400) {
           this.toastrService.error('username or password invaild', 'ERROR', {
             timeOut: 3000,
             closeButton: true,

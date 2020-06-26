@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { containAllBlankCharacter, MustMatch } from 'src/app/common/custom-validator-account';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
-import { AccountService } from 'src/app/services/account.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-change-pass',
@@ -17,15 +17,15 @@ export class ChangePassComponent implements OnInit {
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
-    private accountService: AccountService) { }
+    private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.profileForm = this.formBuilder.group({
       oldPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), containAllBlankCharacter]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), containAllBlankCharacter]],
+      newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), containAllBlankCharacter]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), containAllBlankCharacter]],
     },{
-      validators: MustMatch('password', 'confirmPassword')
+      validators: MustMatch('newPassword', 'confirmPassword')
     });
   }
 
@@ -36,37 +36,36 @@ export class ChangePassComponent implements OnInit {
     console.log(this.newPass)
     if(this.newPass != null) { 
       Swal.fire({
-        title: 'Are you sure to create account',
+        title: 'Are you sure to change profile password',
         // text: 'You will not be able to recover this imaginary file!',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, create it!',
-        cancelButtonText: 'No, don\'t create it'
+        confirmButtonText: 'Yes, change it!',
+        cancelButtonText: 'No, don\'t change it'
       }).then(result => {
         if (result.value) { 
-        //   this.accountService.createAccount(this.newPass).subscribe( 
-        //     res => {
-        //       console.log(res)
-        //       this.router.navigate(["/user-management"])
-        //         Swal.fire(
-        //           'Created!',
-        //           'Account has been created.',
-        //           'success'
-        //         )
-        //     },
-        // error => {
-        //   console.log(error)
-        // })
-
-        Swal.fire(
-          'Created!',
-          'Account has been created.',
-          'success'
-        )
+          this.profileService.changeProfilePass(this.newPass).subscribe( 
+            res => {
+              console.log(res)
+              Swal.fire(
+                'Change password!',
+                'Profile has been changed password.',
+                'success'
+              )
+              this.router.navigate(["/user-management"])
+            },
+        error => {
+          console.log(error)
+          Swal.fire(
+            'Change password fail!',
+            'Profile isn\'t change password',
+            'success'
+          )
+        })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire(
             'Cancelled',
-            'Account isn\'t created',
+            'Profile isn\'t change password',
             'error'
           )
         }
