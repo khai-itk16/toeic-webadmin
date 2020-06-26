@@ -40,13 +40,13 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-6" *ngIf="groupQuestion.image_path != '' && groupQuestion.image_path != 'undefined' ">
-                                <div class="img-item">
+                            <div class="col-md-12" *ngIf="groupQuestion.image_path != '' && groupQuestion.image_path != 'undefined' ">
+                                <div class="img-item mx-auto">
                                     <img [src]="host +'/asset/upload/images/'+ groupQuestion.image_path" style="width: 100%">
                                 </div>
                             </div>
 
-                            <div class="col-md-6" style="float: left;" *ngFor="let question of groupQuestion.questions; let i = index;">
+                            <div class="col-md-12" *ngFor="let question of groupQuestion.questions; let i = index;">
                                 <div class="answer-item">
                                     <ul class="answer-list">
                                         <li>
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="explain-item">
-                                        <h5 style="font-weight: bold;">Explanation {{i+1}}:</h5>
+                                        <h5 style="font-weight: bold; padding-left: 5px;">Explanation {{i+1}}:</h5>
                                         <pre>{{ question.explanation }}</pre>
                                     </div>
                                 </div> 

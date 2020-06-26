@@ -8,5 +8,7 @@ export class GroupQuestion {
     testId: number
     text: string
     groupQuestionId: any
+    checkDeleteImage: boolean
+    checkDeleteAudio: boolean
     questions = new Array<Question>()
 }
