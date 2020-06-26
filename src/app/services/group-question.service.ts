@@ -33,10 +33,16 @@ export class GroupQuestionService {
 
   updateGroupQuestion(groupQuestion) {
     const formData = new FormData()
+
+    formData.append('checkDeleteAudio', groupQuestion.checkDeleteAudio)
+    formData.append('checkDeleteImage', groupQuestion.checkDeleteImage)
+
     formData.append('imagePath', groupQuestion.imagePath)
-    formData.append('audioPath', groupQuestion.audioPath)
     formData.append('oldImagePath', groupQuestion.oldImagePath)
+
+    formData.append('audioPath', groupQuestion.audioPath)
     formData.append('oldAudioPath', groupQuestion.oldAudioPath)
+
     formData.append('text', groupQuestion.text)
     formData.append('testId', groupQuestion.testId)
     formData.append('groupQuestionId', groupQuestion.groupQuestionId)

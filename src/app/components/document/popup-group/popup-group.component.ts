@@ -16,6 +16,8 @@ export class PopupGroupComponent implements OnInit {
 
   imageName: string
   audioName: string
+  checkDeleteImage = false
+  checkDeleteAudio = false
   representAns = ['A) ', 'B) ', 'C) ', 'D) ']
 
   constructor(private groupQuestionService: GroupQuestionService,
@@ -51,6 +53,9 @@ export class PopupGroupComponent implements OnInit {
 
     let groupQuestion = new GroupQuestion();
     let totalQuestion = $('.popup-question-content').length;
+
+    groupQuestion.checkDeleteImage = this.checkDeleteImage
+    groupQuestion.checkDeleteAudio = this.checkDeleteAudio
 
     groupQuestion.testId = this.data.testId;
     groupQuestion.imagePath = $('input[name="image"]').prop('files')[0];
@@ -119,6 +124,8 @@ export class PopupGroupComponent implements OnInit {
     let groupQuestion = new GroupQuestion();
     let totalQuestion = $('.popup-question-content').length;
 
+    groupQuestion.checkDeleteAudio = this.checkDeleteAudio
+    groupQuestion.checkDeleteImage = this.checkDeleteImage
     groupQuestion.groupQuestionId = this.data.questionUpdate.group_question_id;
     groupQuestion.testId = this.data.questionUpdate.test_id;
     groupQuestion.imagePath = $('input[name="image"]').prop('files')[0];
@@ -166,14 +173,9 @@ export class PopupGroupComponent implements OnInit {
       groupQuestion.questions.push(question)
     }
 
-    if(this.imageName != this.data.questionUpdate.image_path) {
-      groupQuestion.oldImagePath = this.data.questionUpdate.image_path;
-    }
-
-    if(this.audioName != this.data.questionUpdate.audio_path) {
-      groupQuestion.oldAudioPath = this.data.questionUpdate.audio_path;
-    }
-
+    groupQuestion.oldImagePath = this.data.questionUpdate.image_path;
+    groupQuestion.oldAudioPath = this.data.questionUpdate.audio_path;
+   
     console.log(groupQuestion)
 
     this.groupQuestionService.updateGroupQuestion(groupQuestion).subscribe(
@@ -235,6 +237,16 @@ export class PopupGroupComponent implements OnInit {
 
   selectNameAudio(event) {
     this.audioName = event.target.files[0].name;
+  }
+
+  deleteImage() {
+    $("#chooseImage").hide();
+    this.checkDeleteImage = !this.checkDeleteImage
+  }
+
+  deleteAudio() {
+    $("#chooseAudio").hide();
+    this.checkDeleteAudio = !this.checkDeleteAudio
   }
 
   addElementQuestion() {
