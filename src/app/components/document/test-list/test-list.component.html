@@ -53,7 +53,7 @@
                                             <a (click)="deleteAccount(item.account_id)" title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr> -->
-                                    <tr *ngFor="let test of testsAPI; let i = index">
+                                    <tr *ngFor="let test of testsAPI | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
                                         <td class="text-center">{{ i + 1 }}</td>
                                         <td>{{ test.name }}</td>
                                         <td class="center">
