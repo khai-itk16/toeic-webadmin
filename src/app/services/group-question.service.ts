@@ -18,6 +18,15 @@ export class GroupQuestionService {
 
   createGroupQuestion(groupQuestion) {
     const formData = new FormData()
+    
+    if(groupQuestion.checkDeleteImage){
+      groupQuestion.imagePath = 'undefined'
+    }
+
+    if(groupQuestion.checkDeleteAudio){
+      groupQuestion.audioPath = 'undefined'
+    }
+
     formData.append('imagePath', groupQuestion.imagePath)
     formData.append('audioPath', groupQuestion.audioPath)
     formData.append('text', groupQuestion.text)
