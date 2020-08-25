@@ -24,17 +24,16 @@ import { AuthGuard } from './guard/auth.guard';
 import { UserManagementComponent } from './components/account/user-management/user-management.component';
 import { CreateNewUserComponent } from './components/account/create-new-user/create-new-user.component';
 import { EditUserComponent } from './components/account/edit-user/edit-user.component';
-import { DocumentManagementComponent } from './components/document/document-management/document-management.component';
-import { TestListComponent } from './components/document/test-list/test-list.component';
-import { GroupQuestionComponent } from './components/document/group-question/group-question.component';
 import { LeftMainMenuComponent } from './components/left-main-menu/left-main-menu.component';
-import { PopupGroupComponent } from './components/document/popup-group/popup-group.component';
-import { PopupTestComponent } from './components/document/popup-test/popup-test.component';
 import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
 import { ProfileManagementComponent } from './components/profile/profile-management/profile-management.component';
 import { ChangePassComponent } from './components/profile/change-pass/change-pass.component';
 import { DataTransferService } from './services/data-transfer.service';
-import { GroupQuestionService } from './services/group-question.service';
+import { GroupProductComponent } from './components/category/group-product/group-product.component';
+import { TypeProductComponent } from './components/category/type-product/type-product.component';
+import { CategoryDialogComponent } from './components/category/category-dialog/category-dialog.component';
+import { CensorPostsComponent } from './components/sale-post/censor-posts/censor-posts.component';
+import { StatisticalDataComponent } from './components/sale-post/statistical-data/statistical-data.component';
 
 @NgModule({
   declarations: [
@@ -44,16 +43,16 @@ import { GroupQuestionService } from './services/group-question.service';
     CreateNewUserComponent,
     EditUserComponent,
     DashboardComponent,
-    DocumentManagementComponent,
-    TestListComponent,
-    GroupQuestionComponent,
     LeftMainMenuComponent,
     PageNotFoundComponent,
-    PopupGroupComponent,
-    PopupTestComponent,
     ProfileManagementComponent,
     EditProfileComponent,
-    ChangePassComponent
+    ChangePassComponent,
+    GroupProductComponent,
+    TypeProductComponent,
+    CategoryDialogComponent,
+    CensorPostsComponent,
+    StatisticalDataComponent
   ],
   imports: [
     BrowserModule,
@@ -77,13 +76,11 @@ import { GroupQuestionService } from './services/group-question.service';
     AccountService, 
     AuthGuard, 
     DataTransferService,
-    GroupQuestionService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
     }],
-  bootstrap: [AppComponent],
-  entryComponents: [ PopupGroupComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

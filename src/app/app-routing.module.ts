@@ -5,15 +5,16 @@ import { UserManagementComponent } from './components/account/user-management/us
 import { CreateNewUserComponent } from './components/account/create-new-user/create-new-user.component';
 import { EditUserComponent } from './components/account/edit-user/edit-user.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DocumentManagementComponent } from './components/document/document-management/document-management.component';
-import { TestListComponent } from './components/document/test-list/test-list.component';
-import { GroupQuestionComponent } from './components/document/group-question/group-question.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LeftMainMenuComponent } from './components/left-main-menu/left-main-menu.component';
 import { ProfileManagementComponent } from './components/profile/profile-management/profile-management.component';
 import { ChangePassComponent } from './components/profile/change-pass/change-pass.component';
 import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
+import { GroupProductComponent } from './components/category/group-product/group-product.component';
+import { TypeProductComponent } from './components/category/type-product/type-product.component';
+import { CensorPostsComponent } from './components/sale-post/censor-posts/censor-posts.component';
+import { StatisticalDataComponent } from './components/sale-post/statistical-data/statistical-data.component';
 
 
 const routes: Routes = [
@@ -24,13 +25,11 @@ const routes: Routes = [
   },
   {
     path: "dashboard",
-    component: LeftMainMenuComponent,
     children: [{ path: '', component: DashboardComponent }],
     canActivate: [AuthGuard]
   },
   {
     path: "profile",
-    component: LeftMainMenuComponent,
     children: [
       { path: '', component: ProfileManagementComponent },
       { path: 'edit-profile', component: EditProfileComponent },
@@ -39,8 +38,20 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: "sale-post",
+    children: [
+      {
+        path: "",
+        redirectTo: "statistics",
+        pathMatch: "full"
+      },
+      { path: "statistics", component: StatisticalDataComponent },
+      { path: 'censor-posts', component: CensorPostsComponent }
+    ],
+    canActivate: [AuthGuard]
+  },
+  {
     path: "user-management",
-    component: LeftMainMenuComponent,
     children: [
       { path: '', component: UserManagementComponent },
       { path: 'create-new-user', component: CreateNewUserComponent },
@@ -50,12 +61,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "document-management",
-    component: LeftMainMenuComponent,
+    path: "category",
     children: [
-      { path: '', component: DocumentManagementComponent },
-      { path: ':partId/test-list', component: TestListComponent },
-      { path: ':partId/test/:testId', component: GroupQuestionComponent },
+      { path: "", redirectTo: "group-product", pathMatch: "full" },
+      { path: 'group-product', component: GroupProductComponent },
+      { path: ':groupId/type-product', component: TypeProductComponent },
       { path: "**", component: PageNotFoundComponent }
     ],
     canActivate: [AuthGuard]
@@ -66,7 +76,6 @@ const routes: Routes = [
   },
   {
     path: "**",
-    component: LeftMainMenuComponent,
     children: [{ path: '', component: PageNotFoundComponent }]
   }
 ];

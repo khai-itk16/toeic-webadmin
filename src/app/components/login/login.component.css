@@ -17,6 +17,7 @@ h1 {
   background-image: url("../../../assets/img/cover4.jpg");
   background-size: cover;
   font-family: 'Raleway', sans-serif;
+  height: 100vh;
 }
 
 .tilte-login {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
-import { Account } from 'src/app/models/account';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { containAllBlankCharacter, MustMatch, unselectOption } from 'src/app/common/custom-validator-account';
 import Swal from 'sweetalert2'
@@ -15,9 +14,9 @@ export class CreateNewUserComponent implements OnInit {
 
   createAccountForm: FormGroup
 
-  newAccount: Account
+  newAccount: any
 
-  roles = [{ roleId: 1, role: 'admin' }, { roleId: 2, role: 'editor' }, { roleId: 3, role: 'user' }]
+  roles = [{ roleId: 3, role: 'admin' }, { roleId: 2, role: 'censor' }, { roleId: 1, role: 'user' }]
 
   constructor(private accountService: AccountService , 
     private router: Router, private formBuilder: FormBuilder) { }
@@ -25,11 +24,14 @@ export class CreateNewUserComponent implements OnInit {
   ngOnInit(): void {
     this.createAccountForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
-      fullName: ['', [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
+      firstName: ['', [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
+      lastName: ['', [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
       email: ['', [Validators.required, Validators.maxLength(100), Validators.email]],
+      phone: ['', [Validators.required, Validators.maxLength(10)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), containAllBlankCharacter]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), containAllBlankCharacter]],
-      roleId: ['', [unselectOption]]
+      roleId: ['', [unselectOption]],
+      vipAccount: []
   },{
     validators: MustMatch('password', 'confirmPassword')
   });
@@ -39,6 +41,27 @@ export class CreateNewUserComponent implements OnInit {
 
   onCreateNewUser() {
     this.newAccount = this.createAccountForm.value
+    this.newAccount.roleEntities = new Array()
+    switch(this.newAccount.roleId) {
+      case "3": 
+        this.newAccount.roleEntities.push({
+          roleId: 1,
+          roleName: "ROLE_ADMIN"
+        })
+      case "2": 
+        this.newAccount.roleEntities.push({
+          roleId: 2,
+          roleName: "ROLE_CENSOR"
+        })
+      case "1": 
+        this.newAccount.roleEntities.push({
+          roleId: 3,
+          roleName: "ROLE_USER"
+        })
+    }
+    
+    delete this.newAccount.confirmPassword
+    delete this.newAccount.roleId
     console.log(this.newAccount)
     if(this.newAccount != null) { 
       Swal.fire({
@@ -60,8 +83,13 @@ export class CreateNewUserComponent implements OnInit {
                   'success'
                 )
             },
-        error => {
-          console.log(error)
+        err => {
+          console.log(err)
+          Swal.fire(
+            'Cancelled',
+            'Account isn\'t created with error\n' + err.error.subErrors[0].message,
+            'error'
+          )
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire(

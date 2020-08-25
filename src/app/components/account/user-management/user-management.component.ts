@@ -10,9 +10,17 @@ import Swal from 'sweetalert2'
 })
 export class UserManagementComponent implements OnInit {
 
-  filter
   Accounts: Array<any>
   statusCode: number
+
+  filter
+  key: string = 'username'; //set default
+  reverse: boolean = false;
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+  p: number = 1;
 
   constructor(private accountService: AccountService, private router: Router) { }
 
@@ -20,7 +28,7 @@ export class UserManagementComponent implements OnInit {
 
     this.accountService.getAccounts().subscribe(
       res => {
-        this.Accounts = res.data.list
+        this.Accounts = res
         console.log(res)
         this.statusCode = 200
       },
@@ -30,14 +38,6 @@ export class UserManagementComponent implements OnInit {
       }
     );
   }
-
-  key: string = 'username'; //set default
-  reverse: boolean = false;
-  sort(key){
-    this.key = key;
-    this.reverse = !this.reverse;
-  }
-  p: number = 1;
 
   deleteAccount(id) {
     Swal.fire({

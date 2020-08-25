@@ -39,20 +39,39 @@
                                     </div>
 
                                     <div class="col s12">
-                                        <label for="fname">Full name</label>
-                                        <input id="fname" type="text" formControlName="fullName"
+                                        <label for="fname">First name</label>
+                                        <input id="fname" type="text" formControlName="firstName"
                                             name="fname" class="validate"/>
-                                        <div *ngIf="profileFormControl.fullName.errors 
-                                            && (profileFormControl.fullName.touched || profileFormControl.fullName.dirty)" 
+                                        <div *ngIf="profileFormControl.firstName.errors 
+                                            && (profileFormControl.firstName.touched || profileFormControl.firstName.dirty)" 
                                             class="text-danger">
-                                            <div *ngIf="profileFormControl.fullName.errors.required"  class="text-danger">
-                                                Full name  is required.
+                                            <div *ngIf="profileFormControl.firstName.errors.required"  class="text-danger">
+                                                First name  is required.
                                             </div>
-                                            <div *ngIf="profileFormControl.fullName.errors.containAllBlankCharacter">
-                                                Full name  must not be blank character.
+                                            <div *ngIf="profileFormControl.firstName.errors.containAllBlankCharacter">
+                                                First name  must not be blank character.
                                             </div>
-                                            <div *ngIf="profileFormControl.fullName.errors.maxlength">
-                                                Full name must be at less than 100 characters long.
+                                            <div *ngIf="profileFormControl.firstName.errors.maxlength">
+                                                First name must be at less than 100 characters long.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col s12">
+                                        <label for="lname">Last name</label>
+                                        <input id="lname" type="text" formControlName="lastName"
+                                            name="lname" class="validate"/>
+                                        <div *ngIf="profileFormControl.lastName.errors 
+                                            && (profileFormControl.lastName.touched || profileFormControl.lastName.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="profileFormControl.lastName.errors.required"  class="text-danger">
+                                                Last name  is required.
+                                            </div>
+                                            <div *ngIf="profileFormControl.lastName.errors.containAllBlankCharacter">
+                                                Last name  must not be blank character.
+                                            </div>
+                                            <div *ngIf="profileFormControl.lastName.errors.maxlength">
+                                                Last name must be at less than 100 characters long.
                                             </div>
                                         </div>
                                     </div>
@@ -75,6 +94,26 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col s12">
+                                        <label for="phone">Phone</label>
+                                        <input id="phone" type="text" formControlName="phone"
+                                            name="phone" class="validate"/>
+                                        <div *ngIf="profileFormControl.phone.errors 
+                                            && (profileFormControl.phone.touched || profileFormControl.phone.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="profileFormControl.phone.errors.required"  class="text-danger">
+                                                Phone  is required.
+                                            </div>
+                                            <!-- <div *ngIf="profileFormControl.phone.errors.email">
+                                                Phone invalid format.
+                                            </div> -->
+                                            <div *ngIf="profileFormControl.phone.errors.maxlength">
+                                                Phone must be 10 characters long.
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <button [disabled]="profileForm.invalid" class="btn btn-success btn-md" 
                                         (click)="onEditProfile()">Chỉnh sửa</button>
                                     &nbsp;

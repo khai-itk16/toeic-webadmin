@@ -4,7 +4,7 @@
             Thêm mới tài khoản
         </h1>
         <ol class="breadcrumb">
-            <li><a [routerLink]="['/user-management']">Thêm mới tài khoản</a></li>
+            <li><a [routerLink]="['/user-management']">Quản lý tài khoản</a></li>
             <li><a class="active">Thêm mới tài khoản</a></li>
         </ol>
 
@@ -39,20 +39,39 @@
                                     </div>
 
                                     <div class="form-group input-field col s12">
-                                        <label for="fname">Full name</label>
-                                        <input id="fname" type="text" formControlName="fullName"
-                                            name="fname" class="form-control validate"/>
-                                        <div *ngIf="createAccountFormControl.fullName.errors 
-                                            && (createAccountFormControl.fullName.touched || createAccountFormControl.fullName.dirty)" 
+                                        <label for="firstName">Full name</label>
+                                        <input id="firstName" type="text" formControlName="firstName"
+                                            name="firstName" class="form-control validate"/>
+                                        <div *ngIf="createAccountFormControl.firstName.errors 
+                                            && (createAccountFormControl.firstName.touched || createAccountFormControl.firstName.dirty)" 
                                             class="text-danger">
-                                            <div *ngIf="createAccountFormControl.fullName.errors.required"  class="text-danger">
-                                                Full name  is required.
+                                            <div *ngIf="createAccountFormControl.firstName.errors.required"  class="text-danger">
+                                                First name  is required.
                                             </div>
-                                            <div *ngIf="createAccountFormControl.fullName.errors.containAllBlankCharacter">
-                                                Full name  must not be blank character.
+                                            <div *ngIf="createAccountFormControl.firstName.errors.containAllBlankCharacter">
+                                                First name  must not be blank character.
                                             </div>
-                                            <div *ngIf="createAccountFormControl.fullName.errors.maxlength">
-                                                Full name must be at less than 100 characters long.
+                                            <div *ngIf="createAccountFormControl.firstName.errors.maxlength">
+                                                First name must be at less than 100 characters long.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group input-field col s12">
+                                        <label for="lastName">Full name</label>
+                                        <input id="lastName" type="text" formControlName="lastName"
+                                            name="lastName" class="form-control validate"/>
+                                        <div *ngIf="createAccountFormControl.firstName.errors 
+                                            && (createAccountFormControl.firstName.touched || createAccountFormControl.firstName.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="createAccountFormControl.firstName.errors.required"  class="text-danger">
+                                                Last name  is required.
+                                            </div>
+                                            <div *ngIf="createAccountFormControl.firstName.errors.containAllBlankCharacter">
+                                                Last name  must not be blank character.
+                                            </div>
+                                            <div *ngIf="createAccountFormControl.firstName.errors.maxlength">
+                                                Last name must be at less than 100 characters long.
                                             </div>
                                         </div>
                                     </div>
@@ -76,9 +95,28 @@
                                         </div>
                                     </div>
 
+                                    <div class="col s12">
+                                        <label for="phone">Phone</label>
+                                        <input id="phone" type="text" formControlName="phone"
+                                            name="phone" class="validate"/>
+                                        <div *ngIf="createAccountFormControl.phone.errors 
+                                            && (createAccountFormControl.phone.touched || createAccountFormControl.phone.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="createAccountFormControl.phone.errors.required"  class="text-danger">
+                                                Phone  is required.
+                                            </div>
+                                            <!-- <div *ngIf="profileFormControl.phone.errors.email">
+                                                Phone invalid format.
+                                            </div> -->
+                                            <div *ngIf="createAccountFormControl.phone.errors.maxlength">
+                                                Phone must be 10 characters long.
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group input-field col s12">
                                         <label for="password">Password</label>
-                                        <input id="password" type="text" formControlName="password"
+                                        <input id="password" type="password" formControlName="password"
                                             name="password" class="form-control validate"/>
                                         <div *ngIf="createAccountFormControl.password.errors 
                                             && (createAccountFormControl.password.touched || createAccountFormControl.password.dirty)" 
@@ -100,7 +138,7 @@
 
                                     <div class="form-group input-field col s12">
                                         <label for="confirmPassword">Confirm Password</label>
-                                        <input id="confirmPassword" type="text" formControlName="confirmPassword"
+                                        <input id="confirmPassword" type="password" formControlName="confirmPassword"
                                             name="confirmPassword" class="form-control validate"/>
                                         <div *ngIf="createAccountFormControl.confirmPassword.errors 
                                             && (createAccountFormControl.confirmPassword.touched || createAccountFormControl.confirmPassword.dirty)" 
@@ -125,7 +163,7 @@
 
                                     <div class="form-group col s12">
                                         <label for="category">Role</label>
-                                        <select formControlName="roleId" id="category" name="roleId" name="category" class="form-control">
+                                        <select formControlName="roleId" id="category" name="roleId"  class="form-control">
                                             <option value="">--</option>
                                             <option *ngFor="let rl of roles" [value]="rl.roleId">{{rl.role}}</option>
                                         </select>
@@ -133,6 +171,16 @@
                                             Please select role
                                         </div>
                                     </div>
+
+                                    <div class="form-group col s12">
+                                        <td colspan="2">
+                                            <p>
+                                                <input type="checkbox" formControlName="vipAccount" id="vip_account">
+                                                <label for="vip_account">Vip Account</label>
+                                            </p>
+                                        </td>
+                                    </div>
+                                    
                                     <button [disabled]="createAccountForm.invalid" class="btn btn-success btn-md" (click)="onCreateNewUser()">Thêm</button>
                                     &nbsp;
                                     <button class="btn btn-primary btn-md" [routerLink]="['../']">Trở về</button>

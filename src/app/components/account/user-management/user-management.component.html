@@ -42,12 +42,20 @@
                                             <span class="glyphicon sort-icon" *ngIf="key =='username'"
                                              [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                         </th>
-                                        <th class="text-center" style="cursor: pointer;" (click)="sort('fullName')">Full name
-                                            <span class="glyphicon sort-icon" *ngIf="key =='fullName'"
+                                        <th class="text-center" style="cursor: pointer;" (click)="sort('firstName')">First Name
+                                            <span class="glyphicon sort-icon" *ngIf="key =='firstName'"
+                                             [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                        </th>
+                                        <th class="text-center" style="cursor: pointer;" (click)="sort('lastName')">Last Name
+                                            <span class="glyphicon sort-icon" *ngIf="key =='lastName'"
                                              [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                         </th>
                                         <th class="text-center" style="cursor: pointer;" (click)="sort('email')">Email
                                             <span class="glyphicon sort-icon" *ngIf="key =='email'"
+                                             [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                        </th>
+                                        <th class="text-center" style="cursor: pointer;" (click)="sort('phone')">Phone
+                                            <span class="glyphicon sort-icon" *ngIf="key =='phone'"
                                              [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                         </th>
                                         <th class="text-center" style="cursor: pointer;" (click)="sort('role')">Role
@@ -60,22 +68,24 @@
                                 <tbody>
                                     <tr *ngFor="let item of Accounts | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
                                         <td class="center">{{ i + 1 }}</td>
-                                        <td class="center">{{item.username}}</td>
-                                        <td class="center">{{item.full_name}}</td>
+                                        <td class="center">{{item.username}}<span *ngIf="item.vipAccount == true" class="badge badge-pill badge-success">VIP</span></td>
+                                        <td class="center">{{item.firstName}}</td>
+                                        <td class="center">{{item.lastName}}</td>
                                         <td class="center">{{item.email}}</td>
+                                        <td class="center">{{item.phone}}</td>
                                         <td class="center">
-											{{item.role_name}}
+                                            <p *ngFor="let role of item.roleEntities">{{ role.roleName }}</p>
                                         </td>
                                         <td class="center">
-                                            <a [routerLink]="['/user-management/edit-user', item.account_id]" title="Sửa" class="btn btn-primary">
+                                            <a [routerLink]="['/user-management/edit-user', item.accountId]" title="Sửa" class="btn btn-primary">
                                                 <i class="fa fa-edit "></i></a> 
                                                 &nbsp;
-                                            <a *ngIf="item.status == 'lock'" (click)="changeLockAccount(item.account_id)" title="Đang bị khóa" class="btn btn-danger">
+                                            <a *ngIf="item.status == 'LOCK'" (click)="changeLockAccount(item.accountId)" title="Đang bị khóa" class="btn btn-danger">
                                                 <i class="fa fa-lock"></i></a>
-                                            <a *ngIf="item.status == 'active'" (click)="changeLockAccount(item.account_id)" title="Không bị khóa" class="btn btn-primary">
+                                            <a *ngIf="item.status == 'ACTIVE'" (click)="changeLockAccount(item.accountId)" title="Không bị khóa" class="btn btn-primary">
                                                 <i class="fa fa-unlock"></i></a> 
                                                 &nbsp;
-                                            <a (click)="deleteAccount(item.account_id)" title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                            <a (click)="deleteAccount(item.accountId)" title="Xóa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>

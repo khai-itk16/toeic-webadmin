@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare const $: any
 
 @Component({
   selector: 'app-left-main-menu',
@@ -10,6 +11,6 @@ export class LeftMainMenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+   
   }
-
 }

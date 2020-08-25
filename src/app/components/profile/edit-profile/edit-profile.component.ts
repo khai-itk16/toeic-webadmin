@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AccountService } from 'src/app/services/account.service';
 import { Router } from '@angular/router';
 import { containAllBlankCharacter } from 'src/app/common/custom-validator-account';
-import { Account } from 'src/app/models/account';
 import Swal from 'sweetalert2'
 import { DataTransferService } from 'src/app/services/data-transfer.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -16,7 +14,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class EditProfileComponent implements OnInit {
  
   profileForm: FormGroup
-  editProfile: Account
+  editProfile: any
   profileAPI: any
   
   constructor(private profile: ProfileService,
@@ -28,8 +26,10 @@ export class EditProfileComponent implements OnInit {
     this.dataTransferService.getDataTranfer().subscribe(result => this.profileAPI = result)
     this.profileForm = this.formBuilder.group({
       username: [this.profileAPI.username, [Validators.required,  Validators.maxLength(100), containAllBlankCharacter]],
-      fullName: [this.profileAPI.full_name, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
-      email: [this.profileAPI.email, [Validators.required, Validators.maxLength(100), Validators.email]]
+      firstName: [this.profileAPI.firstName, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
+      lastName: [this.profileAPI.lastName, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
+      email: [this.profileAPI.email, [Validators.required, Validators.maxLength(100), Validators.email]],
+      phone: [this.profileAPI.phone, [Validators.required, Validators.maxLength(10)]]
     });
   }
 
@@ -37,7 +37,12 @@ export class EditProfileComponent implements OnInit {
 
   onEditProfile() {
     this.editProfile = this.profileForm.value
-    if ( this.editProfile != null) {
+    if (this.editProfile != null) {
+      this.editProfile.accountId = this.profileAPI.accountId
+      this.editProfile.status = this.profileAPI.status
+      this.editProfile.roleEntities = this.profileAPI.roleEntities
+      this.editProfile.vipAccount = this.profileAPI.vipAccount
+
       console.log(this.editProfile)
       Swal.fire({
         title: 'Are you sure to update profile',

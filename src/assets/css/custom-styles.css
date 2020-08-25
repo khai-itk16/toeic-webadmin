@@ -1,13 +1,39 @@
-/*----------------------------------------------
-Author : www.webthemez.com
-License: Commons Attribution 3.0
-http://creativecommons.org/licenses/by/3.0/
-------------------------------------------------*/
+label {
+    padding-top: 0 !important;
+    font-size: 12px;
+}
 
+.content_format_pre {
+    width: 100%;
+    display: block;
+    background: transparent;
+    border: 0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: justify;
+    word-break: keep-all;
+    line-height: 21px;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
 
-/*----------------------------------------------
-    COMMON  STYLES    
-------------------------------------------------*/
+.ul_pic {
+    list-style: none;
+}
+
+.ul_pic li {
+    display: inline-block;
+    margin: 10px;
+}
+
+.ul_pic li img {
+    width: auto;
+    height: 90px;
+    display: block;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     background: #2c445a;
@@ -58,7 +84,8 @@ border-radius: 0px;
 }
 p {
     font-size: 14px;
-    line-height:25px;
+    margin: 0;
+    /* line-height:25px; */
     /* padding-top:20px; */
 }
 .navbar-side {
@@ -115,7 +142,7 @@ border-color: #075CB3;
   padding: 4px 7px;
   font-size: 11px;
   font-weight: 700;
-  color: #fff;
+  color: #fff !important;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
@@ -669,4 +696,18 @@ font-size: 19px;
 	 ul#dropdown2 {
 			left: -69px !important;
 		}
+ }
+
+ .table>tbody>tr>td {
+    vertical-align: middle;
+ }
+
+ #table_profile td {
+     border-bottom: solid 1px gainsboro;
+ }
+
+#vip_account {
+    font-size: 14px;
+    margin-left: 2rem;
+    font-weight: 100;
  }

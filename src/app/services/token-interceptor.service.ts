@@ -8,11 +8,14 @@ export class TokenInterceptorService {
   constructor(private injector: Injector) { }
   intercept(req, next) {
     let authService = this.injector.get(AuthService)
-    let tokenizedReq = req.clone(
-      {
-        headers: req.headers.set('Authorization', 'bearer ' + authService.getToken())
-      }
-    )
+    let tokenizedReq = req;
+    if(authService.loggedIn()) {
+      tokenizedReq = req.clone(
+        {
+          headers: req.headers.set('Authorization', 'Bearer ' + authService.getToken())
+        }
+      )
+    }
     return next.handle(tokenizedReq)
   }
 }

@@ -1,0 +1,42 @@
+<form style="margin: 0 25px;" [formGroup]="formGroup">
+    <div class="row">
+        <div class="popup-test">
+            <div class="popup-header">
+                <h1 mat-dialog-title>{{ data.title }}</h1>
+            </div>
+            
+            <div class="popup-body">
+                <div class="form-group">
+                    <div class="test col s12">
+                        <div class="input-field">Name
+                            <input name="test" type="text"  formControlName="name">
+                        </div>
+
+                        <div *ngIf="formGroupControl.name?.errors 
+                            && (formGroupControl.name?.touched || formGroupControl.name?.dirty)" 
+                            class="text-danger">
+                            <div *ngIf="formGroupControl.name?.errors?.required"  class="text-danger">
+                                Name is required.
+                            </div>
+                            <div *ngIf="formGroupControl.name?.errors?.containAllBlankCharacter">
+                                Name must not be blank character.
+                            </div>
+                            <div *ngIf="formGroupControl.name?.errors?.maxlength">
+                                Name must be at less than 100 characters long.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-footer" style="text-align: right;">
+                <button class="btn btn-primary" (click)="onNoClick()">No Thanks</button>
+                &nbsp;
+                <button class=" btn btn-success" [disabled]="formGroup.invalid" (click)="onSubmit()">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</form>
+

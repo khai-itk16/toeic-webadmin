@@ -3,7 +3,6 @@ import { Router, ActivatedRoute  } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { containAllBlankCharacter, MustMatch, unselectOption } from 'src/app/common/custom-validator-account';
-import { Account } from 'src/app/models/account';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -19,30 +18,37 @@ export class EditUserComponent implements OnInit {
     private formBuilder: FormBuilder) { }
  
   editAccountForm: FormGroup
-  editAccount: Account
-  accountAPI = { account_id: 0, username: '', full_name: '', email: '', role_id: 0 }
+  editAccount: any
   changPass = false
 
-  roles = [{ roleId: 1, role: 'admin' }, { roleId: 2, role: 'editor' }, { roleId: 3, role: 'user' }]
+  roles = [{ roleId: 3, role: 'admin' }, { roleId: 2, role: 'editor' }, { roleId: 1, role: 'user' }]
 
   ngOnInit(): void {
     this.editAccountForm = this.formBuilder.group({
-      username: [this.accountAPI.username],
-      fullName: [this.accountAPI.full_name],
-      email: [this.accountAPI.email],
-      roleId: [this.accountAPI.role_id]
-    });
+      username: [],
+      firstName: [],
+      lastName: [],
+      email: [],
+      phone: [],
+      roleId: [],
+      vipAccount: []
+      }
+    );
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.accountService.getAccountById(id).subscribe(
       res => {
-        this.accountAPI = res.data
-        console.log(this.accountAPI);
+        this.editAccount = res
+        console.log(this.editAccount);
         this.editAccountForm = this.formBuilder.group({
-          username: [this.accountAPI.username, [Validators.required,  Validators.maxLength(100), containAllBlankCharacter]],
-          fullName: [this.accountAPI.full_name, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
-          email: [this.accountAPI.email, [Validators.required, Validators.maxLength(100), Validators.email]],
-          roleId: [this.accountAPI.role_id, [unselectOption]]
-        });
+          username: [this.editAccount.username, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
+          firstName: [this.editAccount.firstName, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
+          lastName: [this.editAccount.lastName, [Validators.required, Validators.maxLength(100), containAllBlankCharacter]],
+          email: [this.editAccount.email, [Validators.required, Validators.maxLength(100), Validators.email]],
+          phone: [this.editAccount.phone, [Validators.required, Validators.maxLength(10)]],
+          roleId: [this.editAccount.roleEntities.length, [unselectOption]],
+          vipAccount: [this.editAccount.vipAccount]
+          }
+        );
       },
       error => {
         console.log(error);      
@@ -54,13 +60,35 @@ export class EditUserComponent implements OnInit {
   get editAccountFormControl() { return this.editAccountForm.controls; }
 
   onEditUser() {
-    this.editAccount = this.editAccountForm.value
-    this.editAccount.id = this.accountAPI.account_id
+    let accountUpdate = this.editAccountForm.value
+    
+    if (accountUpdate != null) {
+      accountUpdate.accountId = this.editAccount.accountId
+      accountUpdate.status = this.editAccount.status
+      accountUpdate.roleEntities = new Array()
+      console.log("id:" + accountUpdate.roleId)
+      switch(accountUpdate.roleId+"") {
+        case "3": 
+          accountUpdate.roleEntities.push({
+            roleId: 1,
+            roleName: "ROLE_ADMIN"
+          })
+        case "2": 
+        accountUpdate.roleEntities.push({
+            roleId: 2,
+            roleName: "ROLE_CENSOR"
+          })
+        case "1": 
+          accountUpdate.roleEntities.push({
+            roleId: 3,
+            roleName: "ROLE_USER"
+          })
+      }
 
-    console.log(this.editAccount)
+      delete accountUpdate.roleId
 
-    if ( this.editAccount != null) {
-      console.log(this.editAccount)
+      console.log(accountUpdate)
+
       Swal.fire({
         title: 'Are you sure to update account',
         // text: 'You will not be able to recover this imaginary file!',
@@ -70,7 +98,7 @@ export class EditUserComponent implements OnInit {
         cancelButtonText: 'No, don\'t update it'
       }).then((result) => {
         if (result.value) { 
-          this.accountService.updateAccount(this.editAccount).subscribe( 
+          this.accountService.updateAccount(accountUpdate).subscribe( 
             res => {
               console.log(res)
               this.router.navigate(["/user-management"])

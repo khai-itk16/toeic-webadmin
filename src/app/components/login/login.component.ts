@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(this.user).subscribe(
       res => {
         console.log(res);
-        var decoded = jwt_decode(res.data.accessToken);
+        var decoded = jwt_decode(res.token);
         console.log(decoded);
         if(decoded.role == 3) {
           this.toastrService.warning('Account user access deny', 'WARMING', {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           });
           return
         }
-        localStorage.setItem("token", res.data.accessToken);
+        localStorage.setItem("token", res.token);
         this.router.navigate(["/dashboard"])
         setTimeout(()=>{
           window.location.reload();

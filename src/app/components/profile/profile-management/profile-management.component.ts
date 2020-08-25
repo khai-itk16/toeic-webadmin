@@ -11,7 +11,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class ProfileManagementComponent implements OnInit {
 
-  profileAPI = { account_id: 0, username: '', full_name: '', email: '', role_name: '' }
+  profileAPI = { username:"", firstName: "", lastName: "", email: "", phone: "", roleEntities: [{roleName:""}], vipAccount: false}
 
   constructor(private profile: ProfileService, 
     private dataTransferService: DataTransferService) { }

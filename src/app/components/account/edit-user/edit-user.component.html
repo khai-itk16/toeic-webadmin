@@ -19,11 +19,12 @@
                         <div class="row">
                             <div class="form-content">
                                 <form  [formGroup]= "editAccountForm">
-                                    <div class="form-group">
+                                    <div class="form-group input-field col s12">
                                         <label for="uname">Username</label>
                                         <input id="uname" type="text" formControlName="username"
-                                            name="username" class="form-control"/>
-                                        <div *ngIf="editAccountFormControl.username.errors" 
+                                            name="uname" class="form-control validate"/>
+                                        <div *ngIf="editAccountFormControl.username.errors 
+                                            && (editAccountFormControl.username.touched || editAccountFormControl.username.dirty)" 
                                             class="text-danger">
                                             <div *ngIf="editAccountFormControl.username.errors.required"  class="text-danger">
                                                 Username is required.
@@ -37,53 +38,103 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="fname">Full name</label>
-                                        <input id="fname" type="text" formControlName="fullName"
-                                            name="fname" class="form-control" />
-                                        <div *ngIf="editAccountFormControl.fullName.errors" 
+                                    <div class="form-group input-field col s12">
+                                        <label for="firstName">Full name</label>
+                                        <input id="firstName" type="text" formControlName="firstName"
+                                            name="firstName" class="form-control validate"/>
+                                        <div *ngIf="editAccountFormControl.firstName.errors 
+                                            && (editAccountFormControl.firstName.touched || editAccountFormControl.firstName.dirty)" 
                                             class="text-danger">
-                                            <div *ngIf="editAccountFormControl.fullName.errors.required"  class="text-danger">
-                                                Full name  is required.
+                                            <div *ngIf="editAccountFormControl.firstName.errors.required"  class="text-danger">
+                                                First name  is required.
                                             </div>
-                                            <div *ngIf="editAccountFormControl.fullName.errors.containAllBlankCharacter">
-                                                Full name  must not be blank character.
+                                            <div *ngIf="editAccountFormControl.firstName.errors.containAllBlankCharacter">
+                                                First name  must not be blank character.
                                             </div>
-                                            <div *ngIf="editAccountFormControl.fullName.errors.maxlength">
-                                                Full name must be at less than 100 characters long.
+                                            <div *ngIf="editAccountFormControl.firstName.errors.maxlength">
+                                                First name must be at less than 100 characters long.
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group input-field col s12">
+                                        <label for="lastName">Full name</label>
+                                        <input id="lastName" type="text" formControlName="lastName"
+                                            name="lastName" class="form-control validate"/>
+                                        <div *ngIf="editAccountFormControl.firstName.errors 
+                                            && (editAccountFormControl.firstName.touched || editAccountFormControl.firstName.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="editAccountFormControl.firstName.errors.required"  class="text-danger">
+                                                Last name  is required.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.firstName.errors.containAllBlankCharacter">
+                                                Last name  must not be blank character.
+                                            </div>
+                                            <div *ngIf="editAccountFormControl.firstName.errors.maxlength">
+                                                Last name must be at less than 100 characters long.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group input-field col s12">
                                         <label for="email">Email</label>
                                         <input id="email" type="text" formControlName="email"
-                                            name="email" class="form-control"/>
-                                        <div *ngIf="editAccountFormControl.email?.errors " 
+                                            name="email" class="form-control validate"/>
+                                        <div *ngIf="editAccountFormControl.email.errors 
+                                            && (editAccountFormControl.email.touched || editAccountFormControl.email.dirty)" 
                                             class="text-danger">
-                                            <div *ngIf="editAccountFormControl.email.errors?.required"  class="text-danger">
+                                            <div *ngIf="editAccountFormControl.email.errors.required"  class="text-danger">
                                                 Email  is required.
                                             </div>
-                                            <div *ngIf="editAccountFormControl.email.errors?.email">
+                                            <div *ngIf="editAccountFormControl.email.errors.email">
                                                 Email invalid format.
                                             </div>
-                                            <div *ngIf="editAccountFormControl.email.errors?.maxlength">
+                                            <div *ngIf="editAccountFormControl.email.errors.maxlength">
                                                 Email must be at less than 100 characters long.
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="form-group">
+
+                                    <div class="col s12">
+                                        <label for="phone">Phone</label>
+                                        <input id="phone" type="text" formControlName="phone"
+                                            name="phone" class="validate"/>
+                                        <div *ngIf="editAccountFormControl.phone.errors 
+                                            && (editAccountFormControl.phone.touched || editAccountFormControl.phone.dirty)" 
+                                            class="text-danger">
+                                            <div *ngIf="editAccountFormControl.phone.errors.required"  class="text-danger">
+                                                Phone  is required.
+                                            </div>
+                                            <!-- <div *ngIf="profileFormControl.phone.errors.email">
+                                                Phone invalid format.
+                                            </div> -->
+                                            <div *ngIf="editAccountFormControl.phone.errors.maxlength">
+                                                Phone must be 10 characters long.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col s12">
                                         <label for="category">Role</label>
-                                        <select formControlName="roleId" id="category" name="roleId" name="category" class="form-control">
+                                        <select formControlName="roleId" id="category" name="roleId"  class="form-control">
+                                            <option value="">--</option>
                                             <option *ngFor="let rl of roles" [value]="rl.roleId">{{rl.role}}</option>
                                         </select>
-                                        <div *ngIf="editAccountFormControl.roleId?.errors && editAccountFormControl.roleId.touched" class="text-danger">
+                                        <div *ngIf="editAccountFormControl.roleId.errors && editAccountFormControl.roleId.touched" class="text-danger">
                                             Please select role
                                         </div>
                                     </div>
-                                    <button [disabled]="editAccountForm.invalid" class="btn btn-success btn-md" 
-                                        (click)="onEditUser()">Chỉnh sửa</button>
+
+                                    <div class="form-group col s12">
+                                        <td colspan="2">
+                                            <p>
+                                                <input type="checkbox" formControlName="vipAccount" id="vip_account">
+                                                <label for="vip_account">Vip Account</label>
+                                            </p>
+                                        </td>
+                                    </div>
+                                    
+                                    <button [disabled]="editAccountForm.invalid" class="btn btn-success btn-md" (click)="onEditUser()">Chỉnh sửa</button>
                                     &nbsp;
                                     <button class="btn btn-primary btn-md" [routerLink]="['../../']">Trở về</button>
                                 </form>

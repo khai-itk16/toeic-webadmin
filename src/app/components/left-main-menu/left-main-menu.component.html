@@ -11,13 +11,28 @@
                 <a routerLink="/profile" routerLinkActive="active-menu" class="waves-effect waves-dark"><i class="fa fa-user"></i>
                     Quản lý profile</a>
             </li>
-            <li>
-                <a routerLink="/document-management" routerLinkActive="active-menu" class="waves-effect waves-dark"><i class="fa fa-file-text-o"></i>
-                    Quản lý tài liệu</a>
+            <!-- <li>
+                <a routerLink="/sale-posts" routerLinkActive="active-menu" class="waves-effect waves-dark"><i class="fa fa-file-text-o"></i>
+                    Quản lý bài đăng</a>
+            </li> -->
+            <li class="active">
+                <a class="waves-effect waves-dark"><i class="fa fa-sitemap"></i>Quản lý bài đăng<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse in" aria-expanded="true">
+                    <li>
+                        <a routerLink="/sale-post/statistics" routerLinkActive="active-menu">Thống kê bài đăng</a>
+                    </li>
+                    <li>
+                        <a routerLink="/sale-post/censor-posts" routerLinkActive="active-menu">Phê duyệt bài đăng</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a routerLink="/user-management" routerLinkActive="active-menu" class="waves-effect waves-dark"><i class="fa fa-users"></i>
                     Quản lý tài khoản</a>
+            </li>
+            <li>
+                <a routerLink="/category" routerLinkActive="active-menu" class="waves-effect waves-dark"><i class="fa fa-table" aria-hidden="true"></i>
+                    Quản lý danh mục</a>
             </li>
         </ul>
 

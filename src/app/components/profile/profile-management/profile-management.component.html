@@ -17,23 +17,40 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-6 text-primary" style="margin: 10px 25%; border: 2px solid aliceblue;">
-                                <table class="table">
+                                <table id="table_profile" class="table">
                                     <tr>
-                                        <td><h4>Username:</h4></td>
+                                        <td><h5>Username:</h5></td>
                                         <td><p>{{ profileAPI.username }}</p></td>
                                     </tr>
                                     <tr>
-                                        <td><h4>Full Name:</h4></td>
-                                        <td><p>{{ profileAPI.full_name }}</p></td>
+                                        <td><h5>First Name:</h5></td>
+                                        <td><p>{{ profileAPI.firstName }}</p></td>
                                     </tr>
                                     <tr>
-                                        <td><h4>Email:</h4></td>
+                                        <td><h5>Last Name:</h5></td>
+                                        <td><p>{{ profileAPI.lastName }}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h5>Email:</h5></td>
                                         <td><p>{{ profileAPI.email }}</p></td>
                                     </tr>
                                     <tr>
-                                        <td><h4>Role:</h4></td>
-                                        <td><p>{{ profileAPI.role_name }}</p></td>
+                                        <td><h5>Phone:</h5></td>
+                                        <td><p>{{ profileAPI.phone }}</p></td>
                                     </tr>
+                                    <tr>
+                                        <td><h5>Role:</h5></td>
+                                        <td><p *ngFor="let role of profileAPI.roleEntities">{{ role.roleName }}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <p>
+                                                <input type="checkbox" [checked]="profileAPI.vipAccount">
+                                                <label id="vip_account">Vip Account</label>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    
                                 </table>
                                 <div class="profile-action">
                                     <button class="btn btn-primary btn-md" 
